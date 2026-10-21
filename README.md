@@ -1,8 +1,8 @@
-# Moff隊 釣果記録帳 (HartDesign Feather Log)
+# MOFFアプリ (Moff隊 釣果記録帳)
 
 エリアトラウト（管理釣り場）におけるフェザーフィッシング愛好者（Moff隊）向けの釣果記録・分析Webアプリケーションです。
 
-![Moff隊 釣果記録帳](https://img.shields.io/badge/HartDesign-認定フェザーログ-amber)
+![MOFFアプリ](https://img.shields.io/badge/MOFFアプリ-HartDesignフェザーログ-amber)
 ![Platform](https://img.shields.io/badge/Platform-Web%20%2F%20Mobile-blue)
 
 ---
