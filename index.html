@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moff隊 釣果記録帳 - HartDesign Feather Log</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #1a120b;
+            color: #f5eedc;
+            background-image: radial-gradient(#2c1d11 1px, transparent 1px), radial-gradient(#2c1d11 1px, #1a120b 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        .font-serif-title {
+            font-family: 'Shippori Mincho', serif;
+        }
+
+        /* Wood Grain & Plaque Styling */
+        .wood-panel {
+            background: linear-gradient(145deg, #3d2616 0%, #29180c 100%);
+            border: 3px solid #8c6239;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 16px rgba(0,0,0,0.6);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .wood-plaque {
+            background: radial-gradient(circle at 50% 20%, #4a301c 0%, #26150a 100%);
+            border: 2px solid #b8860b;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.2);
+        }
+
+        /* Metallic Accent Details */
+        .brass-text {
+            background: linear-gradient(180deg, #ffe58f 0%, #d4af37 50%, #996515 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .brass-btn {
+            background: linear-gradient(180deg, #b8860b 0%, #7a5807 100%);
+            color: #fff8e7;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            border: 1px solid #e6ca65;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.15s ease;
+        }
+        
+        .brass-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        .brass-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
+
+        /* Buttons for Lures & Species */
+        .lure-chip {
+            background: #2b1a0e;
+            border: 2px solid #5c3e21;
+            color: #e5d3b3;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .lure-chip:hover {
+            border-color: #d4af37;
+            background: #3b2313;
+        }
+
+        .lure-chip.active {
+            background: linear-gradient(135deg, #a0522d 0%, #662200 100%);
+            border-color: #ffd700;
+            color: #ffffff;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Form Inputs High Contrast */
+        .wood-input {
+            background-color: #120b06;
+            border: 2px solid #634325;
+            color: #ffffff;
+            font-size: 1.15rem;
+            border-radius: 8px;
+        }
+
+        .wood-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a120b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5c3e21;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <!-- Header / Brand Sign -->
+    <header class="p-3 bg-neutral-900 border-b-4 border-amber-800 shadow-2xl sticky top-0 z-40">
+        <div class="max-w-2xl mx-auto wood-plaque p-3 rounded-xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-amber-950 border-2 border-amber-400 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-fish-fins text-amber-400 text-2xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-amber-900 text-amber-200 text-xs px-2 py-0.5 rounded font-bold border border-amber-600">HartDesign 認定</span>
+                        <span class="text-xs text-amber-300 tracking-wider">エリアトラウト専用</span>
+                    </div>
+                    <h1 class="text-2xl font-bold font-serif-title brass-text tracking-wide">Moff隊 釣果記録帳</h1>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="exportData()" title="データを出力" class="text-xs bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-700 p-2 rounded-lg flex flex-col items-center transition">
+                    <i class="fa-solid fa-download mb-1 text-sm"></i>
+                    <span>出力</span>
+                </button>
+                <label title="データを復元・読込" class="cursor-pointer text-xs bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-700 p-2 rounded-lg flex flex-col items-center transition">
+                    <i class="fa-solid fa-upload mb-1 text-sm"></i>
+                    <span>読込</span>
+                    <input type="file" id="import-file" accept=".json" onchange="importData(event)" class="hidden">
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="max-w-2xl mx-auto mt-3 px-3">
+        <div class="grid grid-cols-2 gap-2 bg-amber-950 p-1.5 rounded-xl border border-amber-900 shadow-inner">
+            <button id="tab-btn-log" onclick="switchTab('log')" class="py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500">
+                <i class="fa-solid fa-pen-to-square text-amber-300"></i>
+                <span>釣果を記録</span>
+            </button>
+            <button id="tab-btn-history" onclick="switchTab('history')" class="py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200">
+                <i class="fa-solid fa-book-bookmark text-amber-400"></i>
+                <span>釣果履歴・分析</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-2xl mx-auto p-3">
+
+        <!-- TAB 1: CATCH LOG FORM -->
+        <section id="tab-log" class="space-y-4">
+            <form id="catchForm" onsubmit="saveCatch(event)" class="wood-panel p-4 md:p-6 space-y-5">
+                
+                <div class="flex items-center justify-between border-b border-amber-900/60 pb-3">
+                    <h2 class="text-xl font-bold font-serif-title text-amber-200 flex items-center gap-2">
+                        <i class="fa-solid fa-feather-pointed text-amber-400"></i>
+                        <span>新規釣果入力</span>
+                    </h2>
+                    <button type="button" onclick="setNowDateTime()" class="text-xs bg-amber-900/80 text-amber-200 hover:bg-amber-800 px-3 py-1.5 rounded-full border border-amber-700 transition">
+                        <i class="fa-solid fa-clock mr-1"></i>現在時刻をセット
+                    </button>
+                </div>
+
+                <!-- Date & Spot -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-amber-300 text-sm font-bold mb-1">
+                            <i class="fa-regular fa-calendar-alt mr-1"></i>日時
+                        </label>
+                        <input type="datetime-local" id="field-datetime" required class="wood-input w-full p-3 text-base">
+                    </div>
+                    <div>
+                        <label class="block text-amber-300 text-sm font-bold mb-1">
+                            <i class="fa-solid fa-location-dot mr-1"></i>釣り場 (エリア名)
+                        </label>
+                        <input type="text" id="field-location" placeholder="例: 朝霞ガーデン, 王禅寺, 裾野" required class="wood-input w-full p-3 text-base" list="spot-suggestions">
+                        <datalist id="spot-suggestions">
+                            <option value="朝霞ガーデン">
+                            <option value="ベリーパーク in FISH ON！王禅寺">
+                            <option value="すそのフィッシングパーク">
+                            <option value="開成水辺フォレストスプリングス">
+                            <option value="発光路の森ファミリーフィッシング">
+                            <option value="フィッシングフィールド中津川">
+                            <option value="なら山沼漁場">
+                            <option value="アルクスポンド宇都宮">
+                            <option value="アルクスポンド焼津">
+                        </datalist>
+                    </div>
+                </div>
+
+                <!-- Fish Species Picker -->
+                <div>
+                    <label class="block text-amber-300 text-sm font-bold mb-2">
+                        <i class="fa-solid fa-fish mr-1"></i>魚種を選択
+                    </label>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="species-selector"></div>
+                    <input type="hidden" id="field-species" value="ニジマス" required>
+                </div>
+
+                <!-- Size & Count -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-amber-300 text-sm font-bold mb-1">
+                            <i class="fa-solid fa-ruler-horizontal mr-1"></i>サイズ (cm)
+                        </label>
+                        <div class="flex items-center">
+                            <input type="number" id="field-size" placeholder="25" min="5" max="150" step="0.1" class="wood-input w-full p-3 text-xl font-bold text-center">
+                            <span class="ml-2 text-amber-200 font-bold">cm</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-amber-300 text-sm font-bold mb-1">
+                            <i class="fa-solid fa-hashtag mr-1"></i>匹数 (一括記録)
+                        </label>
+                        <div class="flex items-center">
+                            <input type="number" id="field-count" value="1" min="1" max="500" class="wood-input w-full p-3 text-xl font-bold text-center">
+                            <span class="ml-2 text-amber-200 font-bold">匹</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HartDesign Feather Selection -->
+                <div class="bg-black/30 p-3.5 rounded-xl border border-amber-900/80 space-y-3">
+                    <label class="block text-amber-300 text-sm font-bold flex items-center justify-between">
+                        <span><i class="fa-solid fa-feather text-amber-400 mr-1"></i>ヒットルアー (HartDesign フェザー)</span>
+                        <span class="text-xs text-amber-400 font-normal">※タップで選択</span>
+                    </label>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="lure-selector"></div>
+                    <input type="hidden" id="field-lure" value="Light Wing" required>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div>
+                            <label class="block text-amber-400/80 text-xs font-bold mb-1">ルアーカラー</label>
+                            <input type="text" id="field-color" placeholder="例: ペレットオリーブ, 白, チャート" class="wood-input w-full p-2.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-amber-400/80 text-xs font-bold mb-1">ウエイト / アクション</label>
+                            <input type="text" id="field-weight" placeholder="例: 0.17g, 表層デッドスロー, ボトムバンプ" class="wood-input w-full p-2.5 text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Upload with auto-compress -->
+                <div>
+                    <label class="block text-amber-300 text-sm font-bold mb-1">
+                        <i class="fa-solid fa-camera mr-1"></i>写真の保存 (任意・自動軽量化)
+                    </label>
+                    <div class="flex items-center gap-3">
+                        <label class="cursor-pointer bg-amber-950 hover:bg-amber-900 border-2 border-dashed border-amber-700 hover:border-amber-500 rounded-xl p-3 flex-1 text-center transition-all">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-amber-400 mb-1 block"></i>
+                            <span class="text-xs text-amber-200 block font-bold">写真を撮影・選択</span>
+                            <input type="file" id="field-photo" accept="image/*" onchange="previewAndCompressPhoto(event)" class="hidden">
+                        </label>
+                        <div id="photo-preview-container" class="w-20 h-20 bg-black/50 border border-amber-800 rounded-xl overflow-hidden flex items-center justify-center relative hidden">
+                            <img id="photo-preview" src="" alt="プレビュー" class="w-full h-full object-cover">
+                            <button type="button" onclick="removePhoto()" class="absolute top-1 right-1 bg-red-800 hover:bg-red-700 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center">×</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memo -->
+                <div>
+                    <label class="block text-amber-300 text-sm font-bold mb-1">
+                        <i class="fa-solid fa-note-sticky mr-1"></i>メモ・天候・ヒットパターン
+                    </label>
+                    <textarea id="field-memo" rows="2" placeholder="例: 晴れ/水温12℃。駆け上がりの沈み石付近でフォール中にひったくるバイト。" class="wood-input w-full p-3 text-sm"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="brass-btn w-full py-4 rounded-xl text-xl font-bold flex items-center justify-center gap-2 shadow-2xl">
+                        <i class="fa-solid fa-floppy-disk text-2xl"></i>
+                        <span>この釣果を記録する</span>
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- TAB 2: HISTORY & STATS -->
+        <section id="tab-history" class="space-y-4 hidden">
+
+            <!-- Summary Stats Board -->
+            <div class="wood-panel p-4">
+                <h3 class="text-sm font-bold text-amber-400 font-serif-title mb-3 flex items-center justify-between border-b border-amber-900/60 pb-1">
+                    <span><i class="fa-solid fa-trophy text-amber-400 mr-1"></i>通算釣果アナリティクス</span>
+                    <span class="text-xs text-amber-300 font-normal" id="stat-total-records">0件の記録</span>
+                </h3>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg">
+                        <div class="text-xs text-amber-400/80 font-bold">総キャッチ数</div>
+                        <div class="text-2xl font-extrabold brass-text mt-0.5" id="stat-total-count">0</div>
+                        <div class="text-[10px] text-amber-300">匹</div>
+                    </div>
+                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg">
+                        <div class="text-xs text-amber-400/80 font-bold">最大サイズ</div>
+                        <div class="text-2xl font-extrabold text-amber-200 mt-0.5" id="stat-max-size">0.0</div>
+                        <div class="text-[10px] text-amber-300">cm</div>
+                    </div>
+                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg col-span-2 sm:col-span-2 text-left px-3">
+                        <div class="text-xs text-amber-400/80 font-bold">最多ヒットルアー</div>
+                        <div class="text-base font-bold text-amber-100 truncate mt-1" id="stat-best-lure">-</div>
+                        <div class="text-[10px] text-amber-400 truncate" id="stat-best-spot">メインエリア: -</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter & Search Controls -->
+            <div class="wood-panel p-3 space-y-2">
+                <div class="text-xs font-bold text-amber-300 flex items-center justify-between">
+                    <span><i class="fa-solid fa-filter mr-1"></i>絞り込み検索</span>
+                    <button onclick="resetFilters()" class="text-amber-400 hover:underline">リセット</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <select id="filter-spot" onchange="renderHistory()" class="wood-input p-2 text-xs">
+                        <option value="">すべてのエリア</option>
+                    </select>
+                    <select id="filter-lure" onchange="renderHistory()" class="wood-input p-2 text-xs">
+                        <option value="">すべてのルアー</option>
+                    </select>
+                    <select id="filter-species" onchange="renderHistory()" class="wood-input p-2 text-xs">
+                        <option value="">すべての魚種</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Catch Cards List Container -->
+            <div id="history-list" class="space-y-3"></div>
+
+        </section>
+
+    </main>
+
+    <!-- Photo Modal -->
+    <div id="photo-modal" onclick="closePhotoModal()" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden">
+        <div class="relative max-w-xl w-full">
+            <button onclick="closePhotoModal()" class="absolute -top-10 right-0 text-white text-2xl font-bold bg-amber-950 px-3 py-1 rounded-full border border-amber-600">×</button>
+            <img id="modal-img" src="" alt="大判表示" class="w-full max-h-[80vh] object-contain rounded-lg border-2 border-amber-500">
+        </div>
+    </div>
+
+    <!-- Success Toast Modal -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-amber-900 border-2 border-amber-400 text-amber-100 px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50">
+        <i class="fa-solid fa-circle-check text-amber-300 text-xl"></i>
+        <span id="toast-message" class="font-bold text-sm">記録を保存しました！</span>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const HART_DESIGN_LURES = [
+            "Light Wing",
+            "Hart Design Feather",
+            "Giant Wing",
+            "CRAZY",
+            "Canvas",
+            "Twinkle",
+            "Light Wing LD",
+            "その他フェザー"
+        ];
+
+        const FISH_SPECIES = [
+            "ニジマス",
+            "ブラウントラウト",
+            "ブルックトラウト",
+            "イワナ",
+            "ヤマメ",
+            "サクラマス",
+            "イトウ",
+            "F1",
+            "アルビノ",
+            "その他"
+        ];
+
+        const SAMPLE_DATA = [
+            {
+                id: "sample-1",
+                datetime: new Date(Date.now() - 3600000 * 5).toISOString().slice(0,16),
+                location: "朝霞ガーデン",
+                species: "ニジマス",
+                size: "42.5",
+                count: 1,
+                lure: "Light Wing",
+                color: "ペレットオリーブ",
+                weight: "0.17g",
+                memo: "表層をゆっくりリトリーブ。着水直後のバイト。",
+                photo: null
+            },
+            {
+                id: "sample-2",
+                datetime: new Date(Date.now() - 3600000 * 26).toISOString().slice(0,16),
+                location: "すそのフィッシングパーク",
+                species: "ブラウントラウト",
+                size: "51.0",
+                count: 1,
+                lure: "Giant Wing",
+                color: "ブラックG",
+                weight: "0.5g",
+                memo: "ボトムでのバンピング。大物池で強烈なヒキ！",
+                photo: null
+            }
+        ];
+
+        let catchRecords = [];
+        let currentPhotoBase64 = null;
+
+        window.onload = function() {
+            initStorage();
+            initFormSelectors();
+            setNowDateTime();
+            renderHistory();
+        };
+
+        function initStorage() {
+            const stored = localStorage.getItem('moff_trout_catches');
+            if (stored) {
+                try {
+                    catchRecords = JSON.parse(stored);
+                } catch(e) {
+                    catchRecords = SAMPLE_DATA;
+                }
+            } else {
+                catchRecords = SAMPLE_DATA;
+                saveToStorage();
+            }
+        }
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem('moff_trout_catches', JSON.stringify(catchRecords));
+            } catch (err) {
+                showToast('保存容量上限に達しました。古い写真等を整理してください。');
+                console.error('Storage full:', err);
+            }
+        }
+
+        function initFormSelectors() {
+            const speciesContainer = document.getElementById('species-selector');
+            speciesContainer.innerHTML = '';
+            FISH_SPECIES.forEach((s, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `lure-chip p-2.5 rounded-lg text-sm text-center truncate font-medium ${index === 0 ? 'active' : ''}`;
+                btn.innerText = s;
+                btn.onclick = () => {
+                    document.querySelectorAll('#species-selector .lure-chip').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('field-species').value = s;
+                };
+                speciesContainer.appendChild(btn);
+            });
+
+            const lureContainer = document.getElementById('lure-selector');
+            lureContainer.innerHTML = '';
+            HART_DESIGN_LURES.forEach((l, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `lure-chip p-2 rounded-lg text-xs font-bold text-center truncate ${index === 0 ? 'active' : ''}`;
+                btn.innerHTML = `<i class="fa-solid fa-feather mr-1 opacity-70"></i>${escapeHtml(l)}`;
+                btn.onclick = () => {
+                    document.querySelectorAll('#lure-selector .lure-chip').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('field-lure').value = l;
+                };
+                lureContainer.appendChild(btn);
+            });
+        }
+
+        function setNowDateTime() {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('field-datetime').value = now.toISOString().slice(0,16);
+        }
+
+        // Compress image before saving to avoid filling localStorage limit
+        function previewAndCompressPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_SIZE = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_SIZE) {
+                            height = Math.round((height * MAX_SIZE) / width);
+                            width = MAX_SIZE;
+                        }
+                    } else {
+                        if (height > MAX_SIZE) {
+                            width = Math.round((width * MAX_SIZE) / height);
+                            height = MAX_SIZE;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    document.getElementById('photo-preview').src = currentPhotoBase64;
+                    document.getElementById('photo-preview-container').classList.remove('hidden');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto() {
+            currentPhotoBase64 = null;
+            document.getElementById('field-photo').value = '';
+            document.getElementById('photo-preview').src = '';
+            document.getElementById('photo-preview-container').classList.add('hidden');
+        }
+
+        function openPhotoModal(src) {
+            document.getElementById('modal-img').src = src;
+            document.getElementById('photo-modal').classList.remove('hidden');
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+        }
+
+        function saveCatch(e) {
+            e.preventDefault();
+
+            const record = {
+                id: 'cat-' + Date.now(),
+                datetime: document.getElementById('field-datetime').value,
+                location: document.getElementById('field-location').value.trim(),
+                species: document.getElementById('field-species').value,
+                size: document.getElementById('field-size').value ? parseFloat(document.getElementById('field-size').value).toFixed(1) : '-',
+                count: parseInt(document.getElementById('field-count').value) || 1,
+                lure: document.getElementById('field-lure').value,
+                color: document.getElementById('field-color').value.trim(),
+                weight: document.getElementById('field-weight').value.trim(),
+                memo: document.getElementById('field-memo').value.trim(),
+                photo: currentPhotoBase64
+            };
+
+            catchRecords.unshift(record);
+            saveToStorage();
+
+            showToast('釣果を記録しました！');
+            document.getElementById('field-size').value = '';
+            document.getElementById('field-memo').value = '';
+            removePhoto();
+            renderHistory();
+        }
+
+        function switchTab(tab) {
+            const logTab = document.getElementById('tab-log');
+            const historyTab = document.getElementById('tab-history');
+            const btnLog = document.getElementById('tab-btn-log');
+            const btnHistory = document.getElementById('tab-btn-history');
+
+            if (tab === 'log') {
+                logTab.classList.remove('hidden');
+                historyTab.classList.add('hidden');
+                btnLog.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500";
+                btnHistory.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200";
+            } else {
+                logTab.classList.add('hidden');
+                historyTab.classList.remove('hidden');
+                btnHistory.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500";
+                btnLog.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200";
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            populateFilterDropdowns();
+
+            const spotFilter = document.getElementById('filter-spot').value;
+            const lureFilter = document.getElementById('filter-lure').value;
+            const speciesFilter = document.getElementById('filter-species').value;
+
+            const filtered = catchRecords.filter(r => {
+                if (spotFilter && r.location !== spotFilter) return false;
+                if (lureFilter && r.lure !== lureFilter) return false;
+                if (speciesFilter && r.species !== speciesFilter) return false;
+                return true;
+            });
+
+            updateStats();
+
+            const container = document.getElementById('history-list');
+            container.innerHTML = '';
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="wood-panel p-8 text-center text-amber-400/70">
+                        <i class="fa-solid fa-box-open text-4xl mb-2"></i>
+                        <p class="font-bold">該当する釣果記録がありません</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "wood-panel p-4 space-y-3";
+                
+                const dateObj = new Date(item.datetime);
+                const dateStr = !isNaN(dateObj) 
+                    ? `${dateObj.getFullYear()}/${dateObj.getMonth()+1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2,'0')}:${String(dateObj.getMinutes()).padStart(2,'0')}`
+                    : item.datetime;
+
+                const countBadge = item.count > 1 
+                    ? `<span class="ml-1 bg-amber-800 text-amber-100 text-xs px-2 py-0.5 rounded-full font-bold">${item.count}匹</span>` 
+                    : '';
+
+                const photoHtml = item.photo ? `
+                    <div class="sm:col-span-1 h-32 rounded-lg overflow-hidden border border-amber-800 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
+                        <img src="${item.photo}" alt="釣果写真" class="w-full h-full object-cover">
+                    </div>
+                ` : '';
+
+                const detailSpecHtml = (item.color || item.weight) ? `
+                    <div class="text-amber-400/80 pl-4">
+                        ${item.color ? `カラー: ${escapeHtml(item.color)} ` : ''}
+                        ${item.weight ? `| ${escapeHtml(item.weight)}` : ''}
+                    </div>
+                ` : '';
+
+                const memoHtml = item.memo ? `
+                    <p class="text-xs text-amber-200/90 bg-amber-950/40 p-2 rounded border border-amber-900/40 mt-2">
+                        <i class="fa-solid fa-comment-dots text-amber-500 mr-1"></i>${escapeHtml(item.memo)}
+                    </p>
+                ` : '';
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between border-b border-amber-900/60 pb-2">
+                        <div>
+                            <span class="text-xs text-amber-400/80 font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
+                            <h3 class="text-lg font-bold text-amber-100 font-serif-title flex items-center gap-2 mt-0.5">
+                                <i class="fa-solid fa-location-dot text-amber-400 text-sm"></i>
+                                <span>${escapeHtml(item.location || '釣り場未設定')}</span>
+                            </h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-amber-950 text-amber-300 border border-amber-700 text-xs px-2.5 py-1 rounded-full font-bold">
+                                ${escapeHtml(item.species)}
+                            </span>
+                            ${countBadge}
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 ${item.photo ? 'sm:grid-cols-3' : ''} gap-3">
+                        ${photoHtml}
+                        
+                        <div class="${item.photo ? 'sm:col-span-2' : ''} space-y-2">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xs text-amber-400">サイズ:</span>
+                                <span class="text-2xl font-extrabold brass-text">${item.size !== '-' ? item.size + ' cm' : '計測なし'}</span>
+                            </div>
+
+                            <div class="bg-black/30 p-2.5 rounded-lg border border-amber-950 text-xs space-y-1">
+                                <div class="text-amber-200 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-feather text-amber-400"></i>
+                                    <span>ルアー: ${escapeHtml(item.lure)}</span>
+                                </div>
+                                ${detailSpecHtml}
+                            </div>
+
+                            ${memoHtml}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-1 border-t border-amber-900/40">
+                        <button onclick="deleteRecord('${item.id}')" class="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded hover:bg-red-950/40 transition">
+                            <i class="fa-solid fa-trash-can mr-1"></i>削除
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total-records').innerText = `${catchRecords.length}件の記録`;
+            
+            let totalFish = 0;
+            let maxSize = 0;
+            const lureCounts = {};
+            const spotCounts = {};
+
+            catchRecords.forEach(r => {
+                totalFish += (parseInt(r.count) || 1);
+                
+                const sz = parseFloat(r.size);
+                if (!isNaN(sz) && sz > maxSize) {
+                    maxSize = sz;
+                }
+
+                if (r.lure) {
+                    lureCounts[r.lure] = (lureCounts[r.lure] || 0) + (parseInt(r.count) || 1);
+                }
+
+                if (r.location) {
+                    spotCounts[r.location] = (spotCounts[r.location] || 0) + 1;
+                }
+            });
+
+            document.getElementById('stat-total-count').innerText = totalFish;
+            document.getElementById('stat-max-size').innerText = maxSize > 0 ? maxSize.toFixed(1) : '-';
+
+            let topLure = '-';
+            let maxLureCnt = 0;
+            for (let l in lureCounts) {
+                if (lureCounts[l] > maxLureCnt) {
+                    maxLureCnt = lureCounts[l];
+                    topLure = l;
+                }
+            }
+            document.getElementById('stat-best-lure').innerText = topLure !== '-' ? `${topLure} (${maxLureCnt}匹)` : '-';
+
+            let topSpot = '-';
+            let maxSpotCnt = 0;
+            for (let s in spotCounts) {
+                if (spotCounts[s] > maxSpotCnt) {
+                    maxSpotCnt = spotCounts[s];
+                    topSpot = s;
+                }
+            }
+            document.getElementById('stat-best-spot').innerText = topSpot !== '-' ? `メイン: ${topSpot}` : 'メインエリア: -';
+        }
+
+        function populateFilterDropdowns() {
+            const spotSelect = document.getElementById('filter-spot');
+            const lureSelect = document.getElementById('filter-lure');
+            const speciesSelect = document.getElementById('filter-species');
+
+            const currSpot = spotSelect.value;
+            const currLure = lureSelect.value;
+            const currSpecies = speciesSelect.value;
+
+            const spots = [...new Set(catchRecords.map(r => r.location).filter(Boolean))];
+            const lures = [...new Set(catchRecords.map(r => r.lure).filter(Boolean))];
+            const species = [...new Set(catchRecords.map(r => r.species).filter(Boolean))];
+
+            spotSelect.innerHTML = '<option value="">すべてのエリア</option>' + spots.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+            lureSelect.innerHTML = '<option value="">すべてのルアー</option>' + lures.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
+            speciesSelect.innerHTML = '<option value="">すべての魚種</option>' + species.map(sp => `<option value="${escapeHtml(sp)}">${escapeHtml(sp)}</option>`).join('');
+
+            spotSelect.value = currSpot;
+            lureSelect.value = currLure;
+            speciesSelect.value = currSpecies;
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-spot').value = '';
+            document.getElementById('filter-lure').value = '';
+            document.getElementById('filter-species').value = '';
+            renderHistory();
+        }
+
+        function deleteRecord(id) {
+            if (confirm('この釣果記録を削除してもよろしいですか？')) {
+                catchRecords = catchRecords.filter(r => r.id !== id);
+                saveToStorage();
+                renderHistory();
+                showToast('記録を削除しました');
+            }
+        }
+
+        function exportData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(catchRecords, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `Moff_Trout_Catch_Log_${new Date().toISOString().slice(0,10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        catchRecords = imported;
+                        saveToStorage();
+                        renderHistory();
+                        showToast(`${imported.length}件の記録を読み込みました！`);
+                    } else {
+                        alert('不正なデータ形式です。');
+                    }
+                } catch(err) {
+                    alert('ファイルの解析に失敗しました。');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+    </script>
+</body>
+</html>
