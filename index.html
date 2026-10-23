@@ -50,7 +50,7 @@
             border-radius: 18px;
         }
 
-        /* 明るく親しみやすいゴールド＆オレンジボタン */
+        /* ゴールド＆オレンジボタン */
         .btn-moff-primary {
             background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
             color: #261300;
@@ -66,21 +66,7 @@
             box-shadow: 0 3px 8px rgba(0,0,0,0.6);
         }
 
-        /* 爽やかなエメラルドボタン */
-        .btn-lake-emerald {
-            background: linear-gradient(180deg, #34d399 0%, #059669 100%);
-            color: #ffffff;
-            font-weight: 900;
-            border: 2px solid #a7f3d0;
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
-            transition: all 0.12s ease;
-        }
-
-        .btn-lake-emerald:active {
-            transform: scale(0.97);
-        }
-
-        /* 納竿ボタン（アウトドアオレンジレッド） */
+        /* 納竿ボタン */
         .btn-finish-fishing {
             background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
             color: #ffffff;
@@ -88,7 +74,6 @@
             box-shadow: 0 4px 12px rgba(185, 28, 28, 0.4);
             transition: all 0.12s ease;
         }
-
         .btn-finish-fishing:active {
             transform: scale(0.95);
         }
@@ -148,7 +133,7 @@
             background: #140b06;
         }
 
-        /* クイックサイズタグ */
+        /* タグボタン */
         .tag-btn {
             background: #22140b;
             border: 1.5px solid #57371f;
@@ -161,6 +146,7 @@
             border-color: #fde68a;
             color: #241202;
             font-weight: 900;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
         }
 
         /* 高コントラスト入力 */
@@ -185,23 +171,51 @@
             to { transform: translateY(0); }
         }
 
-        /* ★親しみやすくポップな Nice MOFF!! スタンプ */
+        /* カレンダー関連スタイル */
+        .cal-day-cell {
+            min-height: 58px;
+            background: #1a100a;
+            border: 1px solid #3d2616;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4px 2px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            position: relative;
+        }
+
+        .cal-day-cell:active {
+            transform: scale(0.93);
+        }
+
+        .cal-day-cell.other-month {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .cal-day-cell.has-catch {
+            background: linear-gradient(160deg, #1c3628 0%, #12241b 100%);
+            border: 1.5px solid #34d399;
+            box-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
+        }
+
+        .cal-day-cell.selected {
+            background: linear-gradient(160deg, #854d0e 0%, #452404 100%) !important;
+            border: 2px solid #fde68a !important;
+            box-shadow: 0 0 14px rgba(251, 191, 36, 0.6) !important;
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        /* ★Nice MOFF!! スタンプ */
         @keyframes stampPop {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(3.2) rotate(-22deg);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(0.94) rotate(-4deg);
-            }
-            75% {
-                transform: translate(-50%, -50%) scale(1.04) rotate(-5deg);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1) rotate(-5deg);
-            }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(3.2) rotate(-22deg); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(0.94) rotate(-4deg); }
+            75% { transform: translate(-50%, -50%) scale(1.04) rotate(-5deg); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-5deg); }
         }
 
         .stamp-animate {
@@ -233,26 +247,20 @@
     <div class="max-w-xl mx-auto min-h-[94vh] flex flex-col justify-between">
 
         <!-- ======================================================== -->
-        <!-- VIEW 1: ホーム画面（親しみやすいアウトドア・フィッシング） -->
+        <!-- VIEW 1: ホーム画面 -->
         <!-- ======================================================== -->
         <section id="view-home" class="space-y-4 view-fade my-auto py-3">
 
-            <!-- メイン看板（フィッシングキャンプ風） -->
+            <!-- メイン看板 -->
             <div class="outdoor-panel p-6 text-center shadow-2xl relative overflow-hidden">
-                <!-- 水面のきらめき装飾グラデーション -->
-                <div class="absolute -top-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-                <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-                <!-- HartDesign エンブレム -->
                 <div class="inline-flex items-center gap-2 bg-black/40 border border-emerald-400/60 px-4 py-1.5 rounded-full shadow-inner mb-3">
                     <span class="text-emerald-400 text-sm">🎣</span>
                     <span class="text-xs font-black tracking-widest text-emerald-200">HartDesign 公式連動</span>
                     <span class="text-amber-400 text-sm">🪶</span>
                 </div>
 
-                <!-- メインタイトル -->
-                <h1 class="text-3xl sm:text-4xl font-black text-amber-200 tracking-wider mb-1 flex items-center justify-center gap-2">
-                    <span>Moff隊 釣果記録帳</span>
+                <h1 class="text-3xl sm:text-4xl font-black text-amber-200 tracking-wider mb-1">
+                    Moff隊 釣果記録帳
                 </h1>
                 <p class="text-xs sm:text-sm text-emerald-300 font-bold tracking-wider">
                     エリアトラウト・ワンタップ実釣カウンター
@@ -278,7 +286,6 @@
             <!-- メインボタン群 -->
             <div class="space-y-3.5 pt-1">
 
-                <!-- 1. 本日の釣行を開始する（スタート画面へ） -->
                 <button type="button" onclick="startSessionSetup()" class="btn-moff-primary w-full py-5 px-6 rounded-2xl flex items-center justify-between shadow-2xl cursor-pointer">
                     <div class="flex items-center gap-3.5 text-left">
                         <div class="w-14 h-14 rounded-2xl bg-amber-950/40 border border-amber-900 flex items-center justify-center text-amber-900 text-3xl shadow-inner">
@@ -289,7 +296,7 @@
                                 本日の釣行を開始！
                             </span>
                             <span class="block text-xs text-amber-900/90 font-bold mt-0.5">
-                                場所と天気を決めて即座に実釣記録へ
+                                場所・天気・風を選んで即座に記録へ
                             </span>
                         </div>
                     </div>
@@ -298,7 +305,6 @@
                     </div>
                 </button>
 
-                <!-- 釣行中のセッションが残っている場合の再開ボタン -->
                 <button type="button" id="btn-resume-session" onclick="resumeFishingSession()" class="hidden w-full py-4 px-5 rounded-2xl bg-emerald-800/90 border-2 border-emerald-300 text-white font-black flex items-center justify-between shadow-xl cursor-pointer">
                     <span class="flex items-center gap-2.5">
                         <span class="w-3.5 h-3.5 rounded-full bg-emerald-300 animate-ping"></span>
@@ -307,18 +313,17 @@
                     <span class="text-xs bg-emerald-950 px-3 py-1.5 rounded-full border border-emerald-400">戻る →</span>
                 </button>
 
-                <!-- 2. 釣果履歴・分析を見る -->
                 <button type="button" onclick="openHistoryView()" class="outdoor-panel w-full py-4 px-5 flex items-center justify-between shadow-xl cursor-pointer hover:border-amber-500">
                     <div class="flex items-center gap-3.5 text-left">
                         <div class="w-12 h-12 rounded-xl bg-black/40 border border-amber-800 flex items-center justify-center text-amber-400 text-xl">
-                            <i class="fa-solid fa-book-bookmark"></i>
+                            <i class="fa-regular fa-calendar-days"></i>
                         </div>
                         <div>
                             <span class="block text-lg font-bold text-amber-100">
-                                釣果履歴・分析を見る
+                                釣果履歴・カレンダー
                             </span>
                             <span class="block text-xs text-amber-300/80 mt-0.5">
-                                写真付き釣果カード・ヒットルアー統計
+                                日付ごとの釣果と月間アナリティクス
                             </span>
                         </div>
                     </div>
@@ -349,7 +354,7 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 2: 釣行設定（開始前に1回だけ入力） -->
+        <!-- VIEW 2: 釣行設定（釣り場候補・天気・風の分離入力） -->
         <!-- ======================================================== -->
         <section id="view-setup" class="hidden space-y-4 view-fade py-2 my-auto">
 
@@ -366,41 +371,52 @@
                     </button>
                 </div>
 
-                <p class="text-xs text-amber-200/90 leading-relaxed">
-                    ※釣り場と天気をセットすれば、あとは納竿まで1タップで釣果記録し続けられます！
-                </p>
-
-                <!-- 日時 -->
+                <!-- 1. 開始日時 -->
                 <div>
                     <label class="block text-xs font-bold text-amber-300 mb-1">釣行日・開始日時</label>
                     <input type="datetime-local" id="setup-datetime" class="outdoor-input w-full p-3 font-bold text-base">
                 </div>
 
-                <!-- 釣り場 -->
+                <!-- 2. 釣り場（候補から選択 ＋ 新規手入力） ★変更1 -->
                 <div>
-                    <label class="block text-xs font-bold text-amber-300 mb-1">釣り場（エリア名）</label>
-                    <input type="text" id="setup-location" placeholder="釣り場名を入力または下から選択" class="outdoor-input w-full p-3 font-bold text-base mb-2">
-                    <div class="flex flex-wrap gap-1.5" id="setup-spot-tags">
-                        <button type="button" onclick="setSetupSpot('朝霞ガーデン')" class="tag-btn px-3 py-1.5 text-xs font-bold">朝霞ガーデン</button>
-                        <button type="button" onclick="setSetupSpot('ベリーパーク王禅寺')" class="tag-btn px-3 py-1.5 text-xs font-bold">王禅寺</button>
-                        <button type="button" onclick="setSetupSpot('すそのFP')" class="tag-btn px-3 py-1.5 text-xs font-bold">すそのFP</button>
-                        <button type="button" onclick="setSetupSpot('開成FS')" class="tag-btn px-3 py-1.5 text-xs font-bold">開成FS</button>
-                        <button type="button" onclick="setSetupSpot('中津川')" class="tag-btn px-3 py-1.5 text-xs font-bold">中津川</button>
-                        <button type="button" onclick="setSetupSpot('発光路の森')" class="tag-btn px-3 py-1.5 text-xs font-bold">発光路の森</button>
-                        <button type="button" onclick="setSetupSpot('アルクスポンド')" class="tag-btn px-3 py-1.5 text-xs font-bold">アルクスポンド</button>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-bold text-amber-300"><i class="fa-solid fa-location-dot mr-1 text-emerald-400"></i>釣り場（エリア名）</label>
+                        <span class="text-[10px] text-amber-400">※一度入力した場所は自動記憶</span>
+                    </div>
+
+                    <!-- 候補セレクトボックス -->
+                    <select id="setup-spot-select" onchange="onSpotSelectChange(this.value)" class="outdoor-input w-full p-3 font-bold text-sm mb-2">
+                        <!-- JSで動的に候補注入 -->
+                    </select>
+
+                    <!-- 新規手入力欄（「＋新しい場所を入力」選択時に表示または自由編集） -->
+                    <div id="new-spot-input-wrap">
+                        <input type="text" id="setup-location-custom" placeholder="新しい釣り場名を手入力（例: フィッシング母の島）" class="outdoor-input w-full p-3 font-bold text-sm">
                     </div>
                 </div>
 
-                <!-- 天気 -->
+                <!-- 3. 天気（5種から選択） ★変更2 -->
                 <div>
-                    <label class="block text-xs font-bold text-amber-300 mb-1">本日の天気</label>
-                    <div class="grid grid-cols-4 gap-1.5" id="setup-weather-container">
+                    <label class="block text-xs font-bold text-amber-300 mb-1.5"><i class="fa-solid fa-cloud-sun mr-1 text-amber-400"></i>本日の天気（選択式）</label>
+                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5" id="setup-weather-container">
                         <button type="button" onclick="setSetupWeather('晴れ')" class="tag-btn py-2 text-xs font-bold active">☀️ 晴れ</button>
                         <button type="button" onclick="setSetupWeather('曇り')" class="tag-btn py-2 text-xs font-bold">☁️ 曇り</button>
                         <button type="button" onclick="setSetupWeather('雨')" class="tag-btn py-2 text-xs font-bold">🌧️ 雨</button>
-                        <button type="button" onclick="setSetupWeather('風あり')" class="tag-btn py-2 text-xs font-bold">💨 風あり</button>
+                        <button type="button" onclick="setSetupWeather('晴れ時々曇り')" class="tag-btn py-2 text-xs font-bold">⛅ 晴れ時々曇り</button>
+                        <button type="button" onclick="setSetupWeather('曇り時々雨')" class="tag-btn py-2 text-xs font-bold col-span-2 sm:col-span-1">🌦️ 曇り時々雨</button>
                     </div>
                     <input type="hidden" id="setup-weather" value="晴れ">
+                </div>
+
+                <!-- 4. 風（無・弱・強から選択） ★変更2 -->
+                <div>
+                    <label class="block text-xs font-bold text-amber-300 mb-1.5"><i class="fa-solid fa-wind mr-1 text-teal-400"></i>風の強さ（選択式）</label>
+                    <div class="grid grid-cols-3 gap-2" id="setup-wind-container">
+                        <button type="button" onclick="setSetupWind('無')" class="tag-btn py-2.5 text-xs font-bold active">🍃 風: 無</button>
+                        <button type="button" onclick="setSetupWind('弱')" class="tag-btn py-2.5 text-xs font-bold">🌬️ 風: 弱</button>
+                        <button type="button" onclick="setSetupWind('強')" class="tag-btn py-2.5 text-xs font-bold">💨 風: 強</button>
+                    </div>
+                    <input type="hidden" id="setup-wind" value="無">
                 </div>
 
                 <div class="pt-2">
@@ -415,11 +431,11 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 3: 実釣中・スッキリ整理されたワン画面スピード記録 ★最重要 -->
+        <!-- VIEW 3: 実釣中・ワン画面スピード記録（ループ式） -->
         <!-- ======================================================== -->
         <section id="view-fishing" class="hidden space-y-3 view-fade pb-6">
 
-            <!-- 釣行ヘッダーバー（納竿ボタンつき） -->
+            <!-- 釣行ヘッダーバー -->
             <div class="lake-panel p-3 flex items-center justify-between sticky top-1 z-30 shadow-2xl">
                 <div class="flex items-center gap-2.5">
                     <div class="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-400/80 flex items-center justify-center text-emerald-300 text-xl font-black">
@@ -429,7 +445,7 @@
                         <div class="flex items-center gap-1.5">
                             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                             <span class="text-xs font-bold text-emerald-200" id="live-session-spot">朝霞ガーデン</span>
-                            <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300" id="live-session-weather">晴れ</span>
+                            <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300" id="live-session-conditions">☀️ 晴れ / 🍃 風:無</span>
                         </div>
                         <div class="text-sm font-black text-amber-300">
                             本日 <span id="live-session-count" class="text-2xl text-amber-200 font-black">0</span> 匹キャッチ！
@@ -443,10 +459,10 @@
                 </button>
             </div>
 
-            <!-- ★スッキリ整理されたメイン記録カード（全部一覧ではなく、タップで選択ボックス展開） -->
+            <!-- スッキリ整理されたメイン記録カード -->
             <div class="outdoor-panel p-4 sm:p-5 space-y-3">
 
-                <!-- 1. 魚種（タップして選択するボックス） -->
+                <!-- 1. 魚種（タップで開く） -->
                 <div>
                     <div class="text-[11px] font-bold text-amber-300/80 mb-1 flex items-center justify-between">
                         <span><i class="fa-solid fa-fish mr-1 text-emerald-400"></i>魚種</span>
@@ -469,7 +485,7 @@
                     <input type="hidden" id="live-species" value="ニジマス">
                 </div>
 
-                <!-- 2. ヒットルアー（タップして選択するボックス） -->
+                <!-- 2. ルアー（タップで開く） -->
                 <div>
                     <div class="text-[11px] font-bold text-amber-300/80 mb-1 flex items-center justify-between">
                         <span><i class="fa-solid fa-feather mr-1 text-amber-400"></i>ヒットルアー (HartDesign)</span>
@@ -492,9 +508,8 @@
                     <input type="hidden" id="live-lure" value="ライトウイング">
                 </div>
 
-                <!-- 3. ウエイト & カラー（2列ボックス） -->
+                <!-- 3. ウエイト & カラー（タップで開く） -->
                 <div class="grid grid-cols-2 gap-2.5">
-                    <!-- ウエイト -->
                     <div>
                         <div class="text-[11px] font-bold text-amber-300/80 mb-1">
                             <i class="fa-solid fa-weight-hanging mr-1 text-amber-400"></i>ウエイト
@@ -509,7 +524,6 @@
                         <input type="hidden" id="live-weight" value="0.3g">
                     </div>
 
-                    <!-- カラー -->
                     <div>
                         <div class="text-[11px] font-bold text-amber-300/80 mb-1">
                             <i class="fa-solid fa-palette mr-1 text-amber-400"></i>公式カラー
@@ -525,14 +539,13 @@
                     </div>
                 </div>
 
-                <!-- 4. サイズ & 匹数（手袋でも直感操作カウンター） -->
+                <!-- 4. サイズ & 匹数カウンター -->
                 <div class="bg-black/35 p-3 rounded-2xl border border-amber-900/60 space-y-2">
                     <div class="flex items-center justify-between text-xs font-bold text-amber-300">
                         <span><i class="fa-solid fa-ruler mr-1 text-emerald-400"></i>サイズ (cm)</span>
                         <span class="text-[10px] text-amber-400/80">未計測のままでもOK</span>
                     </div>
 
-                    <!-- ＋/－ と中央の大きなサイズ表示 -->
                     <div class="flex items-center gap-2 justify-center">
                         <button type="button" onclick="adjustLiveSize(-1)" class="counter-btn w-12 h-12 rounded-xl text-xl font-black">－</button>
                         <div class="flex-1 text-center bg-black/60 border border-amber-700/80 rounded-xl py-1.5">
@@ -542,7 +555,6 @@
                         <button type="button" onclick="adjustLiveSize(+1)" class="counter-btn w-12 h-12 rounded-xl text-xl font-black">＋</button>
                     </div>
 
-                    <!-- クイックサイズタグ -->
                     <div class="grid grid-cols-5 gap-1 pt-0.5">
                         <button type="button" onclick="setLiveSizeQuick(25)" class="tag-btn py-1 text-xs font-bold">25cm</button>
                         <button type="button" onclick="setLiveSizeQuick(35)" class="tag-btn py-1 text-xs font-bold">35cm</button>
@@ -551,7 +563,6 @@
                         <button type="button" onclick="setLiveSizeQuick(60)" class="tag-btn py-1 text-xs font-bold">60cm超</button>
                     </div>
 
-                    <!-- 匹数カウンター（連発・数釣り用） -->
                     <div class="pt-2 border-t border-amber-900/50 flex items-center justify-between text-xs font-bold text-amber-300">
                         <div>キャッチ数:</div>
                         <div class="flex items-center gap-1.5">
@@ -565,7 +576,7 @@
                     </div>
                 </div>
 
-                <!-- 5. 写真・メモ（任意・コンパクト） -->
+                <!-- 5. 写真・メモ -->
                 <div class="bg-black/25 p-2 rounded-xl border border-amber-900/40 flex items-center gap-2">
                     <label class="cursor-pointer bg-black/50 hover:bg-black/70 border border-amber-700/80 rounded-lg px-2.5 py-1.5 text-center flex items-center gap-1.5 text-xs text-amber-200 font-bold">
                         <i class="fa-solid fa-camera text-emerald-400"></i>
@@ -579,7 +590,7 @@
                     <input type="text" id="live-memo" placeholder="メモ（パターンなど・任意）" class="outdoor-input flex-1 p-1.5 text-xs">
                 </div>
 
-                <!-- ★特大：この釣果を記録するボタン（Nice MOFF!! スタンプ発動） -->
+                <!-- 保存ボタン（Nice MOFF!! 発動） -->
                 <div class="pt-1">
                     <button type="button" onclick="saveLiveCatchRecord()" class="btn-moff-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
                         <i class="fa-solid fa-floppy-disk text-2xl"></i>
@@ -593,69 +604,86 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 4: 釣果履歴・分析画面 -->
+        <!-- VIEW 4: 釣果履歴・カレンダー画面 ★変更3 -->
         <!-- ======================================================== -->
         <section id="view-history" class="hidden space-y-4 view-fade py-2">
 
+            <!-- ヘッダーバー -->
             <div class="lake-panel p-3 flex items-center justify-between">
                 <button type="button" onclick="showView('view-home')" class="outdoor-panel px-3.5 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-house text-amber-400"></i>
                     <span>トップへ</span>
                 </button>
-                <h2 class="text-xl font-black text-amber-200">釣果履歴・分析</h2>
+                <h2 class="text-xl font-black text-amber-200">釣果履歴・カレンダー</h2>
                 <button type="button" onclick="startSessionSetup()" class="btn-moff-primary px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
                     <i class="fa-solid fa-plus"></i>釣行開始
                 </button>
             </div>
 
-            <!-- アナリティクス看板 -->
-            <div class="outdoor-panel p-4">
-                <h3 class="text-xs font-bold text-emerald-300 mb-2 flex items-center justify-between border-b border-amber-900/60 pb-1">
-                    <span><i class="fa-solid fa-trophy text-amber-400 mr-1.5"></i>通算釣果アナリティクス</span>
-                    <span class="text-xs text-amber-300 font-bold" id="hist-stat-records">0件</span>
-                </h3>
+            <!-- カレンダーコンポーネント看板 -->
+            <div class="outdoor-panel p-4 space-y-3">
+                <!-- 月切り替えヘッダー -->
+                <div class="flex items-center justify-between border-b border-amber-900/60 pb-2">
+                    <button type="button" onclick="changeCalMonth(-1)" class="tag-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-chevron-left"></i> 前月
+                    </button>
+                    <div class="text-center">
+                        <span id="cal-month-title" class="text-lg font-black text-amber-200">2026年 10月</span>
+                    </div>
+                    <button type="button" onclick="changeCalMonth(+1)" class="tag-btn px-3 py-1.5 text-xs font-bold flex items-center gap-1">
+                        次月 <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-                    <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl">
-                        <div class="text-[11px] text-amber-300 font-bold">総キャッチ数</div>
-                        <div class="text-2xl font-black text-amber-300 mt-0.5" id="hist-stat-count">0</div>
-                        <div class="text-[10px] text-amber-200">匹</div>
+                <!-- 曜日ヘッダー -->
+                <div class="grid grid-cols-7 gap-1 text-center text-[11px] font-bold">
+                    <div class="text-red-400">日</div>
+                    <div class="text-amber-200">月</div>
+                    <div class="text-amber-200">火</div>
+                    <div class="text-amber-200">水</div>
+                    <div class="text-amber-200">木</div>
+                    <div class="text-amber-200">金</div>
+                    <div class="text-blue-400">土</div>
+                </div>
+
+                <!-- 日付セルグリッド (JS動的生成) -->
+                <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
+
+                <!-- 月間ミニサマリー -->
+                <div class="pt-2 border-t border-amber-900/50 grid grid-cols-3 gap-2 text-center text-xs">
+                    <div class="bg-black/40 p-2 rounded-xl">
+                        <div class="text-[10px] text-amber-400 font-bold">月間釣行日</div>
+                        <div class="text-base font-black text-amber-100" id="month-stat-days">0日</div>
                     </div>
-                    <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl">
-                        <div class="text-[11px] text-emerald-300 font-bold">最大サイズ</div>
-                        <div class="text-2xl font-black text-emerald-300 mt-0.5" id="hist-stat-max">0.0</div>
-                        <div class="text-[10px] text-amber-200">cm</div>
+                    <div class="bg-black/40 p-2 rounded-xl">
+                        <div class="text-[10px] text-amber-400 font-bold">月間キャッチ</div>
+                        <div class="text-base font-black text-amber-300" id="month-stat-count">0匹</div>
                     </div>
-                    <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl col-span-2 text-left px-3.5">
-                        <div class="text-[11px] text-amber-300 font-bold">最多ヒットルアー</div>
-                        <div class="text-sm font-extrabold text-amber-100 truncate mt-0.5" id="hist-stat-best-lure">-</div>
-                        <div class="text-[10px] text-emerald-300 truncate" id="hist-stat-best-spot">メイン釣り場: -</div>
+                    <div class="bg-black/40 p-2 rounded-xl">
+                        <div class="text-[10px] text-emerald-400 font-bold">月間最大魚</div>
+                        <div class="text-base font-black text-emerald-300" id="month-stat-max">- cm</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 絞り込みフィルター -->
-            <div class="outdoor-panel p-3 space-y-1.5">
-                <div class="text-xs font-bold text-amber-300 flex items-center justify-between">
-                    <span><i class="fa-solid fa-filter mr-1"></i>絞り込み</span>
-                    <button onclick="resetFilters()" class="text-emerald-400 hover:underline text-[11px]">すべて表示</button>
+            <!-- ★選択した日付の釣果一覧エリア -->
+            <div class="space-y-2.5">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-sm font-black text-amber-200 flex items-center gap-1.5" id="selected-day-title">
+                        <span>📅 2026/10/23 の釣果</span>
+                    </h3>
+                    <span class="text-xs text-amber-400/90 font-bold" id="selected-day-summary">0件の記録</span>
                 </div>
-                <div class="grid grid-cols-3 gap-1.5">
-                    <select id="filter-spot" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全エリア</option></select>
-                    <select id="filter-lure" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全ルアー</option></select>
-                    <select id="filter-species" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全魚種</option></select>
-                </div>
-            </div>
 
-            <div id="history-cards-container" class="space-y-3 pb-8"></div>
+                <!-- 選択日の釣果カードリスト -->
+                <div id="day-catches-container" class="space-y-3 pb-8"></div>
+            </div>
 
         </section>
 
     </div>
 
-    <!-- ======================================================== -->
-    <!-- CHOICE BOTTOM SHEET MODAL: 項目選択用スライドシート -->
-    <!-- ======================================================== -->
+    <!-- CHOICE BOTTOM SHEET MODAL -->
     <div id="choice-sheet-overlay" onclick="closeChoiceSheet()" class="fixed inset-0 bg-black/80 z-50 flex flex-col justify-end p-2 sm:p-4 hidden">
         <div onclick="event.stopPropagation()" class="outdoor-panel max-w-xl w-full mx-auto p-4 max-h-[82vh] flex flex-col sheet-up">
             <div class="flex items-center justify-between border-b border-amber-900/60 pb-2 mb-3">
@@ -664,31 +692,23 @@
                     閉じる ✕
                 </button>
             </div>
-            
-            <!-- スクロール可能な選択肢グリッド -->
             <div id="choice-sheet-content" class="overflow-y-auto flex-1 pr-1 grid gap-2"></div>
         </div>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- STAMP MODAL: ★Nice MOFF!! 特大スタンプ演出 -->
-    <!-- ======================================================== -->
+    <!-- STAMP MODAL: ★Nice MOFF!! 特大スタンプ -->
     <div id="stamp-overlay" class="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-200">
         <div id="stamp-badge" class="nice-moff-stamp w-80 h-80 rounded-full flex flex-col items-center justify-center text-center p-4 shadow-2xl relative">
             <div class="absolute inset-2 border-3 border-dashed border-amber-950/70 rounded-full pointer-events-none"></div>
-            
             <div class="text-amber-950 text-xs font-black tracking-widest uppercase mb-1">
                 ★ HartDesign Feather Catch ★
             </div>
-            
             <div class="text-5xl font-black tracking-tight text-amber-950 leading-none my-1">
                 Nice MOFF!!
             </div>
-            
             <div class="text-amber-900 font-black text-xl mt-1 tracking-wider">
                 ナイスMOFF! 🎣
             </div>
-
             <div class="mt-3 bg-amber-950 text-amber-300 text-xs px-4 py-1.5 rounded-full font-black border border-amber-600 shadow">
                 本日 <span id="stamp-count" class="text-xl text-amber-200">1</span> 匹目を記録！
             </div>
@@ -706,12 +726,13 @@
             
             <div class="bg-black/50 border border-amber-800 rounded-xl p-3 text-left space-y-1.5 text-xs">
                 <div class="flex justify-between"><span class="text-amber-400">釣り場:</span><span class="font-bold text-amber-100" id="summary-fin-spot">-</span></div>
+                <div class="flex justify-between"><span class="text-amber-400">状況:</span><span class="font-bold text-emerald-300" id="summary-fin-cond">-</span></div>
                 <div class="flex justify-between"><span class="text-amber-400">本日キャッチ:</span><span class="font-black text-amber-300 text-base" id="summary-fin-count">0 匹</span></div>
                 <div class="flex justify-between"><span class="text-amber-400">本日最大:</span><span class="font-bold text-emerald-300" id="summary-fin-max">- cm</span></div>
             </div>
 
             <button type="button" onclick="confirmFinishFishing()" class="btn-moff-primary w-full py-3.5 rounded-xl text-lg font-black shadow-xl">
-                トップメニューへ戻る
+                カレンダー履歴を見る
             </button>
         </div>
     </div>
@@ -807,29 +828,37 @@
         };
 
         const FISH_SPECIES = [
-            "ニジマス",
-            "ブラウントラウト",
-            "イワナ",
-            "ヤマメ",
-            "サクラマス",
-            "イトウ",
-            "ブルックトラウト",
-            "ロックトラウト",
-            "アルビノ",
-            "F1",
-            "その他"
+            "ニジマス", "ブラウントラウト", "イワナ", "ヤマメ", "サクラマス",
+            "イトウ", "ブルックトラウト", "ロックトラウト", "アルビノ", "F1", "その他"
+        ];
+
+        // デフォルト釣り場候補リスト
+        const DEFAULT_SPOTS = [
+            "朝霞ガーデン",
+            "ベリーパーク王禅寺",
+            "すそのFP",
+            "開成FS",
+            "フィッシングフィールド中津川",
+            "発光路の森",
+            "アルクスポンド宇都宮"
         ];
 
         let currentSession = null;
         let catchRecords = [];
+        let savedSpots = [];
         let livePhotoBase64 = null;
         let liveCount = 1;
 
+        // カレンダー表示用
+        let calCurrentYear = new Date().getFullYear();
+        let calCurrentMonth = new Date().getMonth(); // 0-indexed
+        let calSelectedDateStr = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+
         window.onload = function() {
             loadStorage();
+            initSpotCandidates();
             checkActiveSession();
             updateAllStats();
-            // 初期ルアーセット
             updateLureDisplay('ライトウイング');
         };
 
@@ -838,6 +867,15 @@
             if (stored) {
                 try { catchRecords = JSON.parse(stored); } catch(e) { catchRecords = []; }
             }
+
+            const spotsStored = localStorage.getItem('moff_saved_spots');
+            if (spotsStored) {
+                try { savedSpots = JSON.parse(spotsStored); } catch(e) { savedSpots = DEFAULT_SPOTS; }
+            } else {
+                savedSpots = DEFAULT_SPOTS;
+                localStorage.setItem('moff_saved_spots', JSON.stringify(savedSpots));
+            }
+
             const sessStored = localStorage.getItem('moff_active_session');
             if (sessStored) {
                 try { currentSession = JSON.parse(sessStored); } catch(e) { currentSession = null; }
@@ -847,6 +885,7 @@
         function saveStorage() {
             try {
                 localStorage.setItem('moff_trout_catches', JSON.stringify(catchRecords));
+                localStorage.setItem('moff_saved_spots', JSON.stringify(savedSpots));
                 if (currentSession) {
                     localStorage.setItem('moff_active_session', JSON.stringify(currentSession));
                 } else {
@@ -865,6 +904,43 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ==========================================
+        // 変更1: 釣り場候補セレクト ＆ 新規手入力管理
+        // ==========================================
+        function initSpotCandidates() {
+            const select = document.getElementById('setup-spot-select');
+            select.innerHTML = '';
+
+            savedSpots.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.innerText = `📍 ${s}`;
+                select.appendChild(opt);
+            });
+
+            const newOpt = document.createElement('option');
+            newOpt.value = '__NEW__';
+            newOpt.innerText = '➕ 新しい釣り場を手入力する...';
+            select.appendChild(newOpt);
+
+            // 初期選択
+            onSpotSelectChange(select.value);
+        }
+
+        function onSpotSelectChange(val) {
+            const customWrap = document.getElementById('new-spot-input-wrap');
+            const customInput = document.getElementById('setup-location-custom');
+
+            if (val === '__NEW__') {
+                customWrap.classList.remove('hidden');
+                customInput.value = '';
+                customInput.focus();
+            } else {
+                customWrap.classList.add('hidden');
+                customInput.value = val;
+            }
+        }
+
         function checkActiveSession() {
             const resumeBtn = document.getElementById('btn-resume-session');
             if (currentSession && currentSession.active) {
@@ -879,19 +955,13 @@
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             document.getElementById('setup-datetime').value = now.toISOString().slice(0,16);
-            if (!document.getElementById('setup-location').value) {
-                document.getElementById('setup-location').value = '朝霞ガーデン';
-            }
+            initSpotCandidates();
             showView('view-setup');
         }
 
-        function setSetupSpot(spot) {
-            document.getElementById('setup-location').value = spot;
-            document.querySelectorAll('#setup-spot-tags button').forEach(b => {
-                b.classList.toggle('active', b.innerText.includes(spot));
-            });
-        }
-
+        // ==========================================
+        // 変更2: 天気（5種）と風（3種）の分離選択
+        // ==========================================
         function setSetupWeather(weather) {
             document.getElementById('setup-weather').value = weather;
             document.querySelectorAll('#setup-weather-container button').forEach(b => {
@@ -899,17 +969,41 @@
             });
         }
 
+        function setSetupWind(wind) {
+            document.getElementById('setup-wind').value = wind;
+            document.querySelectorAll('#setup-wind-container button').forEach(b => {
+                b.classList.toggle('active', b.innerText.includes(wind));
+            });
+        }
+
         function beginFishingSession() {
-            const loc = document.getElementById('setup-location').value.trim() || '釣り場未設定';
+            const selectVal = document.getElementById('setup-spot-select').value;
+            let finalSpot = selectVal;
+            if (selectVal === '__NEW__') {
+                finalSpot = document.getElementById('setup-location-custom').value.trim();
+            }
+            if (!finalSpot) {
+                showToast('釣り場名を入力または選択してください');
+                return;
+            }
+
+            // 新規釣り場なら候補リストに保存して次回から選べるようにする
+            if (!savedSpots.includes(finalSpot)) {
+                savedSpots.unshift(finalSpot);
+                saveStorage();
+            }
+
             const dt = document.getElementById('setup-datetime').value;
             const weather = document.getElementById('setup-weather').value;
+            const wind = document.getElementById('setup-wind').value;
 
             currentSession = {
                 id: 'sess-' + Date.now(),
                 active: true,
                 datetime: dt,
-                location: loc,
+                location: finalSpot,
                 weather: weather,
+                wind: wind,
                 sessionCatches: []
             };
 
@@ -925,14 +1019,28 @@
 
         function enterFishingView() {
             document.getElementById('live-session-spot').innerText = currentSession.location;
-            document.getElementById('live-session-weather').innerText = currentSession.weather;
+            const wIcon = getWeatherIcon(currentSession.weather);
+            const wndIcon = getWindIcon(currentSession.wind);
+            document.getElementById('live-session-conditions').innerText = `${wIcon} ${currentSession.weather} / ${wndIcon} 風:${currentSession.wind}`;
             document.getElementById('live-session-count').innerText = currentSession.sessionCatches.reduce((a, b) => a + (parseInt(b.count) || 1), 0);
 
             showView('view-fishing');
         }
 
+        function getWeatherIcon(w) {
+            if (w.includes('雨')) return '🌧️';
+            if (w.includes('曇り')) return '⛅';
+            return '☀️';
+        }
+
+        function getWindIcon(wnd) {
+            if (wnd === '強') return '💨';
+            if (wnd === '弱') return '🌬️';
+            return '🍃';
+        }
+
         // ==========================================
-        // ★スッキリ選択シート（魚種・ルアー・ウエイト・カラーのポップアップ）
+        // 実釣スッキリ選択シート
         // ==========================================
         function openChoiceSheet(type) {
             const overlay = document.getElementById('choice-sheet-overlay');
@@ -1032,21 +1140,15 @@
             document.getElementById('display-lure').innerText = lureName;
 
             const info = HART_DESIGN_MASTER[lureName] || { weights: [], colors: [] };
-
-            // デフォルトウエイト
             const defWeight = (info.weights && info.weights.length > 0) ? info.weights[0] : '-';
             document.getElementById('live-weight').value = defWeight;
             document.getElementById('display-weight').innerText = defWeight;
 
-            // デフォルトカラー
             const defColor = (info.colors && info.colors.length > 0) ? info.colors[0] : '-';
             document.getElementById('live-color').value = defColor;
             document.getElementById('display-color').innerText = defColor;
         }
 
-        // ==========================================
-        // 実釣画面のサイズ・匹数ヘルパー
-        // ==========================================
         function adjustLiveSize(delta) {
             const input = document.getElementById('live-size');
             let val = parseFloat(input.value) || 30.0;
@@ -1106,7 +1208,7 @@
         }
 
         // ==========================================
-        // ★保存 ＆ Nice MOFF!! スタンプ
+        // 釣果保存 ＆ Nice MOFF!!
         // ==========================================
         function saveLiveCatchRecord() {
             if (!currentSession) return;
@@ -1120,6 +1222,7 @@
                 datetime: new Date().toISOString(),
                 location: currentSession.location,
                 weather: currentSession.weather,
+                wind: currentSession.wind,
                 species: document.getElementById('live-species').value,
                 size: sizeVal,
                 count: liveCount,
@@ -1137,10 +1240,8 @@
             const totalSessFish = currentSession.sessionCatches.reduce((a, b) => a + (parseInt(b.count) || 1), 0);
             document.getElementById('live-session-count').innerText = totalSessFish;
 
-            // ★Nice MOFF!! スタンプ発動
             triggerNiceMoffStamp(totalSessFish);
 
-            // リセット（魚種とルアー・ウエイト・カラーは連発のため維持！）
             document.getElementById('live-size').value = '';
             document.getElementById('live-memo').value = '';
             resetLiveCount();
@@ -1166,7 +1267,7 @@
         }
 
         // ==========================================
-        // 納竿（釣行終了）
+        // 納竿
         // ==========================================
         function finishFishingSession() {
             if (!currentSession) return;
@@ -1179,6 +1280,7 @@
             });
 
             document.getElementById('summary-fin-spot').innerText = currentSession.location;
+            document.getElementById('summary-fin-cond').innerText = `${currentSession.weather} (風:${currentSession.wind})`;
             document.getElementById('summary-fin-count').innerText = `${total} 匹`;
             document.getElementById('summary-fin-max').innerText = maxSz > 0 ? `${maxSz.toFixed(1)} cm` : '計測なし';
 
@@ -1198,115 +1300,169 @@
         }
 
         // ==========================================
-        // 履歴ビュー & アナリティクス
+        // 変更3: カレンダー形式の履歴と分析
         // ==========================================
         function openHistoryView() {
             showView('view-history');
-            renderHistoryCards();
+            renderCalendar();
+            renderDayCatches(calSelectedDateStr);
         }
 
-        function updateAllStats() {
-            let totalFish = 0, maxSize = 0;
-            const lureCounts = {}, spotCounts = {};
+        function changeCalMonth(delta) {
+            calCurrentMonth += delta;
+            if (calCurrentMonth > 11) {
+                calCurrentMonth = 0;
+                calCurrentYear++;
+            } else if (calCurrentMonth < 0) {
+                calCurrentMonth = 11;
+                calCurrentYear--;
+            }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            document.getElementById('cal-month-title').innerText = `${calCurrentYear}年 ${calCurrentMonth + 1}月`;
+
+            const grid = document.getElementById('cal-grid');
+            grid.innerHTML = '';
+
+            // 当月の1日と最終日
+            const firstDay = new Date(calCurrentYear, calCurrentMonth, 1);
+            const lastDay = new Date(calCurrentYear, calCurrentMonth + 1, 0);
+
+            // 日付ごとの釣果集計マップ { "2026-10-23": { count: 5, max: 45.0, list: [...] } }
+            const dayCatchMap = {};
+            let monthTotalCount = 0;
+            let monthMaxFish = 0;
+            const monthFishingDays = new Set();
 
             catchRecords.forEach(r => {
-                const c = parseInt(r.count) || 1;
-                totalFish += c;
+                const dStr = r.datetime ? r.datetime.slice(0, 10) : '';
+                if (!dStr) return;
+                const dObj = new Date(r.datetime);
+                if (dObj.getFullYear() === calCurrentYear && dObj.getMonth() === calCurrentMonth) {
+                    const c = parseInt(r.count) || 1;
+                    monthTotalCount += c;
+                    monthFishingDays.add(dStr);
+                    const sz = parseFloat(r.size);
+                    if (!isNaN(sz) && sz > monthMaxFish) monthMaxFish = sz;
+                }
+
+                if (!dayCatchMap[dStr]) {
+                    dayCatchMap[dStr] = { count: 0, max: 0, items: [] };
+                }
+                const cnt = parseInt(r.count) || 1;
+                dayCatchMap[dStr].count += cnt;
                 const sz = parseFloat(r.size);
-                if (!isNaN(sz) && sz > maxSize) maxSize = sz;
-                if (r.lure) lureCounts[r.lure] = (lureCounts[r.lure] || 0) + c;
-                if (r.location) spotCounts[r.location] = (spotCounts[r.location] || 0) + 1;
+                if (!isNaN(sz) && sz > dayCatchMap[dStr].max) dayCatchMap[dStr].max = sz;
+                dayCatchMap[dStr].items.push(r);
             });
 
-            document.getElementById('home-stat-count').innerHTML = `${totalFish}<span class="text-xs font-normal text-amber-100 ml-0.5">匹</span>`;
-            document.getElementById('home-stat-max').innerHTML = `${maxSize > 0 ? maxSize.toFixed(1) : '0.0'}<span class="text-xs font-normal text-amber-100 ml-0.5">cm</span>`;
-            document.getElementById('home-stat-records').innerHTML = `${catchRecords.length}<span class="text-xs font-normal text-amber-100 ml-0.5">回</span>`;
+            document.getElementById('month-stat-days').innerText = `${monthFishingDays.size}日`;
+            document.getElementById('month-stat-count').innerText = `${monthTotalCount}匹`;
+            document.getElementById('month-stat-max').innerText = monthMaxFish > 0 ? `${monthMaxFish.toFixed(1)} cm` : '-';
 
-            document.getElementById('hist-stat-records').innerText = `${catchRecords.length}件の記録`;
-            document.getElementById('hist-stat-count').innerText = totalFish;
-            document.getElementById('hist-stat-max').innerText = maxSize > 0 ? maxSize.toFixed(1) : '0.0';
-
-            let topLure = '-', maxLureCnt = 0;
-            for (let l in lureCounts) {
-                if (lureCounts[l] > maxLureCnt) { maxLureCnt = lureCounts[l]; topLure = l; }
+            // 前月の埋め草
+            const startDayOfWeek = firstDay.getDay(); // 0(日) ~ 6(土)
+            const prevMonthLastDay = new Date(calCurrentYear, calCurrentMonth, 0).getDate();
+            for (let i = startDayOfWeek - 1; i >= 0; i--) {
+                const cell = document.createElement('div');
+                cell.className = 'cal-day-cell other-month';
+                cell.innerHTML = `<span class="text-[11px] text-stone-500">${prevMonthLastDay - i}</span>`;
+                grid.appendChild(cell);
             }
-            document.getElementById('hist-stat-best-lure').innerText = topLure !== '-' ? `${topLure} (${maxLureCnt}匹)` : '-';
 
-            let topSpot = '-', maxSpotCnt = 0;
-            for (let s in spotCounts) {
-                if (spotCounts[s] > maxSpotCnt) { maxSpotCnt = spotCounts[s]; topSpot = s; }
+            // 当月の日付
+            for (let d = 1; d <= lastDay.getDate(); d++) {
+                const cell = document.createElement('div');
+                const dateStr = `${calCurrentYear}-${String(calCurrentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const hasCatch = dayCatchMap[dateStr] && dayCatchMap[dateStr].count > 0;
+                const isSelected = (dateStr === calSelectedDateStr);
+
+                cell.className = `cal-day-cell ${hasCatch ? 'has-catch' : ''} ${isSelected ? 'selected' : ''}`;
+                
+                let badgeHtml = '';
+                if (hasCatch) {
+                    badgeHtml = `
+                        <div class="mt-auto bg-emerald-500 text-slate-950 font-black text-[10px] px-1 rounded-full w-full text-center truncate shadow">
+                            🎣 ${dayCatchMap[dateStr].count}
+                        </div>
+                    `;
+                }
+
+                cell.innerHTML = `
+                    <span class="text-xs font-black ${isSelected ? 'text-amber-200' : 'text-stone-300'}">${d}</span>
+                    ${badgeHtml}
+                `;
+
+                cell.onclick = () => {
+                    calSelectedDateStr = dateStr;
+                    document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+                    cell.classList.add('selected');
+                    renderDayCatches(dateStr);
+                };
+
+                grid.appendChild(cell);
             }
-            document.getElementById('hist-stat-best-spot').innerText = topSpot !== '-' ? `メイン: ${topSpot}` : 'メインエリア: -';
+
+            // 次月の埋め草 (合計行が42マスまたは35マスになるよう調整)
+            const totalCells = startDayOfWeek + lastDay.getDate();
+            const remaining = (7 - (totalCells % 7)) % 7;
+            for (let j = 1; j <= remaining; j++) {
+                const cell = document.createElement('div');
+                cell.className = 'cal-day-cell other-month';
+                cell.innerHTML = `<span class="text-[11px] text-stone-500">${j}</span>`;
+                grid.appendChild(cell);
+            }
         }
 
-        function populateFilterDropdowns() {
-            const spotSelect = document.getElementById('filter-spot');
-            const lureSelect = document.getElementById('filter-lure');
-            const speciesSelect = document.getElementById('filter-species');
-
-            const currSpot = spotSelect.value, currLure = lureSelect.value, currSpecies = speciesSelect.value;
-            const spots = [...new Set(catchRecords.map(r => r.location).filter(Boolean))];
-            const lures = [...new Set(catchRecords.map(r => r.lure).filter(Boolean))];
-            const species = [...new Set(catchRecords.map(r => r.species).filter(Boolean))];
-
-            spotSelect.innerHTML = '<option value="">全エリア</option>' + spots.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
-            lureSelect.innerHTML = '<option value="">全ルアー</option>' + lures.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
-            speciesSelect.innerHTML = '<option value="">全魚種</option>' + species.map(sp => `<option value="${escapeHtml(sp)}">${escapeHtml(sp)}</option>`).join('');
-
-            spotSelect.value = currSpot; lureSelect.value = currLure; speciesSelect.value = currSpecies;
-        }
-
-        function resetFilters() {
-            document.getElementById('filter-spot').value = '';
-            document.getElementById('filter-lure').value = '';
-            document.getElementById('filter-species').value = '';
-            renderHistoryCards();
-        }
-
-        function renderHistoryCards() {
-            populateFilterDropdowns();
-            const spotFilter = document.getElementById('filter-spot').value;
-            const lureFilter = document.getElementById('filter-lure').value;
-            const speciesFilter = document.getElementById('filter-species').value;
-
-            const filtered = catchRecords.filter(r => {
-                if (spotFilter && r.location !== spotFilter) return false;
-                if (lureFilter && r.lure !== lureFilter) return false;
-                if (speciesFilter && r.species !== speciesFilter) return false;
-                return true;
-            });
-
-            updateAllStats();
-            const container = document.getElementById('history-cards-container');
+        function renderDayCatches(dateStr) {
+            const container = document.getElementById('day-catches-container');
             container.innerHTML = '';
 
-            if (filtered.length === 0) {
+            const dayObj = new Date(dateStr);
+            const titleDateStr = !isNaN(dayObj) 
+                ? `${dayObj.getFullYear()}/${dayObj.getMonth()+1}/${dayObj.getDate()}`
+                : dateStr;
+
+            document.getElementById('selected-day-title').innerHTML = `<span>📅 ${titleDateStr} の釣果一覧</span>`;
+
+            // その日のレコードを抽出
+            const dayRecords = catchRecords.filter(r => (r.datetime && r.datetime.slice(0, 10) === dateStr));
+
+            if (dayRecords.length === 0) {
+                document.getElementById('selected-day-summary').innerText = '釣果記録なし';
                 container.innerHTML = `
-                    <div class="outdoor-panel p-8 text-center text-amber-300/70">
-                        <i class="fa-solid fa-box-open text-4xl mb-2"></i>
-                        <p class="font-bold">該当する釣果記録がありません</p>
+                    <div class="outdoor-panel p-6 text-center text-amber-300/60">
+                        <i class="fa-regular fa-calendar-xmark text-3xl mb-1.5"></i>
+                        <p class="text-xs font-bold">この日の釣果記録はありません</p>
                     </div>
                 `;
                 return;
             }
 
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "outdoor-panel p-4 space-y-2.5";
-                
-                const dateObj = new Date(item.datetime);
-                const dateStr = !isNaN(dateObj) 
-                    ? `${dateObj.getMonth()+1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2,'0')}:${String(dateObj.getMinutes()).padStart(2,'0')}`
-                    : item.datetime;
+            const totalCatch = dayRecords.reduce((a, b) => a + (parseInt(b.count) || 1), 0);
+            document.getElementById('selected-day-summary').innerText = `合計 ${totalCatch} 匹 (${dayRecords.length}件)`;
 
-                const countBadge = item.count > 1 
-                    ? `<span class="ml-1 bg-amber-600 text-amber-950 text-xs px-2.5 py-0.5 rounded-full font-black border border-amber-300">${item.count}匹</span>` 
+            dayRecords.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "outdoor-panel p-3.5 space-y-2";
+
+                const dateObj = new Date(item.datetime);
+                const timeStr = !isNaN(dateObj) 
+                    ? `${String(dateObj.getHours()).padStart(2,'0')}:${String(dateObj.getMinutes()).padStart(2,'0')}`
                     : '';
 
-                const weatherBadge = item.weather ? `<span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300 ml-1.5">${escapeHtml(item.weather)}</span>` : '';
+                const countBadge = item.count > 1 
+                    ? `<span class="ml-1 bg-amber-600 text-amber-950 text-xs px-2 py-0.5 rounded-full font-black border border-amber-300">${item.count}匹</span>` 
+                    : '';
+
+                const weatherBadge = item.weather 
+                    ? `<span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300 ml-1.5">${escapeHtml(item.weather)}${item.wind ? ` (風:${escapeHtml(item.wind)})` : ''}</span>` 
+                    : '';
 
                 const photoHtml = item.photo ? `
-                    <div class="sm:col-span-1 h-32 rounded-xl overflow-hidden border border-amber-700 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
+                    <div class="sm:col-span-1 h-28 rounded-xl overflow-hidden border border-amber-700 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
                         <img src="${item.photo}" alt="釣果写真" class="w-full h-full object-cover">
                     </div>
                 ` : '';
@@ -1327,7 +1483,7 @@
                 card.innerHTML = `
                     <div class="flex items-start justify-between border-b border-amber-900/60 pb-1.5">
                         <div>
-                            <span class="text-xs text-amber-400 font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
+                            <span class="text-xs text-amber-400 font-bold"><i class="fa-regular fa-clock mr-1"></i>${timeStr}</span>
                             ${weatherBadge}
                             <h3 class="text-base font-black text-amber-100 flex items-center gap-1.5 mt-0.5">
                                 <i class="fa-solid fa-location-dot text-emerald-400 text-xs"></i>
@@ -1377,9 +1533,24 @@
                     currentSession.sessionCatches = currentSession.sessionCatches.filter(r => r.id !== id);
                 }
                 saveStorage();
-                renderHistoryCards();
+                renderCalendar();
+                renderDayCatches(calSelectedDateStr);
+                updateAllStats();
                 showToast('記録を削除しました');
             }
+        }
+
+        function updateAllStats() {
+            let totalFish = 0, maxSize = 0;
+            catchRecords.forEach(r => {
+                totalFish += (parseInt(r.count) || 1);
+                const sz = parseFloat(r.size);
+                if (!isNaN(sz) && sz > maxSize) maxSize = sz;
+            });
+
+            document.getElementById('home-stat-count').innerHTML = `${totalFish}<span class="text-xs font-normal text-amber-100 ml-0.5">匹</span>`;
+            document.getElementById('home-stat-max').innerHTML = `${maxSize > 0 ? maxSize.toFixed(1) : '0.0'}<span class="text-xs font-normal text-amber-100 ml-0.5">cm</span>`;
+            document.getElementById('home-stat-records').innerHTML = `${catchRecords.length}<span class="text-xs font-normal text-amber-100 ml-0.5">回</span>`;
         }
 
         function openPhotoModal(src) {
@@ -1413,7 +1584,8 @@
                         saveStorage();
                         updateAllStats();
                         if (!document.getElementById('view-history').classList.contains('hidden')) {
-                            renderHistoryCards();
+                            renderCalendar();
+                            renderDayCatches(calSelectedDateStr);
                         }
                         showToast(`${imported.length}件の記録を読み込みました！`);
                     } else { alert('不正なデータです'); }
