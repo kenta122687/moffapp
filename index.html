@@ -11,185 +11,212 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --wood-dark: #140c06;
-            --wood-panel: #2b180d;
-            --wood-border: #7c4f27;
-            --brass-bright: #ffe28a;
-            --brass-main: #d4af37;
-            --brass-dark: #8c6819;
+            --bg-forest: #0e1e17;
+            --bg-lake: #091712;
+            --card-wood: #261911;
+            --card-wood-light: #382417;
+            --lake-emerald: #10b981;
+            --pond-teal: #14b8a6;
+            --sun-orange: #f59e0b;
+            --moff-gold: #fbbf24;
         }
 
         body {
-            font-family: 'Zen Maru Gothic', sans-serif;
-            background-color: #120a05;
+            font-family: 'M PLUS Rounded 1c', 'Zen Maru Gothic', sans-serif;
+            background: linear-gradient(180deg, #0d211a 0%, #081510 50%, #050d0a 100%);
             color: #f7eedc;
-            background-image: 
-                radial-gradient(#27160a 1px, transparent 1px), 
-                radial-gradient(#1f1107 1px, #120a05 1px);
-            background-size: 28px 28px;
-            background-position: 0 0, 14px 14px;
             min-height: 100vh;
             touch-action: manipulation;
+            background-attachment: fixed;
         }
 
-        .font-serif-title {
-            font-family: 'Shippori Mincho', serif;
-        }
-
-        /* 重厚な木目パネル */
-        .wood-panel {
-            background: linear-gradient(165deg, #341d0e 0%, #1e0e05 100%);
-            border: 3px solid #7d4d24;
-            box-shadow: inset 0 0 14px rgba(0,0,0,0.85), 0 8px 20px rgba(0,0,0,0.7);
-            border-radius: 16px;
+        /* 釣り場・アウトドア風パネル */
+        .outdoor-panel {
+            background: linear-gradient(165deg, #2a1c13 0%, #1a100a 100%);
+            border: 2.5px solid #63432a;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15);
+            border-radius: 20px;
             position: relative;
         }
 
-        .wood-plaque {
-            background: radial-gradient(circle at 50% 15%, #462914 0%, #1b0c04 100%);
-            border: 2px solid #c29b38;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.8), inset 0 2px 2px rgba(255,255,255,0.2);
-            border-radius: 14px;
+        .lake-panel {
+            background: linear-gradient(165deg, #132a21 0%, #091913 100%);
+            border: 2px solid #235240;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+            border-radius: 18px;
         }
 
-        /* 真鍮・ゴールドグラデーションテキスト */
-        .brass-text {
-            background: linear-gradient(180deg, #fff5ba 0%, #e5bd47 45%, #9e7418 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* 明るく親しみやすいゴールド＆オレンジボタン */
+        .btn-moff-primary {
+            background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            color: #261300;
             font-weight: 900;
-        }
-
-        /* 黄金の特大アクションボタン */
-        .brass-btn-primary {
-            background: linear-gradient(180deg, #f7da74 0%, #d4a72c 40%, #9e6f0d 100%);
-            color: #2b1704;
-            font-weight: 900;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.6);
-            border: 2px solid #ffe89e;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.7), inset 0 2px 3px rgba(255,255,255,0.7), 0 0 16px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+            border: 2px solid #fde68a;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4), inset 0 2px 2px rgba(255,255,255,0.8);
             transition: all 0.12s ease;
         }
 
-        .brass-btn-primary:active {
+        .btn-moff-primary:active {
             transform: scale(0.97) translateY(2px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 2px 2px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.6);
         }
 
-        /* 納竿ボタン（特別感のあるブロンズレッド） */
-        .btn-finish-fishing {
-            background: linear-gradient(180deg, #8f2c2c 0%, #5e1616 100%);
-            color: #ffe6e6;
-            border: 2px solid #c95d5d;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        /* 爽やかなエメラルドボタン */
+        .btn-lake-emerald {
+            background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+            color: #ffffff;
+            font-weight: 900;
+            border: 2px solid #a7f3d0;
+            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
             transition: all 0.12s ease;
         }
+
+        .btn-lake-emerald:active {
+            transform: scale(0.97);
+        }
+
+        /* 納竿ボタン（アウトドアオレンジレッド） */
+        .btn-finish-fishing {
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+            color: #ffffff;
+            border: 2px solid #fca5a5;
+            box-shadow: 0 4px 12px rgba(185, 28, 28, 0.4);
+            transition: all 0.12s ease;
+        }
+
         .btn-finish-fishing:active {
             transform: scale(0.95);
         }
 
-        /* 落ち着いたサブボタン */
-        .wood-btn-secondary {
-            background: linear-gradient(180deg, #442713 0%, #261307 100%);
-            color: #faeccf;
-            border: 2px solid #824f24;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-            transition: all 0.12s ease;
+        /* スッキリ見せるタップ式選択カード */
+        .field-card {
+            background: #1e130c;
+            border: 2px solid #4a301e;
+            border-radius: 16px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .wood-btn-secondary:active {
-            transform: scale(0.97) translateY(2px);
+        .field-card:hover {
+            border-color: #f59e0b;
+            background: #2a1a11;
         }
 
-        /* 手袋でも押しやすいセレクターカード */
-        .select-chip {
-            background: #221309;
-            border: 2px solid #543317;
-            color: #ebd7b5;
+        .field-card:active {
+            transform: scale(0.98);
+        }
+
+        /* 選択肢モーダル内のグリッドカード */
+        .choice-card {
+            background: #24160e;
+            border: 2px solid #4d311d;
+            border-radius: 14px;
+            color: #faedd9;
             transition: all 0.12s ease;
             cursor: pointer;
             user-select: none;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        .select-chip:active, .select-chip.active {
-            background: linear-gradient(145deg, #8a410e 0%, #4a1e03 100%);
-            border-color: #ffd700;
+        .choice-card:active, .choice-card.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+            border-color: #fde68a;
             color: #ffffff;
-            font-weight: 800;
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.45);
-            transform: translateY(-1px);
+            font-weight: 900;
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.5);
+            transform: scale(0.98);
         }
 
-        /* 高コントラスト入力フィールド */
-        .wood-input {
-            background-color: #0e0703;
-            border: 2px solid #633c1a;
-            color: #ffffff;
-            font-size: 1.1rem;
-            border-radius: 10px;
-        }
-
-        .wood-input:focus {
-            outline: none;
-            border-color: #ffd700;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-            background-color: #170d06;
-        }
-
-        /* 数量調整用のでかボタン */
+        /* 数量調整カウンター */
         .counter-btn {
-            background: linear-gradient(180deg, #442611 0%, #241207 100%);
-            border: 2px solid #7c4a22;
-            color: #ffe6a3;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #382417 0%, #20130b 100%);
+            border: 2px solid #69442a;
+            color: #fde68a;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
             transition: all 0.1s ease;
         }
-
         .counter-btn:active {
-            transform: scale(0.92);
-            background: #170a03;
+            transform: scale(0.9);
+            background: #140b06;
         }
 
-        /* Nice MOFF スタンプ演出アニメーション */
+        /* クイックサイズタグ */
+        .tag-btn {
+            background: #22140b;
+            border: 1.5px solid #57371f;
+            color: #eedcc6;
+            border-radius: 10px;
+            transition: all 0.12s ease;
+        }
+        .tag-btn:active, .tag-btn.active {
+            background: #f59e0b;
+            border-color: #fde68a;
+            color: #241202;
+            font-weight: 900;
+        }
+
+        /* 高コントラスト入力 */
+        .outdoor-input {
+            background-color: #120a06;
+            border: 2px solid #5c3920;
+            color: #ffffff;
+            border-radius: 12px;
+        }
+        .outdoor-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+
+        /* ボトムシート / モーダルアニメーション */
+        .sheet-up {
+            animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* ★親しみやすくポップな Nice MOFF!! スタンプ */
         @keyframes stampPop {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(3.5) rotate(-25deg);
+                transform: translate(-50%, -50%) scale(3.2) rotate(-22deg);
             }
-            45% {
+            50% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(0.92) rotate(-6deg);
+                transform: translate(-50%, -50%) scale(0.94) rotate(-4deg);
             }
-            65% {
-                transform: translate(-50%, -50%) scale(1.06) rotate(-8deg);
+            75% {
+                transform: translate(-50%, -50%) scale(1.04) rotate(-5deg);
             }
             100% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1) rotate(-8deg);
+                transform: translate(-50%, -50%) scale(1) rotate(-5deg);
             }
         }
 
         .stamp-animate {
-            animation: stampPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: stampPop 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* スタンプの重厚な看板刻印風スタイル */
         .nice-moff-stamp {
-            background: radial-gradient(circle, #ffeaa7 15%, #d4af37 60%, #8c6218 100%);
-            border: 6px double #4a2800;
-            box-shadow: 0 0 45px rgba(255, 215, 0, 0.75), 0 16px 36px rgba(0,0,0,0.9);
-            color: #381900;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+            background: radial-gradient(circle, #fff7d6 20%, #fcd34d 65%, #f59e0b 100%);
+            border: 6px solid #451a03;
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.8), 0 20px 40px rgba(0,0,0,0.85);
+            color: #3b1900;
         }
 
-        /* 画面フェードイン */
         .view-fade {
-            animation: fadeIn 0.2s ease-out forwards;
+            animation: fadeIn 0.18s ease-out forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
@@ -197,8 +224,8 @@
         }
 
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #120a05; }
-        ::-webkit-scrollbar-thumb { background: #523114; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: #0c1813; }
+        ::-webkit-scrollbar-thumb { background: #235240; border-radius: 3px; }
     </style>
 </head>
 <body class="p-2 sm:p-4 select-none">
@@ -206,65 +233,63 @@
     <div class="max-w-xl mx-auto min-h-[94vh] flex flex-col justify-between">
 
         <!-- ======================================================== -->
-        <!-- VIEW 1: ホーム画面（トップメニュー） -->
+        <!-- VIEW 1: ホーム画面（親しみやすいアウトドア・フィッシング） -->
         <!-- ======================================================== -->
-        <section id="view-home" class="space-y-5 view-fade my-auto py-3">
+        <section id="view-home" class="space-y-4 view-fade my-auto py-3">
 
-            <!-- 木製メイン看板プレート -->
-            <div class="wood-panel p-6 text-center shadow-2xl">
-                <!-- 真鍮コーナーピン -->
-                <div class="absolute top-2.5 left-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
-                <div class="absolute top-2.5 right-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
-                <div class="absolute bottom-2.5 left-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
-                <div class="absolute bottom-2.5 right-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
+            <!-- メイン看板（フィッシングキャンプ風） -->
+            <div class="outdoor-panel p-6 text-center shadow-2xl relative overflow-hidden">
+                <!-- 水面のきらめき装飾グラデーション -->
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-                <!-- HartDesign 公式エンブレム -->
-                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 border border-amber-500/80 px-4 py-1.5 rounded-full shadow-inner mb-3">
-                    <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
-                    <span class="text-xs font-black tracking-widest text-amber-200 uppercase">HartDesign Official Log</span>
-                    <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
+                <!-- HartDesign エンブレム -->
+                <div class="inline-flex items-center gap-2 bg-black/40 border border-emerald-400/60 px-4 py-1.5 rounded-full shadow-inner mb-3">
+                    <span class="text-emerald-400 text-sm">🎣</span>
+                    <span class="text-xs font-black tracking-widest text-emerald-200">HartDesign 公式連動</span>
+                    <span class="text-amber-400 text-sm">🪶</span>
                 </div>
 
-                <!-- タイトル看板 -->
-                <h1 class="text-3xl sm:text-4xl font-extrabold font-serif-title brass-text tracking-wider leading-tight mb-1">
-                    Moff隊 釣果記録帳
+                <!-- メインタイトル -->
+                <h1 class="text-3xl sm:text-4xl font-black text-amber-200 tracking-wider mb-1 flex items-center justify-center gap-2">
+                    <span>Moff隊 釣果記録帳</span>
                 </h1>
-                <p class="text-xs sm:text-sm text-amber-300/80 font-bold tracking-widest">
-                    エリアトラウト実釣カウンター
+                <p class="text-xs sm:text-sm text-emerald-300 font-bold tracking-wider">
+                    エリアトラウト・ワンタップ実釣カウンター
                 </p>
 
-                <!-- ミニ通算ステータス -->
-                <div class="mt-5 pt-4 border-t border-amber-800/60 grid grid-cols-3 gap-2 text-center bg-black/35 rounded-xl p-2.5">
+                <!-- 通算ステータス -->
+                <div class="mt-5 pt-4 border-t border-amber-900/60 grid grid-cols-3 gap-2 text-center bg-black/30 rounded-xl p-3">
                     <div>
-                        <div class="text-[11px] text-amber-400/90 font-bold">通算キャッチ</div>
-                        <div class="text-2xl font-black brass-text" id="home-stat-count">0<span class="text-xs font-normal text-amber-200 ml-0.5">匹</span></div>
+                        <div class="text-[11px] text-amber-300/90 font-bold">通算キャッチ</div>
+                        <div class="text-2xl sm:text-3xl font-black text-amber-300" id="home-stat-count">0<span class="text-xs font-normal text-amber-100 ml-0.5">匹</span></div>
                     </div>
                     <div class="border-x border-amber-900/60">
-                        <div class="text-[11px] text-amber-400/90 font-bold">最大サイズ</div>
-                        <div class="text-2xl font-black text-amber-100" id="home-stat-max">0.0<span class="text-xs font-normal text-amber-200 ml-0.5">cm</span></div>
+                        <div class="text-[11px] text-emerald-300/90 font-bold">最大サイズ</div>
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-300" id="home-stat-max">0.0<span class="text-xs font-normal text-amber-100 ml-0.5">cm</span></div>
                     </div>
                     <div>
-                        <div class="text-[11px] text-amber-400/90 font-bold">釣行回数</div>
-                        <div class="text-2xl font-black text-amber-200" id="home-stat-records">0<span class="text-xs font-normal text-amber-200 ml-0.5">回</span></div>
+                        <div class="text-[11px] text-amber-300/90 font-bold">釣行回数</div>
+                        <div class="text-2xl sm:text-3xl font-black text-amber-100" id="home-stat-records">0<span class="text-xs font-normal text-amber-100 ml-0.5">回</span></div>
                     </div>
                 </div>
             </div>
 
             <!-- メインボタン群 -->
-            <div class="space-y-4 pt-1">
+            <div class="space-y-3.5 pt-1">
 
                 <!-- 1. 本日の釣行を開始する（スタート画面へ） -->
-                <button type="button" onclick="startSessionSetup()" class="brass-btn-primary w-full py-6 px-6 rounded-2xl flex items-center justify-between shadow-2xl group cursor-pointer">
-                    <div class="flex items-center gap-4 text-left">
-                        <div class="w-16 h-16 rounded-xl bg-amber-950/70 border-2 border-amber-300 flex items-center justify-center text-amber-200 shadow-inner group-active:scale-95 transition-transform">
-                            <i class="fa-solid fa-play text-3xl ml-1 text-amber-300"></i>
+                <button type="button" onclick="startSessionSetup()" class="btn-moff-primary w-full py-5 px-6 rounded-2xl flex items-center justify-between shadow-2xl cursor-pointer">
+                    <div class="flex items-center gap-3.5 text-left">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-950/40 border border-amber-900 flex items-center justify-center text-amber-900 text-3xl shadow-inner">
+                            <i class="fa-solid fa-play ml-1"></i>
                         </div>
                         <div>
-                            <span class="block text-2xl sm:text-3xl font-extrabold tracking-wide text-amber-950">
+                            <span class="block text-2xl font-black tracking-wide text-amber-950">
                                 本日の釣行を開始！
                             </span>
-                            <span class="block text-xs sm:text-sm text-amber-900 font-bold mt-0.5">
-                                場所・天気を決めて即座に実釣記録へ
+                            <span class="block text-xs text-amber-900/90 font-bold mt-0.5">
+                                場所と天気を決めて即座に実釣記録へ
                             </span>
                         </div>
                     </div>
@@ -274,26 +299,26 @@
                 </button>
 
                 <!-- 釣行中のセッションが残っている場合の再開ボタン -->
-                <button type="button" id="btn-resume-session" onclick="resumeFishingSession()" class="hidden w-full py-3.5 px-5 rounded-xl bg-emerald-900/90 border-2 border-emerald-400 text-emerald-100 font-bold flex items-center justify-between shadow-xl cursor-pointer">
-                    <span class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span id="resume-session-label">釣行を再開する（現在◯匹）</span>
+                <button type="button" id="btn-resume-session" onclick="resumeFishingSession()" class="hidden w-full py-4 px-5 rounded-2xl bg-emerald-800/90 border-2 border-emerald-300 text-white font-black flex items-center justify-between shadow-xl cursor-pointer">
+                    <span class="flex items-center gap-2.5">
+                        <span class="w-3.5 h-3.5 rounded-full bg-emerald-300 animate-ping"></span>
+                        <span id="resume-session-label" class="text-base">釣行を再開する（現在◯匹）</span>
                     </span>
-                    <span class="text-sm">再開する →</span>
+                    <span class="text-xs bg-emerald-950 px-3 py-1.5 rounded-full border border-emerald-400">戻る →</span>
                 </button>
 
                 <!-- 2. 釣果履歴・分析を見る -->
-                <button type="button" onclick="openHistoryView()" class="wood-btn-secondary w-full py-5 px-6 rounded-2xl flex items-center justify-between shadow-xl cursor-pointer">
-                    <div class="flex items-center gap-4 text-left">
-                        <div class="w-14 h-14 rounded-xl bg-black/40 border border-amber-700/80 flex items-center justify-center text-amber-400 shadow-inner">
-                            <i class="fa-solid fa-book-bookmark text-2xl"></i>
+                <button type="button" onclick="openHistoryView()" class="outdoor-panel w-full py-4 px-5 flex items-center justify-between shadow-xl cursor-pointer hover:border-amber-500">
+                    <div class="flex items-center gap-3.5 text-left">
+                        <div class="w-12 h-12 rounded-xl bg-black/40 border border-amber-800 flex items-center justify-center text-amber-400 text-xl">
+                            <i class="fa-solid fa-book-bookmark"></i>
                         </div>
                         <div>
-                            <span class="block text-xl sm:text-2xl font-extrabold text-amber-100 tracking-wide">
+                            <span class="block text-lg font-bold text-amber-100">
                                 釣果履歴・分析を見る
                             </span>
-                            <span class="block text-xs text-amber-300/80 font-bold mt-0.5">
-                                写真付き釣果一覧・ヒットルアー統計
+                            <span class="block text-xs text-amber-300/80 mt-0.5">
+                                写真付き釣果カード・ヒットルアー統計
                             </span>
                         </div>
                     </div>
@@ -305,15 +330,15 @@
             </div>
 
             <!-- 下部ツールバー -->
-            <div class="pt-4 flex items-center justify-between text-xs text-amber-400/80 px-2 border-t border-amber-900/40">
+            <div class="pt-3 flex items-center justify-between text-xs text-amber-300/70 px-2 border-t border-amber-900/40">
                 <span class="font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-shield-halved text-amber-500"></i>端末内に安全に自動保存
+                    <i class="fa-solid fa-shield-halved text-emerald-400"></i>端末内に自動保存中
                 </span>
                 <div class="flex gap-2">
-                    <button onclick="exportData()" class="bg-amber-950 hover:bg-amber-900 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                    <button onclick="exportData()" class="bg-black/40 hover:bg-black/60 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1 font-bold">
                         <i class="fa-solid fa-download"></i>出力
                     </button>
-                    <label class="cursor-pointer bg-amber-950 hover:bg-amber-900 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                    <label class="cursor-pointer bg-black/40 hover:bg-black/60 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1 font-bold">
                         <i class="fa-solid fa-upload"></i>読込
                         <input type="file" accept=".json" onchange="importData(event)" class="hidden">
                     </label>
@@ -324,63 +349,62 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 2: 釣行設定（セッション開始画面 / 最初に1回だけ入力） -->
+        <!-- VIEW 2: 釣行設定（開始前に1回だけ入力） -->
         <!-- ======================================================== -->
         <section id="view-setup" class="hidden space-y-4 view-fade py-2 my-auto">
 
-            <div class="wood-panel p-5 sm:p-6 space-y-4">
+            <div class="outdoor-panel p-5 sm:p-6 space-y-4">
                 <div class="border-b border-amber-900/60 pb-3 flex items-center justify-between">
                     <div>
-                        <span class="text-xs font-bold text-amber-400">SESSION START</span>
-                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
-                            <i class="fa-solid fa-clipboard-list text-amber-400"></i>本日の釣行設定
+                        <span class="text-xs font-black text-amber-400 tracking-wider">FISHING SESSION</span>
+                        <h2 class="text-2xl font-black text-amber-100 flex items-center gap-2">
+                            <span>🎣 本日の釣行設定</span>
                         </h2>
                     </div>
-                    <button type="button" onclick="showView('view-home')" class="text-xs bg-amber-950 text-amber-300 border border-amber-700 px-3 py-1.5 rounded-full font-bold">
+                    <button type="button" onclick="showView('view-home')" class="text-xs bg-black/40 text-amber-300 border border-amber-700 px-3 py-1.5 rounded-full font-bold">
                         戻る
                     </button>
                 </div>
 
-                <p class="text-xs text-amber-300/80">
-                    ※場所と天気を一度設定すれば、納竿までワンタップで記録し続けられます。
+                <p class="text-xs text-amber-200/90 leading-relaxed">
+                    ※釣り場と天気をセットすれば、あとは納竿まで1タップで釣果記録し続けられます！
                 </p>
 
                 <!-- 日時 -->
                 <div>
                     <label class="block text-xs font-bold text-amber-300 mb-1">釣行日・開始日時</label>
-                    <input type="datetime-local" id="setup-datetime" class="wood-input w-full p-3 font-bold text-base">
+                    <input type="datetime-local" id="setup-datetime" class="outdoor-input w-full p-3 font-bold text-base">
                 </div>
 
-                <!-- 釣り場（クイックタグ＋自由入力） -->
+                <!-- 釣り場 -->
                 <div>
                     <label class="block text-xs font-bold text-amber-300 mb-1">釣り場（エリア名）</label>
-                    <input type="text" id="setup-location" placeholder="釣り場名を入力または下から選択" class="wood-input w-full p-3 font-bold text-base mb-2">
+                    <input type="text" id="setup-location" placeholder="釣り場名を入力または下から選択" class="outdoor-input w-full p-3 font-bold text-base mb-2">
                     <div class="flex flex-wrap gap-1.5" id="setup-spot-tags">
-                        <button type="button" onclick="setSetupSpot('朝霞ガーデン')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">朝霞ガーデン</button>
-                        <button type="button" onclick="setSetupSpot('ベリーパーク王禅寺')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">王禅寺</button>
-                        <button type="button" onclick="setSetupSpot('すそのFP')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">すそのFP</button>
-                        <button type="button" onclick="setSetupSpot('開成FS')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">開成FS</button>
-                        <button type="button" onclick="setSetupSpot('中津川')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">中津川</button>
-                        <button type="button" onclick="setSetupSpot('発光路の森')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">発光路の森</button>
-                        <button type="button" onclick="setSetupSpot('アルクスポンド')" class="select-chip px-3 py-1.5 rounded-lg text-xs font-bold">アルクスポンド</button>
+                        <button type="button" onclick="setSetupSpot('朝霞ガーデン')" class="tag-btn px-3 py-1.5 text-xs font-bold">朝霞ガーデン</button>
+                        <button type="button" onclick="setSetupSpot('ベリーパーク王禅寺')" class="tag-btn px-3 py-1.5 text-xs font-bold">王禅寺</button>
+                        <button type="button" onclick="setSetupSpot('すそのFP')" class="tag-btn px-3 py-1.5 text-xs font-bold">すそのFP</button>
+                        <button type="button" onclick="setSetupSpot('開成FS')" class="tag-btn px-3 py-1.5 text-xs font-bold">開成FS</button>
+                        <button type="button" onclick="setSetupSpot('中津川')" class="tag-btn px-3 py-1.5 text-xs font-bold">中津川</button>
+                        <button type="button" onclick="setSetupSpot('発光路の森')" class="tag-btn px-3 py-1.5 text-xs font-bold">発光路の森</button>
+                        <button type="button" onclick="setSetupSpot('アルクスポンド')" class="tag-btn px-3 py-1.5 text-xs font-bold">アルクスポンド</button>
                     </div>
                 </div>
 
-                <!-- 天気セレクター -->
+                <!-- 天気 -->
                 <div>
                     <label class="block text-xs font-bold text-amber-300 mb-1">本日の天気</label>
                     <div class="grid grid-cols-4 gap-1.5" id="setup-weather-container">
-                        <button type="button" onclick="setSetupWeather('晴れ')" class="select-chip py-2 rounded-lg text-xs font-bold active"><i class="fa-solid fa-sun mr-1 text-amber-400"></i>晴れ</button>
-                        <button type="button" onclick="setSetupWeather('曇り')" class="select-chip py-2 rounded-lg text-xs font-bold"><i class="fa-solid fa-cloud mr-1 text-slate-300"></i>曇り</button>
-                        <button type="button" onclick="setSetupWeather('雨')" class="select-chip py-2 rounded-lg text-xs font-bold"><i class="fa-solid fa-cloud-rain mr-1 text-blue-400"></i>雨</button>
-                        <button type="button" onclick="setSetupWeather('風あり')" class="select-chip py-2 rounded-lg text-xs font-bold"><i class="fa-solid fa-wind mr-1 text-teal-300"></i>強風</button>
+                        <button type="button" onclick="setSetupWeather('晴れ')" class="tag-btn py-2 text-xs font-bold active">☀️ 晴れ</button>
+                        <button type="button" onclick="setSetupWeather('曇り')" class="tag-btn py-2 text-xs font-bold">☁️ 曇り</button>
+                        <button type="button" onclick="setSetupWeather('雨')" class="tag-btn py-2 text-xs font-bold">🌧️ 雨</button>
+                        <button type="button" onclick="setSetupWeather('風あり')" class="tag-btn py-2 text-xs font-bold">💨 風あり</button>
                     </div>
                     <input type="hidden" id="setup-weather" value="晴れ">
                 </div>
 
-                <!-- スタートボタン -->
                 <div class="pt-2">
-                    <button type="button" onclick="beginFishingSession()" class="brass-btn-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
+                    <button type="button" onclick="beginFishingSession()" class="btn-moff-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
                         <i class="fa-solid fa-fish text-2xl"></i>
                         <span>釣行スタート！（記録画面へ）</span>
                     </button>
@@ -391,61 +415,128 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 3: 実釣中・ワン画面スピード記録（ループ式）★最重要 -->
+        <!-- VIEW 3: 実釣中・スッキリ整理されたワン画面スピード記録 ★最重要 -->
         <!-- ======================================================== -->
         <section id="view-fishing" class="hidden space-y-3 view-fade pb-6">
 
-            <!-- 釣行セッションバー（固定ステータス＆納竿ボタン） -->
-            <div class="wood-plaque p-3 flex items-center justify-between sticky top-1 z-30 shadow-2xl">
+            <!-- 釣行ヘッダーバー（納竿ボタンつき） -->
+            <div class="lake-panel p-3 flex items-center justify-between sticky top-1 z-30 shadow-2xl">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-full bg-amber-950 border border-amber-500 flex items-center justify-center text-amber-300 font-black">
-                        <i class="fa-solid fa-fish"></i>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-400/80 flex items-center justify-center text-emerald-300 text-xl font-black">
+                        🎣
                     </div>
                     <div>
                         <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span class="text-xs font-bold text-amber-200" id="live-session-spot">朝霞ガーデン</span>
-                            <span class="text-[10px] bg-black/40 px-1.5 py-0.5 rounded text-amber-300" id="live-session-weather">晴れ</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span class="text-xs font-bold text-emerald-200" id="live-session-spot">朝霞ガーデン</span>
+                            <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300" id="live-session-weather">晴れ</span>
                         </div>
-                        <div class="text-sm font-black brass-text">
-                            本日 <span id="live-session-count" class="text-xl sm:text-2xl text-amber-200">0</span> 匹キャッチ！
+                        <div class="text-sm font-black text-amber-300">
+                            本日 <span id="live-session-count" class="text-2xl text-amber-200 font-black">0</span> 匹キャッチ！
                         </div>
                     </div>
                 </div>
 
-                <!-- 納竿ボタン（特別赤色） -->
                 <button type="button" onclick="finishFishingSession()" class="btn-finish-fishing px-3.5 py-2.5 rounded-xl font-black text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-lg">
                     <i class="fa-solid fa-flag-checkered"></i>
                     <span>納竿（終了）</span>
                 </button>
             </div>
 
-            <!-- ★1画面に全情報が集約された記録カード -->
-            <div class="wood-panel p-4 sm:p-5 space-y-4">
+            <!-- ★スッキリ整理されたメイン記録カード（全部一覧ではなく、タップで選択ボックス展開） -->
+            <div class="outdoor-panel p-4 sm:p-5 space-y-3">
 
-                <!-- 1. 魚種選択（押しやすい大型グリッド） -->
+                <!-- 1. 魚種（タップして選択するボックス） -->
                 <div>
-                    <label class="block text-xs font-bold text-amber-300 mb-1.5 flex items-center justify-between">
-                        <span><i class="fa-solid fa-fish text-amber-400 mr-1"></i>魚種を選択</span>
-                        <span class="text-[11px] text-amber-300 font-bold" id="badge-species">選択中: ニジマス</span>
-                    </label>
-                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-1.5" id="live-species-grid">
-                        <!-- JSで動的生成 -->
+                    <div class="text-[11px] font-bold text-amber-300/80 mb-1 flex items-center justify-between">
+                        <span><i class="fa-solid fa-fish mr-1 text-emerald-400"></i>魚種</span>
+                        <span class="text-[10px] text-amber-400">タップして変更</span>
+                    </div>
+                    <div onclick="openChoiceSheet('species')" class="field-card">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-xl bg-amber-950/70 border border-amber-700/80 flex items-center justify-center text-xl text-amber-300">
+                                🐟
+                            </div>
+                            <div>
+                                <span class="block text-xl font-black text-amber-100" id="display-species">ニジマス</span>
+                                <span class="block text-[11px] text-amber-400/80">タップで他の魚種を選択</span>
+                            </div>
+                        </div>
+                        <div class="bg-amber-950/60 px-3 py-1.5 rounded-lg border border-amber-800 text-xs font-bold text-amber-300">
+                            変更 <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </div>
                     </div>
                     <input type="hidden" id="live-species" value="ニジマス">
                 </div>
 
-                <!-- 2. サイズ & 匹数（直感カウンター＆クイックタグ） -->
-                <div class="bg-black/35 p-3 rounded-xl border border-amber-900/70 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-amber-300"><i class="fa-solid fa-ruler mr-1 text-amber-400"></i>サイズ (cm)</span>
+                <!-- 2. ヒットルアー（タップして選択するボックス） -->
+                <div>
+                    <div class="text-[11px] font-bold text-amber-300/80 mb-1 flex items-center justify-between">
+                        <span><i class="fa-solid fa-feather mr-1 text-amber-400"></i>ヒットルアー (HartDesign)</span>
+                        <span class="text-[10px] text-amber-400">タップして変更</span>
+                    </div>
+                    <div onclick="openChoiceSheet('lure')" class="field-card">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-950/70 border border-emerald-600/80 flex items-center justify-center text-xl text-emerald-300">
+                                🪶
+                            </div>
+                            <div>
+                                <span class="block text-xl font-black text-amber-100" id="display-lure">ライトウイング</span>
+                                <span class="block text-[11px] text-emerald-400/80">HartDesign公式モデル</span>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-700 text-xs font-bold text-emerald-300">
+                            変更 <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" id="live-lure" value="ライトウイング">
+                </div>
+
+                <!-- 3. ウエイト & カラー（2列ボックス） -->
+                <div class="grid grid-cols-2 gap-2.5">
+                    <!-- ウエイト -->
+                    <div>
+                        <div class="text-[11px] font-bold text-amber-300/80 mb-1">
+                            <i class="fa-solid fa-weight-hanging mr-1 text-amber-400"></i>ウエイト
+                        </div>
+                        <div onclick="openChoiceSheet('weight')" class="field-card py-2.5 px-3">
+                            <div>
+                                <span class="block text-lg font-black text-amber-100" id="display-weight">0.3g</span>
+                                <span class="block text-[10px] text-amber-400/80">公式規格</span>
+                            </div>
+                            <i class="fa-solid fa-angle-down text-amber-400"></i>
+                        </div>
+                        <input type="hidden" id="live-weight" value="0.3g">
+                    </div>
+
+                    <!-- カラー -->
+                    <div>
+                        <div class="text-[11px] font-bold text-amber-300/80 mb-1">
+                            <i class="fa-solid fa-palette mr-1 text-amber-400"></i>公式カラー
+                        </div>
+                        <div onclick="openChoiceSheet('color')" class="field-card py-2.5 px-3">
+                            <div class="truncate mr-1">
+                                <span class="block text-base font-black text-amber-100 truncate" id="display-color">ホワイト</span>
+                                <span class="block text-[10px] text-amber-400/80">タップで一覧</span>
+                            </div>
+                            <i class="fa-solid fa-angle-down text-amber-400"></i>
+                        </div>
+                        <input type="hidden" id="live-color" value="ホワイト">
+                    </div>
+                </div>
+
+                <!-- 4. サイズ & 匹数（手袋でも直感操作カウンター） -->
+                <div class="bg-black/35 p-3 rounded-2xl border border-amber-900/60 space-y-2">
+                    <div class="flex items-center justify-between text-xs font-bold text-amber-300">
+                        <span><i class="fa-solid fa-ruler mr-1 text-emerald-400"></i>サイズ (cm)</span>
                         <span class="text-[10px] text-amber-400/80">未計測のままでもOK</span>
                     </div>
 
+                    <!-- ＋/－ と中央の大きなサイズ表示 -->
                     <div class="flex items-center gap-2 justify-center">
                         <button type="button" onclick="adjustLiveSize(-1)" class="counter-btn w-12 h-12 rounded-xl text-xl font-black">－</button>
                         <div class="flex-1 text-center bg-black/60 border border-amber-700/80 rounded-xl py-1.5">
-                            <input type="number" id="live-size" placeholder="未計測" step="0.5" class="bg-transparent text-center text-2xl sm:text-3xl font-black text-amber-200 w-full focus:outline-none">
+                            <input type="number" id="live-size" placeholder="未計測" step="0.5" class="bg-transparent text-center text-3xl font-black text-amber-200 w-full focus:outline-none">
                             <span class="text-[10px] text-amber-400/80 font-bold block">cm</span>
                         </div>
                         <button type="button" onclick="adjustLiveSize(+1)" class="counter-btn w-12 h-12 rounded-xl text-xl font-black">＋</button>
@@ -453,75 +544,44 @@
 
                     <!-- クイックサイズタグ -->
                     <div class="grid grid-cols-5 gap-1 pt-0.5">
-                        <button type="button" onclick="setLiveSizeQuick(25)" class="select-chip py-1 rounded text-xs font-bold">25cm</button>
-                        <button type="button" onclick="setLiveSizeQuick(35)" class="select-chip py-1 rounded text-xs font-bold">35cm</button>
-                        <button type="button" onclick="setLiveSizeQuick(45)" class="select-chip py-1 rounded text-xs font-bold">45cm</button>
-                        <button type="button" onclick="setLiveSizeQuick(55)" class="select-chip py-1 rounded text-xs font-bold">55cm</button>
-                        <button type="button" onclick="setLiveSizeQuick(60)" class="select-chip py-1 rounded text-xs font-bold">60cm超</button>
+                        <button type="button" onclick="setLiveSizeQuick(25)" class="tag-btn py-1 text-xs font-bold">25cm</button>
+                        <button type="button" onclick="setLiveSizeQuick(35)" class="tag-btn py-1 text-xs font-bold">35cm</button>
+                        <button type="button" onclick="setLiveSizeQuick(45)" class="tag-btn py-1 text-xs font-bold">45cm</button>
+                        <button type="button" onclick="setLiveSizeQuick(55)" class="tag-btn py-1 text-xs font-bold">55cm</button>
+                        <button type="button" onclick="setLiveSizeQuick(60)" class="tag-btn py-1 text-xs font-bold">60cm超</button>
                     </div>
 
-                    <!-- 匹数カウンター（連発・一括用） -->
-                    <div class="pt-2 border-t border-amber-900/50 flex items-center justify-between">
-                        <div class="text-xs font-bold text-amber-300">匹数:</div>
+                    <!-- 匹数カウンター（連発・数釣り用） -->
+                    <div class="pt-2 border-t border-amber-900/50 flex items-center justify-between text-xs font-bold text-amber-300">
+                        <div>キャッチ数:</div>
                         <div class="flex items-center gap-1.5">
                             <button type="button" onclick="adjustLiveCount(-1)" class="counter-btn w-8 h-8 rounded text-sm font-bold">－</button>
-                            <span id="live-count-display" class="w-10 text-center font-black brass-text text-xl">1</span>
+                            <span id="live-count-display" class="w-8 text-center font-black text-amber-300 text-xl">1</span>
                             <span class="text-xs text-amber-200">匹</span>
                             <button type="button" onclick="adjustLiveCount(+1)" class="counter-btn w-8 h-8 rounded text-sm font-bold">＋</button>
-                            <button type="button" onclick="adjustLiveCount(+5)" class="select-chip px-2 py-1 rounded text-xs font-bold ml-1">+5</button>
-                            <button type="button" onclick="resetLiveCount()" class="select-chip px-2 py-1 rounded text-xs text-red-300 ml-0.5">1に戻す</button>
+                            <button type="button" onclick="adjustLiveCount(+5)" class="tag-btn px-2 py-1 text-xs font-bold ml-1">+5</button>
+                            <button type="button" onclick="resetLiveCount()" class="tag-btn px-2 py-1 text-[11px] text-red-300 ml-0.5">1匹</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. HartDesign公式フェザー（モデル・ウエイト・カラー完全連動） -->
-                <div class="bg-black/35 p-3 rounded-xl border border-amber-900/70 space-y-2.5">
-                    <div class="flex items-center justify-between border-b border-amber-900/60 pb-1">
-                        <span class="text-xs font-bold text-amber-300"><i class="fa-solid fa-feather text-amber-400 mr-1"></i>ヒットルアー (HartDesign)</span>
-                        <span class="text-[10px] text-amber-300 font-bold" id="live-badge-lure">ライトウイング</span>
-                    </div>
-
-                    <!-- ルアーモデル一覧（前回選んだものが自動維持される！） -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 max-h-[22vh] overflow-y-auto pr-0.5" id="live-lure-grid">
-                        <!-- JSで動的生成 -->
-                    </div>
-                    <input type="hidden" id="live-lure" value="ライトウイング">
-
-                    <!-- 連動ウエイト -->
-                    <div>
-                        <div class="text-[11px] font-bold text-amber-400/90 mb-1">ウエイト:</div>
-                        <div class="flex flex-wrap gap-1" id="live-weight-container"></div>
-                        <input type="hidden" id="live-weight" value="0.3g">
-                    </div>
-
-                    <!-- 連動公式カラー -->
-                    <div>
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-[11px] font-bold text-amber-400/90">公式カラー:</span>
-                            <span class="text-[10px] text-amber-300" id="live-badge-color">ホワイト</span>
-                        </div>
-                        <div class="flex flex-wrap gap-1 max-h-[16vh] overflow-y-auto pr-0.5" id="live-color-container"></div>
-                        <input type="hidden" id="live-color" value="ホワイト">
-                    </div>
-                </div>
-
-                <!-- 4. 写真・メモ（任意：コンパクトに配置） -->
-                <div class="bg-black/30 p-2.5 rounded-xl border border-amber-900/50 flex items-center gap-2">
-                    <label class="cursor-pointer bg-amber-950/80 hover:bg-amber-900 border border-amber-700 rounded-lg px-3 py-2 text-center flex items-center gap-1.5 text-xs text-amber-200 font-bold">
-                        <i class="fa-solid fa-camera text-amber-400"></i>
-                        <span>写真追加</span>
+                <!-- 5. 写真・メモ（任意・コンパクト） -->
+                <div class="bg-black/25 p-2 rounded-xl border border-amber-900/40 flex items-center gap-2">
+                    <label class="cursor-pointer bg-black/50 hover:bg-black/70 border border-amber-700/80 rounded-lg px-2.5 py-1.5 text-center flex items-center gap-1.5 text-xs text-amber-200 font-bold">
+                        <i class="fa-solid fa-camera text-emerald-400"></i>
+                        <span>写真</span>
                         <input type="file" id="live-photo-file" accept="image/*" onchange="previewLivePhoto(event)" class="hidden">
                     </label>
-                    <div id="live-photo-preview-wrap" class="w-10 h-10 rounded-lg overflow-hidden border border-amber-500 relative hidden">
+                    <div id="live-photo-preview-wrap" class="w-9 h-9 rounded-lg overflow-hidden border border-amber-500 relative hidden">
                         <img id="live-photo-preview" src="" alt="写真" class="w-full h-full object-cover">
-                        <button type="button" onclick="removeLivePhoto()" class="absolute top-0 right-0 bg-red-700 text-white w-3.5 h-3.5 text-[9px] font-black flex items-center justify-center">×</button>
+                        <button type="button" onclick="removeLivePhoto()" class="absolute top-0 right-0 bg-red-700 text-white w-3 h-3 text-[8px] font-black flex items-center justify-center">×</button>
                     </div>
-                    <input type="text" id="live-memo" placeholder="メモ（ヒットパターン等・任意）" class="wood-input flex-1 p-2 text-xs">
+                    <input type="text" id="live-memo" placeholder="メモ（パターンなど・任意）" class="outdoor-input flex-1 p-1.5 text-xs">
                 </div>
 
-                <!-- ★最重要：保存ボタン（Nice MOFFスタンプ発動！） -->
+                <!-- ★特大：この釣果を記録するボタン（Nice MOFF!! スタンプ発動） -->
                 <div class="pt-1">
-                    <button type="button" onclick="saveLiveCatchRecord()" class="brass-btn-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
+                    <button type="button" onclick="saveLiveCatchRecord()" class="btn-moff-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
                         <i class="fa-solid fa-floppy-disk text-2xl"></i>
                         <span>この釣果を記録する！</span>
                     </button>
@@ -533,62 +593,60 @@
 
 
         <!-- ======================================================== -->
-        <!-- VIEW 4: 釣果履歴・分析画面（独立ビュー） -->
+        <!-- VIEW 4: 釣果履歴・分析画面 -->
         <!-- ======================================================== -->
         <section id="view-history" class="hidden space-y-4 view-fade py-2">
 
-            <!-- 履歴上部バー -->
-            <div class="wood-plaque p-3 flex items-center justify-between">
-                <button type="button" onclick="showView('view-home')" class="wood-btn-secondary px-4 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer">
+            <div class="lake-panel p-3 flex items-center justify-between">
+                <button type="button" onclick="showView('view-home')" class="outdoor-panel px-3.5 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-house text-amber-400"></i>
-                    <span>トップへ戻る</span>
+                    <span>トップへ</span>
                 </button>
-                <h2 class="text-xl font-bold font-serif-title brass-text">釣果履歴・分析</h2>
-                <button type="button" onclick="startSessionSetup()" class="brass-btn-primary px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                <h2 class="text-xl font-black text-amber-200">釣果履歴・分析</h2>
+                <button type="button" onclick="startSessionSetup()" class="btn-moff-primary px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
                     <i class="fa-solid fa-plus"></i>釣行開始
                 </button>
             </div>
 
             <!-- アナリティクス看板 -->
-            <div class="wood-panel p-4">
-                <h3 class="text-xs font-bold text-amber-300 font-serif-title mb-2.5 flex items-center justify-between border-b border-amber-900/60 pb-1">
+            <div class="outdoor-panel p-4">
+                <h3 class="text-xs font-bold text-emerald-300 mb-2 flex items-center justify-between border-b border-amber-900/60 pb-1">
                     <span><i class="fa-solid fa-trophy text-amber-400 mr-1.5"></i>通算釣果アナリティクス</span>
                     <span class="text-xs text-amber-300 font-bold" id="hist-stat-records">0件</span>
                 </h3>
 
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
                     <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl">
-                        <div class="text-[11px] text-amber-400/90 font-bold">総キャッチ数</div>
-                        <div class="text-2xl font-black brass-text mt-0.5" id="hist-stat-count">0</div>
-                        <div class="text-[10px] text-amber-300">匹</div>
+                        <div class="text-[11px] text-amber-300 font-bold">総キャッチ数</div>
+                        <div class="text-2xl font-black text-amber-300 mt-0.5" id="hist-stat-count">0</div>
+                        <div class="text-[10px] text-amber-200">匹</div>
                     </div>
                     <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl">
-                        <div class="text-[11px] text-amber-400/90 font-bold">最大サイズ</div>
-                        <div class="text-2xl font-black text-amber-100 mt-0.5" id="hist-stat-max">0.0</div>
-                        <div class="text-[10px] text-amber-300">cm</div>
+                        <div class="text-[11px] text-emerald-300 font-bold">最大サイズ</div>
+                        <div class="text-2xl font-black text-emerald-300 mt-0.5" id="hist-stat-max">0.0</div>
+                        <div class="text-[10px] text-amber-200">cm</div>
                     </div>
                     <div class="bg-black/50 border border-amber-900/80 p-2.5 rounded-xl col-span-2 text-left px-3.5">
-                        <div class="text-[11px] text-amber-400/90 font-bold">最多ヒットルアー</div>
+                        <div class="text-[11px] text-amber-300 font-bold">最多ヒットルアー</div>
                         <div class="text-sm font-extrabold text-amber-100 truncate mt-0.5" id="hist-stat-best-lure">-</div>
-                        <div class="text-[10px] text-amber-300 truncate" id="hist-stat-best-spot">メイン釣り場: -</div>
+                        <div class="text-[10px] text-emerald-300 truncate" id="hist-stat-best-spot">メイン釣り場: -</div>
                     </div>
                 </div>
             </div>
 
             <!-- 絞り込みフィルター -->
-            <div class="wood-panel p-3 space-y-1.5">
+            <div class="outdoor-panel p-3 space-y-1.5">
                 <div class="text-xs font-bold text-amber-300 flex items-center justify-between">
                     <span><i class="fa-solid fa-filter mr-1"></i>絞り込み</span>
-                    <button onclick="resetFilters()" class="text-amber-400 hover:underline text-[11px]">すべて表示</button>
+                    <button onclick="resetFilters()" class="text-emerald-400 hover:underline text-[11px]">すべて表示</button>
                 </div>
                 <div class="grid grid-cols-3 gap-1.5">
-                    <select id="filter-spot" onchange="renderHistoryCards()" class="wood-input p-2 text-xs font-bold"><option value="">全エリア</option></select>
-                    <select id="filter-lure" onchange="renderHistoryCards()" class="wood-input p-2 text-xs font-bold"><option value="">全ルアー</option></select>
-                    <select id="filter-species" onchange="renderHistoryCards()" class="wood-input p-2 text-xs font-bold"><option value="">全魚種</option></select>
+                    <select id="filter-spot" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全エリア</option></select>
+                    <select id="filter-lure" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全ルアー</option></select>
+                    <select id="filter-species" onchange="renderHistoryCards()" class="outdoor-input p-2 text-xs font-bold"><option value="">全魚種</option></select>
                 </div>
             </div>
 
-            <!-- 釣果カードリスト -->
             <div id="history-cards-container" class="space-y-3 pb-8"></div>
 
         </section>
@@ -596,47 +654,63 @@
     </div>
 
     <!-- ======================================================== -->
+    <!-- CHOICE BOTTOM SHEET MODAL: 項目選択用スライドシート -->
+    <!-- ======================================================== -->
+    <div id="choice-sheet-overlay" onclick="closeChoiceSheet()" class="fixed inset-0 bg-black/80 z-50 flex flex-col justify-end p-2 sm:p-4 hidden">
+        <div onclick="event.stopPropagation()" class="outdoor-panel max-w-xl w-full mx-auto p-4 max-h-[82vh] flex flex-col sheet-up">
+            <div class="flex items-center justify-between border-b border-amber-900/60 pb-2 mb-3">
+                <h3 class="text-lg font-black text-amber-200" id="choice-sheet-title">項目を選択</h3>
+                <button type="button" onclick="closeChoiceSheet()" class="text-xs bg-amber-950 text-amber-300 px-3 py-1 rounded-full border border-amber-700 font-bold">
+                    閉じる ✕
+                </button>
+            </div>
+            
+            <!-- スクロール可能な選択肢グリッド -->
+            <div id="choice-sheet-content" class="overflow-y-auto flex-1 pr-1 grid gap-2"></div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
     <!-- STAMP MODAL: ★Nice MOFF!! 特大スタンプ演出 -->
     <!-- ======================================================== -->
     <div id="stamp-overlay" class="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-200">
         <div id="stamp-badge" class="nice-moff-stamp w-80 h-80 rounded-full flex flex-col items-center justify-center text-center p-4 shadow-2xl relative">
-            <!-- 外周ステッチ風円環 -->
-            <div class="absolute inset-2 border-2 border-dashed border-amber-950/60 rounded-full pointer-events-none"></div>
+            <div class="absolute inset-2 border-3 border-dashed border-amber-950/70 rounded-full pointer-events-none"></div>
             
             <div class="text-amber-950 text-xs font-black tracking-widest uppercase mb-1">
                 ★ HartDesign Feather Catch ★
             </div>
             
-            <div class="text-4xl sm:text-5xl font-black font-serif-title tracking-tight text-amber-950 leading-none my-1">
+            <div class="text-5xl font-black tracking-tight text-amber-950 leading-none my-1">
                 Nice MOFF!!
             </div>
             
-            <div class="text-amber-900 font-extrabold text-lg mt-1 tracking-wider">
-                ナイスMOFF!
+            <div class="text-amber-900 font-black text-xl mt-1 tracking-wider">
+                ナイスMOFF! 🎣
             </div>
 
-            <div class="mt-3 bg-amber-950/90 text-amber-200 text-xs px-4 py-1.5 rounded-full font-black border border-amber-600 shadow">
-                本日 <span id="stamp-count" class="text-lg text-amber-300">1</span> 匹目を記録！
+            <div class="mt-3 bg-amber-950 text-amber-300 text-xs px-4 py-1.5 rounded-full font-black border border-amber-600 shadow">
+                本日 <span id="stamp-count" class="text-xl text-amber-200">1</span> 匹目を記録！
             </div>
         </div>
     </div>
 
     <!-- 納竿サマリーモーダル -->
     <div id="finish-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden">
-        <div class="wood-panel max-w-sm w-full p-6 text-center space-y-4">
-            <div class="w-16 h-16 rounded-full bg-amber-950 border-2 border-amber-400 flex items-center justify-center mx-auto text-amber-300 text-3xl">
-                <i class="fa-solid fa-flag-checkered"></i>
+        <div class="outdoor-panel max-w-sm w-full p-6 text-center space-y-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-950 border-2 border-emerald-400 flex items-center justify-center mx-auto text-emerald-300 text-3xl">
+                🏁
             </div>
-            <h3 class="text-2xl font-bold font-serif-title brass-text">本日の釣行終了（納竿）</h3>
+            <h3 class="text-2xl font-black text-amber-200">本日の釣行終了（納竿）</h3>
             <p class="text-xs text-amber-300">お疲れ様でした！本日の釣果まとめです：</p>
             
             <div class="bg-black/50 border border-amber-800 rounded-xl p-3 text-left space-y-1.5 text-xs">
                 <div class="flex justify-between"><span class="text-amber-400">釣り場:</span><span class="font-bold text-amber-100" id="summary-fin-spot">-</span></div>
-                <div class="flex justify-between"><span class="text-amber-400">本日キャッチ:</span><span class="font-black brass-text text-base" id="summary-fin-count">0 匹</span></div>
-                <div class="flex justify-between"><span class="text-amber-400">本日最大:</span><span class="font-bold text-amber-200" id="summary-fin-max">- cm</span></div>
+                <div class="flex justify-between"><span class="text-amber-400">本日キャッチ:</span><span class="font-black text-amber-300 text-base" id="summary-fin-count">0 匹</span></div>
+                <div class="flex justify-between"><span class="text-amber-400">本日最大:</span><span class="font-bold text-emerald-300" id="summary-fin-max">- cm</span></div>
             </div>
 
-            <button type="button" onclick="confirmFinishFishing()" class="brass-btn-primary w-full py-3.5 rounded-xl text-lg font-black shadow-xl">
+            <button type="button" onclick="confirmFinishFishing()" class="btn-moff-primary w-full py-3.5 rounded-xl text-lg font-black shadow-xl">
                 トップメニューへ戻る
             </button>
         </div>
@@ -646,7 +720,7 @@
     <div id="photo-modal" onclick="closePhotoModal()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 hidden">
         <div class="relative max-w-xl w-full">
             <button onclick="closePhotoModal()" class="absolute -top-10 right-0 text-white text-lg font-bold bg-amber-950 px-3 py-1 rounded-full border border-amber-500">閉じる ×</button>
-            <img id="modal-img" src="" alt="拡大釣果写真" class="w-full max-h-[80vh] object-contain rounded-xl border-2 border-amber-500 shadow-2xl">
+            <img id="modal-img" src="" alt="拡大写真" class="w-full max-h-[80vh] object-contain rounded-xl border-2 border-amber-500 shadow-2xl">
         </div>
     </div>
 
@@ -746,7 +820,6 @@
             "その他"
         ];
 
-        // 釣行セッション状態
         let currentSession = null;
         let catchRecords = [];
         let livePhotoBase64 = null;
@@ -754,10 +827,10 @@
 
         window.onload = function() {
             loadStorage();
-            initLiveSpeciesGrid();
-            initLiveLureGrid();
             checkActiveSession();
             updateAllStats();
+            // 初期ルアーセット
+            updateLureDisplay('ライトウイング');
         };
 
         function loadStorage() {
@@ -792,9 +865,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ==========================================
-        // 釣行セッション開始・再開
-        // ==========================================
         function checkActiveSession() {
             const resumeBtn = document.getElementById('btn-resume-session');
             if (currentSession && currentSession.active) {
@@ -862,26 +932,121 @@
         }
 
         // ==========================================
-        // 実釣ワン画面フォーム（魚種・サイズ・ルアー）
+        // ★スッキリ選択シート（魚種・ルアー・ウエイト・カラーのポップアップ）
         // ==========================================
-        function initLiveSpeciesGrid() {
-            const container = document.getElementById('live-species-grid');
-            container.innerHTML = '';
-            FISH_SPECIES.forEach((sp, idx) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `select-chip py-2 px-1 text-center rounded-lg text-xs font-bold truncate ${idx === 0 ? 'active' : ''}`;
-                btn.innerText = sp;
-                btn.onclick = () => {
-                    document.querySelectorAll('#live-species-grid button').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('live-species').value = sp;
-                    document.getElementById('badge-species').innerText = `選択中: ${sp}`;
-                };
-                container.appendChild(btn);
-            });
+        function openChoiceSheet(type) {
+            const overlay = document.getElementById('choice-sheet-overlay');
+            const title = document.getElementById('choice-sheet-title');
+            const content = document.getElementById('choice-sheet-content');
+            content.innerHTML = '';
+
+            if (type === 'species') {
+                title.innerText = '🐟 魚種を選択';
+                content.className = 'overflow-y-auto flex-1 pr-1 grid grid-cols-2 sm:grid-cols-3 gap-2.5';
+                const cur = document.getElementById('live-species').value;
+                FISH_SPECIES.forEach(sp => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `choice-card p-4 text-center font-bold text-base flex flex-col items-center justify-center gap-1 ${sp === cur ? 'active' : ''}`;
+                    btn.innerHTML = `<span class="text-2xl">🐟</span><span>${escapeHtml(sp)}</span>`;
+                    btn.onclick = () => {
+                        document.getElementById('live-species').value = sp;
+                        document.getElementById('display-species').innerText = sp;
+                        closeChoiceSheet();
+                    };
+                    content.appendChild(btn);
+                });
+            } else if (type === 'lure') {
+                title.innerText = '🪶 HartDesign ルアーを選択';
+                content.className = 'overflow-y-auto flex-1 pr-1 grid grid-cols-2 gap-2.5';
+                const cur = document.getElementById('live-lure').value;
+                const models = Object.keys(HART_DESIGN_MASTER);
+                models.forEach(m => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `choice-card p-3 text-center font-bold text-sm flex items-center justify-center gap-2 ${m === cur ? 'active' : ''}`;
+                    btn.innerHTML = `<span class="text-amber-400">🪶</span><span>${escapeHtml(m)}</span>`;
+                    btn.onclick = () => {
+                        updateLureDisplay(m);
+                        closeChoiceSheet();
+                    };
+                    content.appendChild(btn);
+                });
+            } else if (type === 'weight') {
+                title.innerText = '⚖️ ウエイトを選択';
+                content.className = 'overflow-y-auto flex-1 pr-1 grid grid-cols-3 gap-2';
+                const curLure = document.getElementById('live-lure').value;
+                const info = HART_DESIGN_MASTER[curLure] || { weights: [] };
+                const cur = document.getElementById('live-weight').value;
+
+                if (info.weights && info.weights.length > 0) {
+                    info.weights.forEach(w => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = `choice-card p-3.5 text-center font-bold text-base ${w === cur ? 'active' : ''}`;
+                        btn.innerText = w;
+                        btn.onclick = () => {
+                            document.getElementById('live-weight').value = w;
+                            document.getElementById('display-weight').innerText = w;
+                            closeChoiceSheet();
+                        };
+                        content.appendChild(btn);
+                    });
+                } else {
+                    content.innerHTML = '<p class="text-xs text-amber-300 p-4 text-center col-span-3">このルアーには固定ウエイト規格がありません</p>';
+                }
+            } else if (type === 'color') {
+                title.innerText = '🎨 公式カラーを選択';
+                content.className = 'overflow-y-auto flex-1 pr-1 grid grid-cols-2 sm:grid-cols-3 gap-2';
+                const curLure = document.getElementById('live-lure').value;
+                const info = HART_DESIGN_MASTER[curLure] || { colors: [] };
+                const cur = document.getElementById('live-color').value;
+
+                if (info.colors && info.colors.length > 0) {
+                    info.colors.forEach(c => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = `choice-card p-3 text-center font-bold text-xs truncate ${c === cur ? 'active' : ''}`;
+                        btn.innerText = c;
+                        btn.onclick = () => {
+                            document.getElementById('live-color').value = c;
+                            document.getElementById('display-color').innerText = c;
+                            closeChoiceSheet();
+                        };
+                        content.appendChild(btn);
+                    });
+                } else {
+                    content.innerHTML = '<p class="text-xs text-amber-300 p-4 text-center col-span-3">カラー一覧がありません</p>';
+                }
+            }
+
+            overlay.classList.remove('hidden');
         }
 
+        function closeChoiceSheet() {
+            document.getElementById('choice-sheet-overlay').classList.add('hidden');
+        }
+
+        function updateLureDisplay(lureName) {
+            document.getElementById('live-lure').value = lureName;
+            document.getElementById('display-lure').innerText = lureName;
+
+            const info = HART_DESIGN_MASTER[lureName] || { weights: [], colors: [] };
+
+            // デフォルトウエイト
+            const defWeight = (info.weights && info.weights.length > 0) ? info.weights[0] : '-';
+            document.getElementById('live-weight').value = defWeight;
+            document.getElementById('display-weight').innerText = defWeight;
+
+            // デフォルトカラー
+            const defColor = (info.colors && info.colors.length > 0) ? info.colors[0] : '-';
+            document.getElementById('live-color').value = defColor;
+            document.getElementById('display-color').innerText = defColor;
+        }
+
+        // ==========================================
+        // 実釣画面のサイズ・匹数ヘルパー
+        // ==========================================
         function adjustLiveSize(delta) {
             const input = document.getElementById('live-size');
             let val = parseFloat(input.value) || 30.0;
@@ -901,75 +1066,6 @@
         function resetLiveCount() {
             liveCount = 1;
             document.getElementById('live-count-display').innerText = '1';
-        }
-
-        function initLiveLureGrid() {
-            const container = document.getElementById('live-lure-grid');
-            container.innerHTML = '';
-            const models = Object.keys(HART_DESIGN_MASTER);
-            models.forEach((m, idx) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `select-chip py-2 px-1.5 rounded-lg text-center text-xs font-bold truncate flex items-center justify-center gap-1 ${idx === 0 ? 'active' : ''}`;
-                btn.innerHTML = `<i class="fa-solid fa-feather text-amber-400 text-[10px]"></i><span>${escapeHtml(m)}</span>`;
-                btn.onclick = () => {
-                    document.querySelectorAll('#live-lure-grid button').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    selectLiveLureModel(m);
-                };
-                container.appendChild(btn);
-            });
-            selectLiveLureModel(models[0]);
-        }
-
-        function selectLiveLureModel(modelName) {
-            document.getElementById('live-lure').value = modelName;
-            document.getElementById('live-badge-lure').innerText = modelName;
-
-            const info = HART_DESIGN_MASTER[modelName] || { weights: [], colors: [] };
-
-            // ウエイト生成
-            const wtContainer = document.getElementById('live-weight-container');
-            wtContainer.innerHTML = '';
-            if (info.weights && info.weights.length > 0) {
-                info.weights.forEach((w, idx) => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = `select-chip px-2.5 py-1 rounded text-xs font-bold ${idx === 0 ? 'active' : ''}`;
-                    btn.innerText = w;
-                    btn.onclick = () => {
-                        document.querySelectorAll('#live-weight-container button').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.getElementById('live-weight').value = w;
-                    };
-                    wtContainer.appendChild(btn);
-                });
-                document.getElementById('live-weight').value = info.weights[0];
-            } else {
-                wtContainer.innerHTML = '<span class="text-[10px] text-amber-400/60">なし</span>';
-                document.getElementById('live-weight').value = '';
-            }
-
-            // カラー生成
-            const colContainer = document.getElementById('live-color-container');
-            colContainer.innerHTML = '';
-            if (info.colors && info.colors.length > 0) {
-                info.colors.forEach((col, idx) => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = `select-chip px-2 py-1 rounded text-[11px] font-bold ${idx === 0 ? 'active' : ''}`;
-                    btn.innerText = col;
-                    btn.onclick = () => {
-                        document.querySelectorAll('#live-color-container button').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.getElementById('live-color').value = col;
-                        document.getElementById('live-badge-color').innerText = col;
-                    };
-                    colContainer.appendChild(btn);
-                });
-                document.getElementById('live-color').value = info.colors[0];
-                document.getElementById('live-badge-color').innerText = info.colors[0];
-            }
         }
 
         function previewLivePhoto(event) {
@@ -1010,7 +1106,7 @@
         }
 
         // ==========================================
-        // ★釣果記録の保存＆「Nice MOFF!!」スタンプ発動！
+        // ★保存 ＆ Nice MOFF!! スタンプ
         // ==========================================
         function saveLiveCatchRecord() {
             if (!currentSession) return;
@@ -1034,7 +1130,6 @@
                 photo: livePhotoBase64
             };
 
-            // 全体およびセッションに追加
             catchRecords.unshift(record);
             currentSession.sessionCatches.push(record);
             saveStorage();
@@ -1042,10 +1137,10 @@
             const totalSessFish = currentSession.sessionCatches.reduce((a, b) => a + (parseInt(b.count) || 1), 0);
             document.getElementById('live-session-count').innerText = totalSessFish;
 
-            // ★Nice MOFF!! スタンプを画面中央にドカンと表示！
+            // ★Nice MOFF!! スタンプ発動
             triggerNiceMoffStamp(totalSessFish);
 
-            // リセット（魚種とルアーは手袋のまま連発できるよう記憶を維持！）
+            // リセット（魚種とルアー・ウエイト・カラーは連発のため維持！）
             document.getElementById('live-size').value = '';
             document.getElementById('live-memo').value = '';
             resetLiveCount();
@@ -1059,14 +1154,12 @@
             const badge = document.getElementById('stamp-badge');
             document.getElementById('stamp-count').innerText = currentFishCount;
 
-            // アニメーション適用
             badge.classList.remove('stamp-animate');
-            void badge.offsetWidth; // リフロー
+            void badge.offsetWidth;
             badge.classList.add('stamp-animate');
 
             overlay.classList.remove('opacity-0', 'pointer-events-none');
 
-            // 1.4秒後に気持ちよくフェードアウト（釣りを邪魔しない心地よいテンポ）
             setTimeout(() => {
                 overlay.classList.add('opacity-0', 'pointer-events-none');
             }, 1400);
@@ -1125,9 +1218,9 @@
                 if (r.location) spotCounts[r.location] = (spotCounts[r.location] || 0) + 1;
             });
 
-            document.getElementById('home-stat-count').innerHTML = `${totalFish}<span class="text-xs font-normal text-amber-200 ml-0.5">匹</span>`;
-            document.getElementById('home-stat-max').innerHTML = `${maxSize > 0 ? maxSize.toFixed(1) : '0.0'}<span class="text-xs font-normal text-amber-200 ml-0.5">cm</span>`;
-            document.getElementById('home-stat-records').innerHTML = `${catchRecords.length}<span class="text-xs font-normal text-amber-200 ml-0.5">件</span>`;
+            document.getElementById('home-stat-count').innerHTML = `${totalFish}<span class="text-xs font-normal text-amber-100 ml-0.5">匹</span>`;
+            document.getElementById('home-stat-max').innerHTML = `${maxSize > 0 ? maxSize.toFixed(1) : '0.0'}<span class="text-xs font-normal text-amber-100 ml-0.5">cm</span>`;
+            document.getElementById('home-stat-records').innerHTML = `${catchRecords.length}<span class="text-xs font-normal text-amber-100 ml-0.5">回</span>`;
 
             document.getElementById('hist-stat-records').innerText = `${catchRecords.length}件の記録`;
             document.getElementById('hist-stat-count').innerText = totalFish;
@@ -1189,7 +1282,7 @@
 
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="wood-panel p-8 text-center text-amber-400/70">
+                    <div class="outdoor-panel p-8 text-center text-amber-300/70">
                         <i class="fa-solid fa-box-open text-4xl mb-2"></i>
                         <p class="font-bold">該当する釣果記録がありません</p>
                     </div>
@@ -1199,7 +1292,7 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "wood-panel p-4 space-y-2.5";
+                card.className = "outdoor-panel p-4 space-y-2.5";
                 
                 const dateObj = new Date(item.datetime);
                 const dateStr = !isNaN(dateObj) 
@@ -1207,10 +1300,10 @@
                     : item.datetime;
 
                 const countBadge = item.count > 1 
-                    ? `<span class="ml-1 bg-amber-800 text-amber-100 text-xs px-2 py-0.5 rounded-full font-black border border-amber-500">${item.count}匹</span>` 
+                    ? `<span class="ml-1 bg-amber-600 text-amber-950 text-xs px-2.5 py-0.5 rounded-full font-black border border-amber-300">${item.count}匹</span>` 
                     : '';
 
-                const weatherBadge = item.weather ? `<span class="text-[10px] bg-black/40 px-1.5 py-0.5 rounded text-amber-300 ml-1.5">${escapeHtml(item.weather)}</span>` : '';
+                const weatherBadge = item.weather ? `<span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-full text-emerald-300 ml-1.5">${escapeHtml(item.weather)}</span>` : '';
 
                 const photoHtml = item.photo ? `
                     <div class="sm:col-span-1 h-32 rounded-xl overflow-hidden border border-amber-700 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
@@ -1219,15 +1312,15 @@
                 ` : '';
 
                 const detailSpecHtml = (item.color || item.weight) ? `
-                    <div class="text-amber-300/90 text-xs pl-3">
+                    <div class="text-amber-200/90 text-xs pl-3">
                         ${item.color ? `カラー: <span class="font-bold text-amber-100">${escapeHtml(item.color)}</span> ` : ''}
                         ${item.weight ? `| ウエイト: <span class="font-bold text-amber-100">${escapeHtml(item.weight)}</span>` : ''}
                     </div>
                 ` : '';
 
                 const memoHtml = item.memo ? `
-                    <p class="text-xs text-amber-200/95 bg-black/40 p-2 rounded-lg border border-amber-900/50 mt-1 leading-relaxed">
-                        <i class="fa-solid fa-comment-dots text-amber-400 mr-1"></i>${escapeHtml(item.memo)}
+                    <p class="text-xs text-amber-100 bg-black/40 p-2 rounded-lg border border-amber-900/40 mt-1 leading-relaxed">
+                        <i class="fa-solid fa-comment-dots text-emerald-400 mr-1.5"></i>${escapeHtml(item.memo)}
                     </p>
                 ` : '';
 
@@ -1236,8 +1329,8 @@
                         <div>
                             <span class="text-xs text-amber-400 font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
                             ${weatherBadge}
-                            <h3 class="text-base font-bold text-amber-100 font-serif-title flex items-center gap-1.5 mt-0.5">
-                                <i class="fa-solid fa-location-dot text-amber-400 text-xs"></i>
+                            <h3 class="text-base font-black text-amber-100 flex items-center gap-1.5 mt-0.5">
+                                <i class="fa-solid fa-location-dot text-emerald-400 text-xs"></i>
                                 <span>${escapeHtml(item.location || '釣り場未設定')}</span>
                             </h3>
                         </div>
@@ -1253,8 +1346,8 @@
                         ${photoHtml}
                         <div class="${item.photo ? 'sm:col-span-2' : ''} space-y-1.5">
                             <div class="flex items-baseline gap-2">
-                                <span class="text-xs text-amber-400 font-bold">サイズ:</span>
-                                <span class="text-2xl font-black brass-text">${item.size !== '-' ? item.size + ' cm' : '計測なし'}</span>
+                                <span class="text-xs text-amber-300 font-bold">サイズ:</span>
+                                <span class="text-2xl font-black text-emerald-300">${item.size !== '-' ? item.size + ' cm' : '計測なし'}</span>
                             </div>
                             <div class="bg-black/40 p-2 rounded-xl border border-amber-950 text-xs space-y-0.5">
                                 <div class="text-amber-200 font-bold flex items-center gap-1.5">
