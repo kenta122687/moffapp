@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOFFアプリ - HartDesign Feather Log</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Moff隊 釣果記録帳 - HartDesign Official Feather Log</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -11,390 +11,706 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --wood-dark: #1b120c;
+            --wood-panel: #2e1a0e;
+            --wood-border: #7c4f27;
+            --brass-bright: #ffe28a;
+            --brass-main: #d4af37;
+            --brass-dark: #8c6819;
+            --leather-dark: #1f140e;
+        }
+
         body {
             font-family: 'Zen Maru Gothic', sans-serif;
-            background-color: #1a120b;
-            color: #f5eedc;
-            background-image: radial-gradient(#2c1d11 1px, transparent 1px), radial-gradient(#2c1d11 1px, #1a120b 1px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+            background-color: #140d08;
+            color: #f7eedc;
+            background-image: 
+                radial-gradient(#2c1a0f 1px, transparent 1px), 
+                radial-gradient(#24150b 1px, #140d08 1px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            min-height: 100vh;
+            touch-action: manipulation;
         }
 
         .font-serif-title {
             font-family: 'Shippori Mincho', serif;
         }
 
-        /* Wood Grain & Plaque Styling */
+        /* 重厚な木目パネル */
         .wood-panel {
-            background: linear-gradient(145deg, #3d2616 0%, #29180c 100%);
-            border: 3px solid #8c6239;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 16px rgba(0,0,0,0.6);
-            border-radius: 12px;
+            background: linear-gradient(160deg, #382112 0%, #24140a 100%);
+            border: 3px solid #84532b;
+            box-shadow: inset 0 0 16px rgba(0,0,0,0.85), 0 10px 24px rgba(0,0,0,0.7);
+            border-radius: 18px;
             position: relative;
         }
 
         .wood-plaque {
-            background: radial-gradient(circle at 50% 20%, #4a301c 0%, #26150a 100%);
-            border: 2px solid #b8860b;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.2);
+            background: radial-gradient(circle at 50% 15%, #4a2d18 0%, #1e0f06 100%);
+            border: 2px solid #c29b38;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.8), inset 0 2px 2px rgba(255,255,255,0.2);
+            border-radius: 16px;
         }
 
-        /* Metallic Accent Details */
+        /* 真鍮・ゴールドグラデーションテキスト */
         .brass-text {
-            background: linear-gradient(180deg, #ffe58f 0%, #d4af37 50%, #996515 100%);
+            background: linear-gradient(180deg, #fff3b3 0%, #e5bd47 45%, #9e7418 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            font-weight: 900;
         }
 
-        .brass-btn {
-            background: linear-gradient(180deg, #b8860b 0%, #7a5807 100%);
-            color: #fff8e7;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            border: 1px solid #e6ca65;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        /* 黄金の特大アクションボタン */
+        .brass-btn-primary {
+            background: linear-gradient(180deg, #f5d76e 0%, #d4a72c 40%, #9e6f0d 100%);
+            color: #2b1704;
+            font-weight: 900;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+            border: 2px solid #ffe89e;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 2px 3px rgba(255,255,255,0.7), 0 0 18px rgba(212, 175, 55, 0.4);
             transition: all 0.15s ease;
         }
-        
-        .brass-btn:hover {
-            filter: brightness(1.1);
+
+        .brass-btn-primary:active {
+            transform: scale(0.98) translateY(2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.8), inset 0 2px 2px rgba(0,0,0,0.4);
         }
 
-        .brass-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.6);
-        }
-
-        /* Buttons for Lures & Species */
-        .lure-chip {
-            background: #2b1a0e;
-            border: 2px solid #5c3e21;
-            color: #e5d3b3;
+        /* 落ち着いたサブボタン（木製・レザー風） */
+        .wood-btn-secondary {
+            background: linear-gradient(180deg, #4d2f19 0%, #2d180b 100%);
+            color: #faeccf;
+            border: 2px solid #8f5b2e;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.15);
             transition: all 0.15s ease;
+        }
+
+        .wood-btn-secondary:active {
+            transform: scale(0.98) translateY(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+        }
+
+        /* 手袋でも押しやすいセレクターカード */
+        .big-select-card {
+            background: #25160d;
+            border: 2px solid #57361a;
+            color: #edd9b9;
+            transition: all 0.18s ease;
             cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .lure-chip:hover {
+        .big-select-card:hover {
             border-color: #d4af37;
-            background: #3b2313;
+            background: #362012;
         }
 
-        .lure-chip.active {
-            background: linear-gradient(135deg, #a0522d 0%, #662200 100%);
+        .big-select-card.active {
+            background: linear-gradient(145deg, #7c3a0d 0%, #461c02 100%);
             border-color: #ffd700;
             color: #ffffff;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            font-weight: 800;
+            box-shadow: 0 0 14px rgba(255, 215, 0, 0.45), inset 0 1px 2px rgba(255,255,255,0.4);
+            transform: translateY(-2px);
         }
 
-        /* Form Inputs High Contrast */
+        /* 高コントラスト入力フィールド */
         .wood-input {
-            background-color: #120b06;
-            border: 2px solid #634325;
+            background-color: #120a05;
+            border: 2px solid #6c4420;
             color: #ffffff;
-            font-size: 1.15rem;
-            border-radius: 8px;
+            font-size: 1.2rem;
+            border-radius: 12px;
         }
 
         .wood-input:focus {
             outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+            border-color: #ffd700;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+            background-color: #1a0f08;
         }
 
-        /* Custom Scrollbar */
+        /* ステップカードの切り替えアニメーション */
+        .step-transition {
+            animation: fadeInStep 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInStep {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 数量調整用のでかボタン */
+        .counter-btn {
+            background: linear-gradient(180deg, #4a2c16 0%, #29160a 100%);
+            border: 2px solid #84532b;
+            color: #ffe6a3;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+        }
+
+        .counter-btn:active {
+            transform: scale(0.92);
+            background: #1e0f06;
+        }
+
+        /* クイックタグチップ */
+        .quick-tag {
+            background: #2b180d;
+            border: 1.5px solid #633e1c;
+            color: #e5cdad;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .quick-tag:active, .quick-tag.active {
+            background: #944e13;
+            border-color: #ffd700;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* カスタムスクロールバー */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #1a120b;
+            background: #140d08;
         }
         ::-webkit-scrollbar-thumb {
-            background: #5c3e21;
+            background: #5c381a;
             border-radius: 4px;
         }
     </style>
 </head>
-<body class="min-h-screen pb-20">
+<body class="p-2 sm:p-4 select-none">
 
-    <!-- Header / Brand Sign -->
-    <header class="p-3 bg-neutral-900 border-b-4 border-amber-800 shadow-2xl sticky top-0 z-40">
-        <div class="max-w-2xl mx-auto wood-plaque p-3 rounded-xl flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-full bg-amber-950 border-2 border-amber-400 flex items-center justify-center shadow-inner">
-                    <i class="fa-solid fa-fish-fins text-amber-400 text-2xl"></i>
+    <!-- 全体コンテナ -->
+    <div class="max-w-xl mx-auto min-h-[92vh] flex flex-col justify-between">
+
+        <!-- ========================================== -->
+        <!-- VIEW 1: ホーム画面（トップメニュー） -->
+        <!-- ========================================== -->
+        <section id="view-home" class="space-y-5 step-transition my-auto py-4">
+
+            <!-- 木製メイン看板プレート -->
+            <div class="wood-panel p-6 text-center shadow-2xl">
+                <!-- 真鍮コーナー飾りピン -->
+                <div class="absolute top-2.5 left-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
+                <div class="absolute top-2.5 right-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
+                <div class="absolute bottom-2.5 left-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
+                <div class="absolute bottom-2.5 right-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
+
+                <!-- HartDesign エンブレム -->
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 border border-amber-500/80 px-4 py-1.5 rounded-full shadow-inner mb-3">
+                    <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
+                    <span class="text-xs font-black tracking-widest text-amber-200 uppercase">HartDesign Official Log</span>
+                    <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
                 </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-amber-900 text-amber-200 text-xs px-2 py-0.5 rounded font-bold border border-amber-600">HartDesign 認定</span>
-                        <span class="text-xs text-amber-300 tracking-wider">Moff隊 釣果記録帳</span>
+
+                <!-- メインタイトル看板 -->
+                <h1 class="text-3xl sm:text-4xl font-extrabold font-serif-title brass-text tracking-wider leading-tight mb-1">
+                    Moff隊 釣果記録帳
+                </h1>
+                <p class="text-xs sm:text-sm text-amber-300/80 font-bold tracking-widest">
+                    エリアトラウト・フェザーフィッシング専用
+                </p>
+
+                <!-- ミニ通算ステータス（控えめに品よく表示） -->
+                <div class="mt-5 pt-4 border-t border-amber-800/60 grid grid-cols-3 gap-2 text-center bg-black/30 rounded-xl p-2.5">
+                    <div>
+                        <div class="text-[11px] text-amber-400/90 font-bold">総キャッチ</div>
+                        <div class="text-xl sm:text-2xl font-black brass-text" id="home-stat-count">0<span class="text-xs font-normal text-amber-200 ml-0.5">匹</span></div>
                     </div>
-                    <h1 class="text-2xl font-bold font-serif-title brass-text tracking-wide">MOFFアプリ</h1>
+                    <div class="border-x border-amber-900/60">
+                        <div class="text-[11px] text-amber-400/90 font-bold">最大サイズ</div>
+                        <div class="text-xl sm:text-2xl font-black text-amber-100" id="home-stat-max">0.0<span class="text-xs font-normal text-amber-200 ml-0.5">cm</span></div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-amber-400/90 font-bold">釣行回数</div>
+                        <div class="text-xl sm:text-2xl font-black text-amber-200" id="home-stat-records">0<span class="text-xs font-normal text-amber-200 ml-0.5">回</span></div>
+                    </div>
                 </div>
             </div>
-            <div class="flex gap-2">
-                <button onclick="exportData()" title="データを出力" class="text-xs bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-700 p-2 rounded-lg flex flex-col items-center transition">
-                    <i class="fa-solid fa-download mb-1 text-sm"></i>
-                    <span>出力</span>
+
+            <!-- 2大メインボタン（迷わない・手袋でも確実に押せる特大ボタン） -->
+            <div class="space-y-4 pt-2">
+
+                <!-- 1. 新規釣果を記録する（最大サイズ・最重要ボタン） -->
+                <button type="button" onclick="startNewCatchWizard()" class="brass-btn-primary w-full py-6 px-6 rounded-2xl flex items-center justify-between shadow-2xl group cursor-pointer">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="w-16 h-16 rounded-xl bg-amber-950/70 border-2 border-amber-300 flex items-center justify-center text-amber-200 shadow-inner group-active:scale-95 transition-transform">
+                            <i class="fa-solid fa-plus text-3xl"></i>
+                        </div>
+                        <div>
+                            <span class="block text-2xl sm:text-3xl font-extrabold tracking-wide text-amber-950">
+                                釣果を記録する
+                            </span>
+                            <span class="block text-xs sm:text-sm text-amber-900 font-bold mt-0.5">
+                                魚種・サイズ・ヒットフェザーを1分で記録
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-amber-950 text-2xl pr-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
                 </button>
-                <label title="データを復元・読込" class="cursor-pointer text-xs bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-700 p-2 rounded-lg flex flex-col items-center transition">
-                    <i class="fa-solid fa-upload mb-1 text-sm"></i>
-                    <span>読込</span>
-                    <input type="file" id="import-file" accept=".json" onchange="importData(event)" class="hidden">
-                </label>
+
+                <!-- 2. 釣果履歴・分析を見る（独立した一覧・分析ビューへ） -->
+                <button type="button" onclick="openHistoryView()" class="wood-btn-secondary w-full py-5 px-6 rounded-2xl flex items-center justify-between shadow-xl cursor-pointer">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="w-14 h-14 rounded-xl bg-black/40 border border-amber-700/80 flex items-center justify-center text-amber-400 shadow-inner">
+                            <i class="fa-solid fa-book-bookmark text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-extrabold text-amber-100 tracking-wide">
+                                釣果履歴・分析を見る
+                            </span>
+                            <span class="block text-xs text-amber-300/80 font-bold mt-0.5">
+                                写真付き釣果一覧・ヒットルアー統計
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-amber-400 text-xl pr-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </button>
+
             </div>
-        </div>
-    </header>
 
-    <!-- Navigation Tabs -->
-    <nav class="max-w-2xl mx-auto mt-3 px-3">
-        <div class="grid grid-cols-2 gap-2 bg-amber-950 p-1.5 rounded-xl border border-amber-900 shadow-inner">
-            <button id="tab-btn-log" onclick="switchTab('log')" class="py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500">
-                <i class="fa-solid fa-pen-to-square text-amber-300"></i>
-                <span>釣果を記録</span>
-            </button>
-            <button id="tab-btn-history" onclick="switchTab('history')" class="py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200">
-                <i class="fa-solid fa-book-bookmark text-amber-400"></i>
-                <span>釣果履歴・分析</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Main Content Container -->
-    <main class="max-w-2xl mx-auto p-3">
-
-        <!-- TAB 1: CATCH LOG FORM -->
-        <section id="tab-log" class="space-y-4">
-            <form id="catchForm" onsubmit="saveCatch(event)" class="wood-panel p-4 md:p-6 space-y-5">
-                
-                <div class="flex items-center justify-between border-b border-amber-900/60 pb-3">
-                    <h2 class="text-xl font-bold font-serif-title text-amber-200 flex items-center gap-2">
-                        <i class="fa-solid fa-feather-pointed text-amber-400"></i>
-                        <span>新規釣果入力</span>
-                    </h2>
-                    <button type="button" onclick="setNowDateTime()" class="text-xs bg-amber-900/80 text-amber-200 hover:bg-amber-800 px-3 py-1.5 rounded-full border border-amber-700 transition">
-                        <i class="fa-solid fa-clock mr-1"></i>現在時刻をセット
+            <!-- 下部補助ツールバー（データバックアップ・復元） -->
+            <div class="pt-4 flex items-center justify-between text-xs text-amber-400/80 px-2 border-t border-amber-900/40">
+                <span class="font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-amber-500"></i>端末内に安全に自動保存中
+                </span>
+                <div class="flex gap-2">
+                    <button onclick="exportData()" class="bg-amber-950 hover:bg-amber-900 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                        <i class="fa-solid fa-download"></i>出力
                     </button>
-                </div>
-
-                <!-- Date & Spot -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-amber-300 text-sm font-bold mb-1">
-                            <i class="fa-regular fa-calendar-alt mr-1"></i>日時
-                        </label>
-                        <input type="datetime-local" id="field-datetime" required class="wood-input w-full p-3 text-base">
-                    </div>
-                    <div>
-                        <label class="block text-amber-300 text-sm font-bold mb-1">
-                            <i class="fa-solid fa-location-dot mr-1"></i>釣り場 (エリア名)
-                        </label>
-                        <input type="text" id="field-location" placeholder="例: 朝霞ガーデン, 王禅寺, 裾野" required class="wood-input w-full p-3 text-base" list="spot-suggestions">
-                        <datalist id="spot-suggestions">
-                            <option value="朝霞ガーデン">
-                            <option value="ベリーパーク in FISH ON！王禅寺">
-                            <option value="すそのフィッシングパーク">
-                            <option value="開成水辺フォレストスプリングス">
-                            <option value="発光路の森ファミリーフィッシング">
-                            <option value="フィッシングフィールド中津川">
-                            <option value="なら山沼漁場">
-                            <option value="アルクスポンド宇都宮">
-                            <option value="アルクスポンド焼津">
-                        </datalist>
-                    </div>
-                </div>
-
-                <!-- Fish Species Picker -->
-                <div>
-                    <label class="block text-amber-300 text-sm font-bold mb-2">
-                        <i class="fa-solid fa-fish mr-1"></i>魚種を選択
+                    <label class="cursor-pointer bg-amber-950 hover:bg-amber-900 border border-amber-800 text-amber-300 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                        <i class="fa-solid fa-upload"></i>読込
+                        <input type="file" accept=".json" onchange="importData(event)" class="hidden">
                     </label>
-                    <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="species-selector"></div>
-                    <input type="hidden" id="field-species" value="ニジマス" required>
                 </div>
+            </div>
 
-                <!-- Size & Count -->
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-amber-300 text-sm font-bold mb-1">
-                            <i class="fa-solid fa-ruler-horizontal mr-1"></i>サイズ (cm)
-                        </label>
-                        <div class="flex items-center">
-                            <input type="number" id="field-size" placeholder="25" min="5" max="150" step="0.1" class="wood-input w-full p-3 text-xl font-bold text-center">
-                            <span class="ml-2 text-amber-200 font-bold">cm</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-amber-300 text-sm font-bold mb-1">
-                            <i class="fa-solid fa-hashtag mr-1"></i>匹数 (一括記録)
-                        </label>
-                        <div class="flex items-center">
-                            <input type="number" id="field-count" value="1" min="1" max="500" class="wood-input w-full p-3 text-xl font-bold text-center">
-                            <span class="ml-2 text-amber-200 font-bold">匹</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HartDesign Feather Selection -->
-                <div class="bg-black/30 p-3.5 rounded-xl border border-amber-900/80 space-y-3">
-                    <label class="block text-amber-300 text-sm font-bold flex items-center justify-between">
-                        <span><i class="fa-solid fa-feather text-amber-400 mr-1"></i>ヒットルアー (HartDesign フェザー)</span>
-                        <span class="text-xs text-amber-400 font-normal">※タップで選択</span>
-                    </label>
-                    
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="lure-selector"></div>
-                    <input type="hidden" id="field-lure" value="Light Wing" required>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <div>
-                            <label class="block text-amber-400/80 text-xs font-bold mb-1">ルアーカラー</label>
-                            <input type="text" id="field-color" placeholder="例: ペレットオリーブ, 白, チャート" class="wood-input w-full p-2.5 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-amber-400/80 text-xs font-bold mb-1">ウエイト / アクション</label>
-                            <input type="text" id="field-weight" placeholder="例: 0.17g, 表層デッドスロー, ボトムバンプ" class="wood-input w-full p-2.5 text-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Photo Upload with auto-compress -->
-                <div>
-                    <label class="block text-amber-300 text-sm font-bold mb-1">
-                        <i class="fa-solid fa-camera mr-1"></i>写真の保存 (任意・自動軽量化)
-                    </label>
-                    <div class="flex items-center gap-3">
-                        <label class="cursor-pointer bg-amber-950 hover:bg-amber-900 border-2 border-dashed border-amber-700 hover:border-amber-500 rounded-xl p-3 flex-1 text-center transition-all">
-                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-amber-400 mb-1 block"></i>
-                            <span class="text-xs text-amber-200 block font-bold">写真を撮影・選択</span>
-                            <input type="file" id="field-photo" accept="image/*" onchange="previewAndCompressPhoto(event)" class="hidden">
-                        </label>
-                        <div id="photo-preview-container" class="w-20 h-20 bg-black/50 border border-amber-800 rounded-xl overflow-hidden flex items-center justify-center relative hidden">
-                            <img id="photo-preview" src="" alt="プレビュー" class="w-full h-full object-cover">
-                            <button type="button" onclick="removePhoto()" class="absolute top-1 right-1 bg-red-800 hover:bg-red-700 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center">×</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Memo -->
-                <div>
-                    <label class="block text-amber-300 text-sm font-bold mb-1">
-                        <i class="fa-solid fa-note-sticky mr-1"></i>メモ・天候・ヒットパターン
-                    </label>
-                    <textarea id="field-memo" rows="2" placeholder="例: 晴れ/水温12℃。駆け上がりの沈み石付近でフォール中にひったくるバイト。" class="wood-input w-full p-3 text-sm"></textarea>
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="brass-btn w-full py-4 rounded-xl text-xl font-bold flex items-center justify-center gap-2 shadow-2xl">
-                        <i class="fa-solid fa-floppy-disk text-2xl"></i>
-                        <span>この釣果を記録する</span>
-                    </button>
-                </div>
-
-            </form>
         </section>
 
-        <!-- TAB 2: HISTORY & STATS -->
-        <section id="tab-history" class="space-y-4 hidden">
 
-            <!-- Summary Stats Board -->
+        <!-- ========================================== -->
+        <!-- VIEW 2: ステップ式ウィザード（1画面ずつカード切り替え） -->
+        <!-- ========================================== -->
+        <section id="view-wizard" class="hidden flex-col justify-between min-h-[92vh] py-2">
+
+            <!-- ウィザード上部ヘッダー＆プログレスバー -->
+            <div>
+                <!-- 最上部バー（中止ボタン＆タイトル） -->
+                <div class="flex items-center justify-between pb-2 mb-2 border-b border-amber-900/60">
+                    <button type="button" onclick="cancelWizardToHome()" class="text-xs bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-700 px-3 py-1.5 rounded-full flex items-center gap-1.5 font-bold">
+                        <i class="fa-solid fa-house"></i>
+                        <span>メニューへ</span>
+                    </button>
+                    <div class="text-center">
+                        <span class="text-xs text-amber-400 font-bold">MOFF隊 釣果記録</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-extrabold brass-text bg-amber-950 px-2.5 py-1 rounded-full border border-amber-700" id="step-number-indicator">
+                            Step 1 / 5
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ステップ進捗バー（5ステップ） -->
+                <div class="grid grid-cols-5 gap-1.5 mb-3" id="wizard-progress-bar">
+                    <div class="h-2 rounded-full bg-amber-400 shadow" id="prog-1"></div>
+                    <div class="h-2 rounded-full bg-amber-950" id="prog-2"></div>
+                    <div class="h-2 rounded-full bg-amber-950" id="prog-3"></div>
+                    <div class="h-2 rounded-full bg-amber-950" id="prog-4"></div>
+                    <div class="h-2 rounded-full bg-amber-950" id="prog-5"></div>
+                </div>
+            </div>
+
+            <!-- ステップカード本体コンテナ -->
+            <div class="my-auto py-2">
+
+                <!-- ----------------------------------------- -->
+                <!-- STEP 1: 日時と釣り場 -->
+                <!-- ----------------------------------------- -->
+                <div id="step-card-1" class="wood-panel p-5 sm:p-6 space-y-5 step-transition">
+                    <div class="border-b border-amber-900/60 pb-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 1</span>
+                            <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-amber-400"></i>日時と釣り場
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- 日時入力 -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="text-sm font-bold text-amber-300">
+                                <i class="fa-regular fa-clock mr-1"></i>釣れた日時
+                            </label>
+                            <button type="button" onclick="setNowDateTime()" class="text-xs bg-amber-900 hover:bg-amber-800 text-amber-200 border border-amber-600 px-3 py-1 rounded-full font-bold">
+                                <i class="fa-solid fa-rotate-right mr-1"></i>現在時刻に更新
+                            </button>
+                        </div>
+                        <input type="datetime-local" id="wiz-datetime" class="wood-input w-full p-3.5 text-lg font-bold">
+                    </div>
+
+                    <!-- 釣り場入力＆クイックボタン -->
+                    <div>
+                        <label class="block text-sm font-bold text-amber-300 mb-1.5">
+                            <i class="fa-solid fa-map-pin mr-1"></i>釣り場（管理釣り場・エリア名）
+                        </label>
+                        <input type="text" id="wiz-location" placeholder="釣り場名を入力または下から選択" class="wood-input w-full p-3.5 text-lg font-bold mb-2.5">
+                        
+                        <div class="text-xs text-amber-400/90 font-bold mb-1.5">よく行くエリアをワンタップ：</div>
+                        <div class="flex flex-wrap gap-2" id="quick-spot-tags">
+                            <button type="button" onclick="selectSpotQuick('朝霞ガーデン')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">朝霞ガーデン</button>
+                            <button type="button" onclick="selectSpotQuick('ベリーパーク王禅寺')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">王禅寺</button>
+                            <button type="button" onclick="selectSpotQuick('すそのFP')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">すそのFP</button>
+                            <button type="button" onclick="selectSpotQuick('開成FS')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">開成FS</button>
+                            <button type="button" onclick="selectSpotQuick('中津川')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">中津川</button>
+                            <button type="button" onclick="selectSpotQuick('発光路の森')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">発光路の森</button>
+                            <button type="button" onclick="selectSpotQuick('アルクスポンド')" class="quick-tag px-3 py-2 rounded-xl text-xs sm:text-sm font-bold">アルクスポンド</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ----------------------------------------- -->
+                <!-- STEP 2: 魚種の選択（特大カードボタン） -->
+                <!-- ----------------------------------------- -->
+                <div id="step-card-2" class="wood-panel p-5 sm:p-6 space-y-4 step-transition hidden">
+                    <div class="border-b border-amber-900/60 pb-3">
+                        <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 2</span>
+                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
+                            <i class="fa-solid fa-fish-fins text-amber-400"></i>魚種を選択
+                        </h2>
+                        <p class="text-xs text-amber-300/80 mt-0.5">釣れた魚をタップしてください（手袋でも簡単選択）</p>
+                    </div>
+
+                    <!-- 魚種グリッド（押しやすいビッグサイズ） -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[50vh] overflow-y-auto pr-1" id="species-grid-container">
+                        <!-- JSで動的生成 -->
+                    </div>
+                    <input type="hidden" id="wiz-species" value="ニジマス">
+                </div>
+
+                <!-- ----------------------------------------- -->
+                <!-- STEP 3: サイズ・匹数の入力（でかボタン＆カウンター） -->
+                <!-- ----------------------------------------- -->
+                <div id="step-card-3" class="wood-panel p-5 sm:p-6 space-y-5 step-transition hidden">
+                    <div class="border-b border-amber-900/60 pb-3">
+                        <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 3</span>
+                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
+                            <i class="fa-solid fa-ruler text-amber-400"></i>サイズと匹数
+                        </h2>
+                    </div>
+
+                    <!-- サイズ入力 -->
+                    <div class="bg-black/30 p-4 rounded-xl border border-amber-900/80">
+                        <label class="block text-sm font-bold text-amber-300 mb-2">
+                            魚の大きさ（cm）
+                        </label>
+                        <div class="flex items-center gap-3 justify-center mb-3">
+                            <button type="button" onclick="adjustSize(-1)" class="counter-btn w-14 h-14 rounded-2xl text-2xl font-black flex items-center justify-center">－</button>
+                            <div class="flex-1 text-center bg-black/60 border-2 border-amber-600 rounded-2xl py-2 px-3">
+                                <input type="number" id="wiz-size" placeholder="未計測" step="0.5" min="0" max="150" class="bg-transparent text-center text-3xl sm:text-4xl font-black text-amber-200 w-full focus:outline-none">
+                                <span class="text-xs text-amber-400/80 font-bold block">cm（空欄でもOK）</span>
+                            </div>
+                            <button type="button" onclick="adjustSize(+1)" class="counter-btn w-14 h-14 rounded-2xl text-2xl font-black flex items-center justify-center">＋</button>
+                        </div>
+                        
+                        <!-- クイックサイズボタン -->
+                        <div class="grid grid-cols-5 gap-1.5">
+                            <button type="button" onclick="setSizeQuick(25)" class="quick-tag py-2 rounded-lg text-xs font-bold">25cm</button>
+                            <button type="button" onclick="setSizeQuick(35)" class="quick-tag py-2 rounded-lg text-xs font-bold">35cm</button>
+                            <button type="button" onclick="setSizeQuick(45)" class="quick-tag py-2 rounded-lg text-xs font-bold">45cm</button>
+                            <button type="button" onclick="setSizeQuick(55)" class="quick-tag py-2 rounded-lg text-xs font-bold">55cm</button>
+                            <button type="button" onclick="setSizeQuick(60)" class="quick-tag py-2 rounded-lg text-xs font-bold">60cm超</button>
+                        </div>
+                    </div>
+
+                    <!-- 匹数カウンター（数釣りに便利） -->
+                    <div class="bg-black/30 p-4 rounded-xl border border-amber-900/80">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="text-sm font-bold text-amber-300">
+                                キャッチ匹数
+                            </label>
+                            <span class="text-xs text-amber-400/80 font-bold">数釣り・連発時の一括記録</span>
+                        </div>
+                        <div class="flex items-center gap-3 justify-center mb-2">
+                            <button type="button" onclick="adjustCount(-1)" class="counter-btn w-14 h-14 rounded-2xl text-2xl font-black flex items-center justify-center">－</button>
+                            <div class="flex-1 text-center bg-black/60 border-2 border-amber-600 rounded-2xl py-2 px-3">
+                                <span id="wiz-count-display" class="text-3xl sm:text-4xl font-black brass-text">1</span>
+                                <span class="text-sm font-bold text-amber-300 ml-1">匹</span>
+                            </div>
+                            <button type="button" onclick="adjustCount(+1)" class="counter-btn w-14 h-14 rounded-2xl text-2xl font-black flex items-center justify-center">＋</button>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="adjustCount(+5)" class="quick-tag flex-1 py-1.5 rounded-lg text-xs font-bold">+5匹</button>
+                            <button type="button" onclick="adjustCount(+10)" class="quick-tag flex-1 py-1.5 rounded-lg text-xs font-bold">+10匹</button>
+                            <button type="button" onclick="setCountReset()" class="quick-tag py-1.5 px-3 rounded-lg text-xs font-bold text-red-300">1匹に戻す</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ----------------------------------------- -->
+                <!-- STEP 4: HartDesignフェザー＆カラー・ウエイト -->
+                <!-- ----------------------------------------- -->
+                <div id="step-card-4" class="wood-panel p-5 sm:p-6 space-y-4 step-transition hidden">
+                    <div class="border-b border-amber-900/60 pb-3">
+                        <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 4</span>
+                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
+                            <i class="fa-solid fa-feather text-amber-400"></i>ヒットフェザー
+                        </h2>
+                        <p class="text-xs text-amber-300/80 mt-0.5">HartDesignフェザーの種類とカラーを選択</p>
+                    </div>
+
+                    <!-- フェザー種類セレクター -->
+                    <div>
+                        <label class="block text-xs font-bold text-amber-400 mb-1.5">フェザーモデル</label>
+                        <div class="grid grid-cols-2 gap-2" id="lure-grid-container">
+                            <!-- JSで動的生成 -->
+                        </div>
+                        <input type="hidden" id="wiz-lure" value="Light Wing">
+                    </div>
+
+                    <!-- カラー選択＆クイックタグ -->
+                    <div class="pt-2">
+                        <label class="block text-xs font-bold text-amber-400 mb-1.5">フェザーカラー</label>
+                        <input type="text" id="wiz-color" placeholder="例: ペレットオリーブ, ブラック, 白" class="wood-input w-full p-3 text-base mb-2">
+                        <div class="flex flex-wrap gap-1.5" id="quick-color-tags">
+                            <button type="button" onclick="setColorQuick('ペレットオリーブ')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">オリーブ</button>
+                            <button type="button" onclick="setColorQuick('ブラック')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ブラック</button>
+                            <button type="button" onclick="setColorQuick('ホワイト')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ホワイト</button>
+                            <button type="button" onclick="setColorQuick('チャート')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">チャート</button>
+                            <button type="button" onclick="setColorQuick('ピンク')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ピンク</button>
+                            <button type="button" onclick="setColorQuick('ダークブラウン')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ブラウン</button>
+                        </div>
+                    </div>
+
+                    <!-- ウエイト・アクション備考 -->
+                    <div>
+                        <label class="block text-xs font-bold text-amber-400 mb-1.5">ウエイト / アクション備考</label>
+                        <input type="text" id="wiz-weight" placeholder="例: 0.17g, 表層デッドスロー, ボトムバンプ" class="wood-input w-full p-3 text-base">
+                    </div>
+                </div>
+
+                <!-- ----------------------------------------- -->
+                <!-- STEP 5: 写真・メモ・最終確認・保存 -->
+                <!-- ----------------------------------------- -->
+                <div id="step-card-5" class="wood-panel p-5 sm:p-6 space-y-4 step-transition hidden">
+                    <div class="border-b border-amber-900/60 pb-3">
+                        <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 5（最終確認）</span>
+                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
+                            <i class="fa-solid fa-camera text-amber-400"></i>写真・メモと保存
+                        </h2>
+                    </div>
+
+                    <!-- 写真添付（カメラ撮影またはギャラリー） -->
+                    <div>
+                        <label class="block text-xs font-bold text-amber-300 mb-1.5">
+                            釣果写真の保存（任意・自動軽量化）
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <label class="cursor-pointer bg-black/40 hover:bg-black/60 border-2 border-dashed border-amber-600 hover:border-amber-400 rounded-xl p-3 flex-1 text-center transition">
+                                <i class="fa-solid fa-camera text-2xl text-amber-400 mb-1 block"></i>
+                                <span class="text-xs text-amber-200 block font-bold">写真を撮影 または 選択</span>
+                                <input type="file" id="wiz-photo-file" accept="image/*" onchange="previewAndCompressPhoto(event)" class="hidden">
+                            </label>
+                            <div id="wiz-photo-preview-wrap" class="w-20 h-20 bg-black/60 border border-amber-500 rounded-xl overflow-hidden relative hidden">
+                                <img id="wiz-photo-preview" src="" alt="写真" class="w-full h-full object-cover">
+                                <button type="button" onclick="removePhoto()" class="absolute top-1 right-1 bg-red-700 text-white w-5 h-5 rounded-full text-xs font-black flex items-center justify-center">×</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- メモ入力 -->
+                    <div>
+                        <label class="block text-xs font-bold text-amber-300 mb-1.5">
+                            メモ・天候・アタリの出方など
+                        </label>
+                        <textarea id="wiz-memo" rows="2" placeholder="例: 晴れ/風あり。カケアガリのフォール中に違和感バイト。" class="wood-input w-full p-3 text-sm"></textarea>
+                    </div>
+
+                    <!-- 記録サマリープレビュー看板 -->
+                    <div class="bg-black/50 border-2 border-amber-700/80 rounded-xl p-3 space-y-1.5 text-xs">
+                        <div class="text-[11px] font-bold text-amber-400 border-b border-amber-900/60 pb-1 flex items-center justify-between">
+                            <span><i class="fa-solid fa-clipboard-check mr-1"></i>入力内容の確認</span>
+                            <span class="text-amber-200" id="summary-datetime">-</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm font-bold">
+                            <span class="text-amber-300" id="summary-location">-</span>
+                            <span class="brass-text text-base" id="summary-species-size">-</span>
+                        </div>
+                        <div class="text-amber-200 flex items-center gap-1">
+                            <i class="fa-solid fa-feather text-amber-400 text-xs"></i>
+                            <span id="summary-lure">-</span>
+                        </div>
+                    </div>
+
+                    <!-- 特大の保存完了ボタン -->
+                    <div class="pt-2">
+                        <button type="button" onclick="submitCatchWizard()" class="brass-btn-primary w-full py-5 rounded-2xl text-2xl font-black flex items-center justify-center gap-3 shadow-2xl cursor-pointer">
+                            <i class="fa-solid fa-floppy-disk text-2xl"></i>
+                            <span>この釣果を保存する！</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ウィザード下部ナビゲーションバー（戻る・進む） -->
+            <div class="pt-3 border-t border-amber-900/60 flex items-center gap-3">
+                <button type="button" id="wiz-prev-btn" onclick="wizardPrevStep()" class="wood-btn-secondary py-4 px-6 rounded-xl font-bold flex items-center gap-2 text-base cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span id="wiz-prev-text">戻る</span>
+                </button>
+                <button type="button" id="wiz-next-btn" onclick="wizardNextStep()" class="brass-btn-primary flex-1 py-4 px-6 rounded-xl font-extrabold flex items-center justify-center gap-2 text-xl shadow-xl cursor-pointer">
+                    <span>次へ進む</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- VIEW 3: 釣果履歴・分析ビュー（独立した画面） -->
+        <!-- ========================================== -->
+        <section id="view-history" class="hidden space-y-4 step-transition py-2">
+
+            <!-- 履歴画面上部ヘッダー（トップへ戻る常設ボタン） -->
+            <div class="wood-plaque p-3 flex items-center justify-between">
+                <button type="button" onclick="closeHistoryToHome()" class="wood-btn-secondary px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-house text-amber-400"></i>
+                    <span>トップに戻る</span>
+                </button>
+                <h2 class="text-xl font-bold font-serif-title brass-text">釣果履歴・分析</h2>
+                <button type="button" onclick="startNewCatchWizard()" class="brass-btn-primary px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer">
+                    <i class="fa-solid fa-plus"></i>記録
+                </button>
+            </div>
+
+            <!-- アナリティクスダッシュボード看板 -->
             <div class="wood-panel p-4">
-                <h3 class="text-sm font-bold text-amber-400 font-serif-title mb-3 flex items-center justify-between border-b border-amber-900/60 pb-1">
-                    <span><i class="fa-solid fa-trophy text-amber-400 mr-1"></i>通算釣果アナリティクス</span>
-                    <span class="text-xs text-amber-300 font-normal" id="stat-total-records">0件の記録</span>
+                <h3 class="text-sm font-bold text-amber-300 font-serif-title mb-3 flex items-center justify-between border-b border-amber-900/60 pb-1.5">
+                    <span><i class="fa-solid fa-trophy text-amber-400 mr-1.5"></i>通算釣果アナリティクス</span>
+                    <span class="text-xs text-amber-300 font-bold" id="hist-stat-records">0件</span>
                 </h3>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg">
-                        <div class="text-xs text-amber-400/80 font-bold">総キャッチ数</div>
-                        <div class="text-2xl font-extrabold brass-text mt-0.5" id="stat-total-count">0</div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                    <div class="bg-black/50 border border-amber-900/80 p-3 rounded-xl">
+                        <div class="text-xs text-amber-400/90 font-bold">総キャッチ数</div>
+                        <div class="text-2xl font-black brass-text mt-0.5" id="hist-stat-count">0</div>
                         <div class="text-[10px] text-amber-300">匹</div>
                     </div>
-                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg">
-                        <div class="text-xs text-amber-400/80 font-bold">最大サイズ</div>
-                        <div class="text-2xl font-extrabold text-amber-200 mt-0.5" id="stat-max-size">0.0</div>
+                    <div class="bg-black/50 border border-amber-900/80 p-3 rounded-xl">
+                        <div class="text-xs text-amber-400/90 font-bold">最大サイズ</div>
+                        <div class="text-2xl font-black text-amber-100 mt-0.5" id="hist-stat-max">0.0</div>
                         <div class="text-[10px] text-amber-300">cm</div>
                     </div>
-                    <div class="bg-black/40 border border-amber-900/80 p-2.5 rounded-lg col-span-2 sm:col-span-2 text-left px-3">
-                        <div class="text-xs text-amber-400/80 font-bold">最多ヒットルアー</div>
-                        <div class="text-base font-bold text-amber-100 truncate mt-1" id="stat-best-lure">-</div>
-                        <div class="text-[10px] text-amber-400 truncate" id="stat-best-spot">メインエリア: -</div>
+                    <div class="bg-black/50 border border-amber-900/80 p-3 rounded-xl col-span-2 text-left px-3.5">
+                        <div class="text-xs text-amber-400/90 font-bold">最多ヒットルアー</div>
+                        <div class="text-sm sm:text-base font-extrabold text-amber-100 truncate mt-1" id="hist-stat-best-lure">-</div>
+                        <div class="text-[11px] text-amber-300 truncate" id="hist-stat-best-spot">メイン釣り場: -</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Filter & Search Controls -->
+            <!-- 絞り込みフィルターバー -->
             <div class="wood-panel p-3 space-y-2">
                 <div class="text-xs font-bold text-amber-300 flex items-center justify-between">
-                    <span><i class="fa-solid fa-filter mr-1"></i>絞り込み検索</span>
-                    <button onclick="resetFilters()" class="text-amber-400 hover:underline">リセット</button>
+                    <span><i class="fa-solid fa-filter mr-1"></i>絞り込み</span>
+                    <button onclick="resetFilters()" class="text-amber-400 hover:underline">すべて表示</button>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
-                    <select id="filter-spot" onchange="renderHistory()" class="wood-input p-2 text-xs">
-                        <option value="">すべてのエリア</option>
+                    <select id="filter-spot" onchange="renderHistoryCards()" class="wood-input p-2.5 text-xs font-bold">
+                        <option value="">全エリア</option>
                     </select>
-                    <select id="filter-lure" onchange="renderHistory()" class="wood-input p-2 text-xs">
-                        <option value="">すべてのルアー</option>
+                    <select id="filter-lure" onchange="renderHistoryCards()" class="wood-input p-2.5 text-xs font-bold">
+                        <option value="">全ルアー</option>
                     </select>
-                    <select id="filter-species" onchange="renderHistory()" class="wood-input p-2 text-xs">
-                        <option value="">すべての魚種</option>
+                    <select id="filter-species" onchange="renderHistoryCards()" class="wood-input p-2.5 text-xs font-bold">
+                        <option value="">全魚種</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Catch Cards List Container -->
-            <div id="history-list" class="space-y-3"></div>
+            <!-- 釣果カードリスト -->
+            <div id="history-cards-container" class="space-y-3 pb-8">
+                <!-- JSでカードを動的生成 -->
+            </div>
 
         </section>
 
-    </main>
+    </div>
 
-    <!-- Photo Modal -->
-    <div id="photo-modal" onclick="closePhotoModal()" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden">
+    <!-- 拡大写真モーダル -->
+    <div id="photo-modal" onclick="closePhotoModal()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 hidden">
         <div class="relative max-w-xl w-full">
-            <button onclick="closePhotoModal()" class="absolute -top-10 right-0 text-white text-2xl font-bold bg-amber-950 px-3 py-1 rounded-full border border-amber-600">×</button>
-            <img id="modal-img" src="" alt="大判表示" class="w-full max-h-[80vh] object-contain rounded-lg border-2 border-amber-500">
+            <button onclick="closePhotoModal()" class="absolute -top-12 right-0 text-white text-xl font-bold bg-amber-950 px-4 py-1.5 rounded-full border border-amber-500">閉じる ×</button>
+            <img id="modal-img" src="" alt="拡大釣果写真" class="w-full max-h-[80vh] object-contain rounded-xl border-2 border-amber-500 shadow-2xl">
         </div>
     </div>
 
-    <!-- Success Toast Modal -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-amber-900 border-2 border-amber-400 text-amber-100 px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50">
-        <i class="fa-solid fa-circle-check text-amber-300 text-xl"></i>
-        <span id="toast-message" class="font-bold text-sm">記録を保存しました！</span>
+    <!-- トースト通知 -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-amber-950 border-2 border-amber-400 text-amber-100 px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none z-50">
+        <i class="fa-solid fa-circle-check text-amber-300 text-2xl"></i>
+        <span id="toast-message" class="font-bold text-base">保存しました！</span>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- ========================================== -->
+    <!-- JavaScript ロジック -->
+    <!-- ========================================== -->
     <script>
+        // HartDesign 定番フェザー一覧
         const HART_DESIGN_LURES = [
             "Light Wing",
-            "Hart Design Feather",
+            "Light Wing LD",
             "Giant Wing",
             "CRAZY",
             "Canvas",
             "Twinkle",
-            "Light Wing LD",
+            "Hart Design Feather",
             "その他フェザー"
         ];
 
+        // 魚種一覧
         const FISH_SPECIES = [
             "ニジマス",
             "ブラウントラウト",
-            "ブルックトラウト",
             "イワナ",
             "ヤマメ",
             "サクラマス",
             "イトウ",
-            "F1",
+            "ブルックトラウト",
+            "ロックトラウト",
             "アルビノ",
+            "F1",
             "その他"
         ];
 
-        const SAMPLE_DATA = [
+        // 初期サンプルデータ
+        const INITIAL_SAMPLES = [
             {
                 id: "sample-1",
-                datetime: new Date(Date.now() - 3600000 * 5).toISOString().slice(0,16),
+                datetime: new Date(Date.now() - 3600000 * 4).toISOString().slice(0,16),
                 location: "朝霞ガーデン",
                 species: "ニジマス",
                 size: "42.5",
@@ -402,96 +718,296 @@
                 lure: "Light Wing",
                 color: "ペレットオリーブ",
                 weight: "0.17g",
-                memo: "表層をゆっくりリトリーブ。着水直後のバイト。",
+                memo: "表層デッドスローリトリーブ。着水直後に猛烈なひったくりバイト！",
                 photo: null
             },
             {
                 id: "sample-2",
-                datetime: new Date(Date.now() - 3600000 * 26).toISOString().slice(0,16),
+                datetime: new Date(Date.now() - 3600000 * 28).toISOString().slice(0,16),
                 location: "すそのフィッシングパーク",
                 species: "ブラウントラウト",
-                size: "51.0",
+                size: "52.0",
                 count: 1,
                 lure: "Giant Wing",
-                color: "ブラックG",
+                color: "ブラック",
                 weight: "0.5g",
-                memo: "ボトムでのバンピング。大物池で強烈なヒキ！",
+                memo: "大物池のボトムバンプ。強烈な首振りに耐えてランディング成功！",
                 photo: null
             }
         ];
 
         let catchRecords = [];
+        let currentStep = 1;
+        const TOTAL_STEPS = 5;
         let currentPhotoBase64 = null;
+        let currentCount = 1;
 
+        // 初期化
         window.onload = function() {
-            initStorage();
-            initFormSelectors();
+            loadStorage();
+            initSpeciesGrid();
+            initLureGrid();
             setNowDateTime();
-            renderHistory();
+            updateAllStats();
         };
 
-        function initStorage() {
+        // LocalStorage 管理
+        function loadStorage() {
             const stored = localStorage.getItem('moff_trout_catches');
             if (stored) {
                 try {
                     catchRecords = JSON.parse(stored);
                 } catch(e) {
-                    catchRecords = SAMPLE_DATA;
+                    catchRecords = INITIAL_SAMPLES;
                 }
             } else {
-                catchRecords = SAMPLE_DATA;
-                saveToStorage();
+                catchRecords = INITIAL_SAMPLES;
+                saveStorage();
             }
         }
 
-        function saveToStorage() {
+        function saveStorage() {
             try {
                 localStorage.setItem('moff_trout_catches', JSON.stringify(catchRecords));
             } catch (err) {
-                showToast('保存容量上限に達しました。古い写真等を整理してください。');
+                showToast('保存容量がいっぱいです。不要な記録や写真を整理してください。');
                 console.error('Storage full:', err);
             }
         }
 
-        function initFormSelectors() {
-            const speciesContainer = document.getElementById('species-selector');
-            speciesContainer.innerHTML = '';
-            FISH_SPECIES.forEach((s, index) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `lure-chip p-2.5 rounded-lg text-sm text-center truncate font-medium ${index === 0 ? 'active' : ''}`;
-                btn.innerText = s;
-                btn.onclick = () => {
-                    document.querySelectorAll('#species-selector .lure-chip').forEach(c => c.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('field-species').value = s;
-                };
-                speciesContainer.appendChild(btn);
-            });
+        // ==========================================
+        // 画面切り替え制御 (Home / Wizard / History)
+        // ==========================================
+        function showView(viewId) {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-wizard').classList.add('hidden');
+            document.getElementById('view-wizard').classList.remove('flex');
+            document.getElementById('view-history').classList.add('hidden');
 
-            const lureContainer = document.getElementById('lure-selector');
-            lureContainer.innerHTML = '';
-            HART_DESIGN_LURES.forEach((l, index) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = `lure-chip p-2 rounded-lg text-xs font-bold text-center truncate ${index === 0 ? 'active' : ''}`;
-                btn.innerHTML = `<i class="fa-solid fa-feather mr-1 opacity-70"></i>${escapeHtml(l)}`;
-                btn.onclick = () => {
-                    document.querySelectorAll('#lure-selector .lure-chip').forEach(c => c.classList.remove('active'));
-                    btn.classList.add('active');
-                    document.getElementById('field-lure').value = l;
-                };
-                lureContainer.appendChild(btn);
-            });
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            if (viewId === 'view-wizard') {
+                target.classList.add('flex');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function startNewCatchWizard() {
+            resetWizardForm();
+            currentStep = 1;
+            updateWizardStepUI();
+            showView('view-wizard');
+        }
+
+        function cancelWizardToHome() {
+            if (confirm('記録入力を中断してホームに戻りますか？')) {
+                showView('view-home');
+                updateAllStats();
+            }
+        }
+
+        function openHistoryView() {
+            showView('view-history');
+            renderHistoryCards();
+        }
+
+        function closeHistoryToHome() {
+            showView('view-home');
+            updateAllStats();
+        }
+
+        // ==========================================
+        // ウィザード ステップ制御
+        // ==========================================
+        function wizardNextStep() {
+            if (currentStep === 1) {
+                const loc = document.getElementById('wiz-location').value.trim();
+                if (!loc) {
+                    showToast('釣り場名を入力または選択してください');
+                    document.getElementById('wiz-location').focus();
+                    return;
+                }
+            }
+
+            if (currentStep < TOTAL_STEPS) {
+                currentStep++;
+                updateWizardStepUI();
+            }
+        }
+
+        function wizardPrevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateWizardStepUI();
+            } else {
+                cancelWizardToHome();
+            }
+        }
+
+        function updateWizardStepUI() {
+            // プログレスバーの更新
+            for (let i = 1; i <= TOTAL_STEPS; i++) {
+                const card = document.getElementById(`step-card-${i}`);
+                const prog = document.getElementById(`prog-${i}`);
+                if (i === currentStep) {
+                    card.classList.remove('hidden');
+                    prog.className = 'h-2 rounded-full bg-amber-400 shadow-md';
+                } else if (i < currentStep) {
+                    card.classList.add('hidden');
+                    prog.className = 'h-2 rounded-full bg-amber-600';
+                } else {
+                    card.classList.add('hidden');
+                    prog.className = 'h-2 rounded-full bg-amber-950';
+                }
+            }
+
+            // ステップインジケーター文字
+            document.getElementById('step-number-indicator').innerText = `Step ${currentStep} / ${TOTAL_STEPS}`;
+
+            // 戻るボタンの表示制御
+            const prevText = document.getElementById('wiz-prev-text');
+            if (currentStep === 1) {
+                prevText.innerText = "メニューへ";
+            } else {
+                prevText.innerText = "戻る";
+            }
+
+            // 次へボタンの表示制御（最終ステップでは非表示）
+            const nextBtn = document.getElementById('wiz-next-btn');
+            if (currentStep === TOTAL_STEPS) {
+                nextBtn.classList.add('hidden');
+                updateSummaryPreview();
+            } else {
+                nextBtn.classList.remove('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateSummaryPreview() {
+            const dt = document.getElementById('wiz-datetime').value;
+            const loc = document.getElementById('wiz-location').value.trim() || '釣り場未設定';
+            const sp = document.getElementById('wiz-species').value;
+            const sz = document.getElementById('wiz-size').value;
+            const lure = document.getElementById('wiz-lure').value;
+            const col = document.getElementById('wiz-color').value.trim();
+            const wt = document.getElementById('wiz-weight').value.trim();
+
+            const dateObj = new Date(dt);
+            const dateStr = !isNaN(dateObj) 
+                ? `${dateObj.getMonth()+1}/${dateObj.getDate()} ${String(dateObj.getHours()).padStart(2,'0')}:${String(dateObj.getMinutes()).padStart(2,'0')}`
+                : dt;
+
+            document.getElementById('summary-datetime').innerText = dateStr;
+            document.getElementById('summary-location').innerText = loc;
+            
+            const sizeStr = sz ? `${sz} cm` : '計測なし';
+            const countStr = currentCount > 1 ? ` (${currentCount}匹)` : '';
+            document.getElementById('summary-species-size').innerText = `${sp} ${sizeStr}${countStr}`;
+
+            let lureDetail = lure;
+            if (col) lureDetail += ` [${col}]`;
+            if (wt) lureDetail += ` (${wt})`;
+            document.getElementById('summary-lure').innerText = lureDetail;
+        }
+
+        // ==========================================
+        // ステップ1: 日時・釣り場ヘルパー
+        // ==========================================
         function setNowDateTime() {
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('field-datetime').value = now.toISOString().slice(0,16);
+            document.getElementById('wiz-datetime').value = now.toISOString().slice(0,16);
         }
 
-        // Compress image before saving to avoid filling localStorage limit
+        function selectSpotQuick(spotName) {
+            document.getElementById('wiz-location').value = spotName;
+            document.querySelectorAll('#quick-spot-tags .quick-tag').forEach(tag => {
+                if (tag.innerText.includes(spotName)) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+        }
+
+        // ==========================================
+        // ステップ2: 魚種セレクター
+        // ==========================================
+        function initSpeciesGrid() {
+            const container = document.getElementById('species-grid-container');
+            container.innerHTML = '';
+            FISH_SPECIES.forEach((name, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `big-select-card py-4 px-3 rounded-xl text-center flex flex-col items-center justify-center gap-1.5 ${index === 0 ? 'active' : ''}`;
+                btn.innerHTML = `
+                    <i class="fa-solid fa-fish text-xl text-amber-400"></i>
+                    <span class="text-base font-bold">${escapeHtml(name)}</span>
+                `;
+                btn.onclick = () => {
+                    document.querySelectorAll('#species-grid-container .big-select-card').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('wiz-species').value = name;
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // ==========================================
+        // ステップ3: サイズ・匹数ヘルパー
+        // ==========================================
+        function adjustSize(delta) {
+            const input = document.getElementById('wiz-size');
+            let val = parseFloat(input.value) || 30.0;
+            val = Math.max(5, Math.min(150, val + delta));
+            input.value = val.toFixed(1);
+        }
+
+        function setSizeQuick(size) {
+            document.getElementById('wiz-size').value = size.toFixed(1);
+        }
+
+        function adjustCount(delta) {
+            currentCount = Math.max(1, Math.min(200, currentCount + delta));
+            document.getElementById('wiz-count-display').innerText = currentCount;
+        }
+
+        function setCountReset() {
+            currentCount = 1;
+            document.getElementById('wiz-count-display').innerText = currentCount;
+        }
+
+        // ==========================================
+        // ステップ4: ルアー・カラーセレクター
+        // ==========================================
+        function initLureGrid() {
+            const container = document.getElementById('lure-grid-container');
+            container.innerHTML = '';
+            HART_DESIGN_LURES.forEach((lure, index) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `big-select-card py-3.5 px-3 rounded-xl text-center flex items-center justify-center gap-2 ${index === 0 ? 'active' : ''}`;
+                btn.innerHTML = `
+                    <i class="fa-solid fa-feather text-amber-400 text-sm"></i>
+                    <span class="text-sm font-bold truncate">${escapeHtml(lure)}</span>
+                `;
+                btn.onclick = () => {
+                    document.querySelectorAll('#lure-grid-container .big-select-card').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById('wiz-lure').value = lure;
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function setColorQuick(colorName) {
+            document.getElementById('wiz-color').value = colorName;
+        }
+
+        // ==========================================
+        // ステップ5: 写真圧縮・登録保存
+        // ==========================================
         function previewAndCompressPhoto(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -523,8 +1039,8 @@
                     ctx.drawImage(img, 0, 0, width, height);
 
                     currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7);
-                    document.getElementById('photo-preview').src = currentPhotoBase64;
-                    document.getElementById('photo-preview-container').classList.remove('hidden');
+                    document.getElementById('wiz-photo-preview').src = currentPhotoBase64;
+                    document.getElementById('wiz-photo-preview-wrap').classList.remove('hidden');
                 };
                 img.src = e.target.result;
             };
@@ -533,68 +1049,150 @@
 
         function removePhoto() {
             currentPhotoBase64 = null;
-            document.getElementById('field-photo').value = '';
-            document.getElementById('photo-preview').src = '';
-            document.getElementById('photo-preview-container').classList.add('hidden');
+            document.getElementById('wiz-photo-file').value = '';
+            document.getElementById('wiz-photo-preview').src = '';
+            document.getElementById('wiz-photo-preview-wrap').classList.add('hidden');
         }
 
-        function openPhotoModal(src) {
-            document.getElementById('modal-img').src = src;
-            document.getElementById('photo-modal').classList.remove('hidden');
+        function resetWizardForm() {
+            setNowDateTime();
+            document.getElementById('wiz-location').value = '';
+            document.getElementById('wiz-species').value = 'ニジマス';
+            document.getElementById('wiz-size').value = '';
+            currentCount = 1;
+            document.getElementById('wiz-count-display').innerText = '1';
+            document.getElementById('wiz-lure').value = 'Light Wing';
+            document.getElementById('wiz-color').value = '';
+            document.getElementById('wiz-weight').value = '';
+            document.getElementById('wiz-memo').value = '';
+            removePhoto();
+            
+            // クイックボタンなどのアクティブ状態リセット
+            initSpeciesGrid();
+            initLureGrid();
+            document.querySelectorAll('#quick-spot-tags .quick-tag').forEach(t => t.classList.remove('active'));
         }
 
-        function closePhotoModal() {
-            document.getElementById('photo-modal').classList.add('hidden');
-        }
-
-        function saveCatch(e) {
-            e.preventDefault();
+        function submitCatchWizard() {
+            const loc = document.getElementById('wiz-location').value.trim() || '釣り場未設定';
+            const szInput = document.getElementById('wiz-size').value;
+            const sizeVal = szInput ? parseFloat(szInput).toFixed(1) : '-';
 
             const record = {
                 id: 'cat-' + Date.now(),
-                datetime: document.getElementById('field-datetime').value,
-                location: document.getElementById('field-location').value.trim(),
-                species: document.getElementById('field-species').value,
-                size: document.getElementById('field-size').value ? parseFloat(document.getElementById('field-size').value).toFixed(1) : '-',
-                count: parseInt(document.getElementById('field-count').value) || 1,
-                lure: document.getElementById('field-lure').value,
-                color: document.getElementById('field-color').value.trim(),
-                weight: document.getElementById('field-weight').value.trim(),
-                memo: document.getElementById('field-memo').value.trim(),
+                datetime: document.getElementById('wiz-datetime').value,
+                location: loc,
+                species: document.getElementById('wiz-species').value,
+                size: sizeVal,
+                count: currentCount,
+                lure: document.getElementById('wiz-lure').value,
+                color: document.getElementById('wiz-color').value.trim(),
+                weight: document.getElementById('wiz-weight').value.trim(),
+                memo: document.getElementById('wiz-memo').value.trim(),
                 photo: currentPhotoBase64
             };
 
             catchRecords.unshift(record);
-            saveToStorage();
+            saveStorage();
 
             showToast('釣果を記録しました！');
-            document.getElementById('field-size').value = '';
-            document.getElementById('field-memo').value = '';
-            removePhoto();
-            renderHistory();
+            updateAllStats();
+            
+            // 記録完了後は履歴ビューに移動して確認できるようにする
+            openHistoryView();
         }
 
-        function switchTab(tab) {
-            const logTab = document.getElementById('tab-log');
-            const historyTab = document.getElementById('tab-history');
-            const btnLog = document.getElementById('tab-btn-log');
-            const btnHistory = document.getElementById('tab-btn-history');
+        // ==========================================
+        // 統計ダッシュボード更新
+        // ==========================================
+        function updateAllStats() {
+            let totalFish = 0;
+            let maxSize = 0;
+            const lureCounts = {};
+            const spotCounts = {};
 
-            if (tab === 'log') {
-                logTab.classList.remove('hidden');
-                historyTab.classList.add('hidden');
-                btnLog.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500";
-                btnHistory.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200";
-            } else {
-                logTab.classList.add('hidden');
-                historyTab.classList.remove('hidden');
-                btnHistory.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all bg-amber-800 text-amber-100 shadow border border-amber-500";
-                btnLog.className = "py-3 text-lg font-bold rounded-lg flex items-center justify-center gap-2 transition-all text-amber-400 hover:text-amber-200";
-                renderHistory();
+            catchRecords.forEach(r => {
+                const c = parseInt(r.count) || 1;
+                totalFish += c;
+                
+                const sz = parseFloat(r.size);
+                if (!isNaN(sz) && sz > maxSize) {
+                    maxSize = sz;
+                }
+
+                if (r.lure) {
+                    lureCounts[r.lure] = (lureCounts[r.lure] || 0) + c;
+                }
+
+                if (r.location) {
+                    spotCounts[r.location] = (spotCounts[r.location] || 0) + 1;
+                }
+            });
+
+            // ホーム用ステータス
+            document.getElementById('home-stat-count').innerHTML = `${totalFish}<span class="text-xs font-normal text-amber-200 ml-0.5">匹</span>`;
+            document.getElementById('home-stat-max').innerHTML = `${maxSize > 0 ? maxSize.toFixed(1) : '0.0'}<span class="text-xs font-normal text-amber-200 ml-0.5">cm</span>`;
+            document.getElementById('home-stat-records').innerHTML = `${catchRecords.length}<span class="text-xs font-normal text-amber-200 ml-0.5">件</span>`;
+
+            // 履歴画面用ステータス
+            document.getElementById('hist-stat-records').innerText = `${catchRecords.length}件の記録`;
+            document.getElementById('hist-stat-count').innerText = totalFish;
+            document.getElementById('hist-stat-max').innerText = maxSize > 0 ? maxSize.toFixed(1) : '0.0';
+
+            let topLure = '-';
+            let maxLureCnt = 0;
+            for (let l in lureCounts) {
+                if (lureCounts[l] > maxLureCnt) {
+                    maxLureCnt = lureCounts[l];
+                    topLure = l;
+                }
             }
+            document.getElementById('hist-stat-best-lure').innerText = topLure !== '-' ? `${topLure} (${maxLureCnt}匹)` : '-';
+
+            let topSpot = '-';
+            let maxSpotCnt = 0;
+            for (let s in spotCounts) {
+                if (spotCounts[s] > maxSpotCnt) {
+                    maxSpotCnt = spotCounts[s];
+                    topSpot = s;
+                }
+            }
+            document.getElementById('hist-stat-best-spot').innerText = topSpot !== '-' ? `メインエリア: ${topSpot}` : 'メインエリア: -';
         }
 
-        function renderHistory() {
+        // ==========================================
+        // 履歴ビュー レンダリング＆フィルター
+        // ==========================================
+        function populateFilterDropdowns() {
+            const spotSelect = document.getElementById('filter-spot');
+            const lureSelect = document.getElementById('filter-lure');
+            const speciesSelect = document.getElementById('filter-species');
+
+            const currSpot = spotSelect.value;
+            const currLure = lureSelect.value;
+            const currSpecies = speciesSelect.value;
+
+            const spots = [...new Set(catchRecords.map(r => r.location).filter(Boolean))];
+            const lures = [...new Set(catchRecords.map(r => r.lure).filter(Boolean))];
+            const species = [...new Set(catchRecords.map(r => r.species).filter(Boolean))];
+
+            spotSelect.innerHTML = '<option value="">全エリア</option>' + spots.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+            lureSelect.innerHTML = '<option value="">全ルアー</option>' + lures.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
+            speciesSelect.innerHTML = '<option value="">全魚種</option>' + species.map(sp => `<option value="${escapeHtml(sp)}">${escapeHtml(sp)}</option>`).join('');
+
+            spotSelect.value = currSpot;
+            lureSelect.value = currLure;
+            speciesSelect.value = currSpecies;
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-spot').value = '';
+            document.getElementById('filter-lure').value = '';
+            document.getElementById('filter-species').value = '';
+            renderHistoryCards();
+        }
+
+        function renderHistoryCards() {
             populateFilterDropdowns();
 
             const spotFilter = document.getElementById('filter-spot').value;
@@ -608,9 +1206,9 @@
                 return true;
             });
 
-            updateStats();
+            updateAllStats();
 
-            const container = document.getElementById('history-list');
+            const container = document.getElementById('history-cards-container');
             container.innerHTML = '';
 
             if (filtered.length === 0) {
@@ -633,56 +1231,56 @@
                     : item.datetime;
 
                 const countBadge = item.count > 1 
-                    ? `<span class="ml-1 bg-amber-800 text-amber-100 text-xs px-2 py-0.5 rounded-full font-bold">${item.count}匹</span>` 
+                    ? `<span class="ml-1.5 bg-amber-800 text-amber-100 text-xs px-2.5 py-0.5 rounded-full font-black border border-amber-500">${item.count}匹</span>` 
                     : '';
 
                 const photoHtml = item.photo ? `
-                    <div class="sm:col-span-1 h-32 rounded-lg overflow-hidden border border-amber-800 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
+                    <div class="sm:col-span-1 h-36 rounded-xl overflow-hidden border border-amber-700 bg-black cursor-pointer hover:opacity-90" onclick="openPhotoModal('${item.photo}')">
                         <img src="${item.photo}" alt="釣果写真" class="w-full h-full object-cover">
                     </div>
                 ` : '';
 
                 const detailSpecHtml = (item.color || item.weight) ? `
-                    <div class="text-amber-400/80 pl-4">
-                        ${item.color ? `カラー: ${escapeHtml(item.color)} ` : ''}
+                    <div class="text-amber-300/90 text-xs pl-3">
+                        ${item.color ? `カラー: <span class="font-bold text-amber-100">${escapeHtml(item.color)}</span> ` : ''}
                         ${item.weight ? `| ${escapeHtml(item.weight)}` : ''}
                     </div>
                 ` : '';
 
                 const memoHtml = item.memo ? `
-                    <p class="text-xs text-amber-200/90 bg-amber-950/40 p-2 rounded border border-amber-900/40 mt-2">
-                        <i class="fa-solid fa-comment-dots text-amber-500 mr-1"></i>${escapeHtml(item.memo)}
+                    <p class="text-xs text-amber-200/95 bg-black/40 p-2.5 rounded-lg border border-amber-900/50 mt-1.5 leading-relaxed">
+                        <i class="fa-solid fa-comment-dots text-amber-400 mr-1.5"></i>${escapeHtml(item.memo)}
                     </p>
                 ` : '';
 
                 card.innerHTML = `
                     <div class="flex items-start justify-between border-b border-amber-900/60 pb-2">
                         <div>
-                            <span class="text-xs text-amber-400/80 font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
+                            <span class="text-xs text-amber-400 font-bold"><i class="fa-regular fa-clock mr-1"></i>${dateStr}</span>
                             <h3 class="text-lg font-bold text-amber-100 font-serif-title flex items-center gap-2 mt-0.5">
                                 <i class="fa-solid fa-location-dot text-amber-400 text-sm"></i>
                                 <span>${escapeHtml(item.location || '釣り場未設定')}</span>
                             </h3>
                         </div>
                         <div class="text-right">
-                            <span class="bg-amber-950 text-amber-300 border border-amber-700 text-xs px-2.5 py-1 rounded-full font-bold">
+                            <span class="bg-amber-950 text-amber-200 border border-amber-600 text-xs px-3 py-1 rounded-full font-bold shadow">
                                 ${escapeHtml(item.species)}
                             </span>
                             ${countBadge}
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 ${item.photo ? 'sm:grid-cols-3' : ''} gap-3">
+                    <div class="grid grid-cols-1 ${item.photo ? 'sm:grid-cols-3' : ''} gap-3 items-center">
                         ${photoHtml}
                         
                         <div class="${item.photo ? 'sm:col-span-2' : ''} space-y-2">
                             <div class="flex items-baseline gap-2">
-                                <span class="text-xs text-amber-400">サイズ:</span>
-                                <span class="text-2xl font-extrabold brass-text">${item.size !== '-' ? item.size + ' cm' : '計測なし'}</span>
+                                <span class="text-xs text-amber-400 font-bold">サイズ:</span>
+                                <span class="text-3xl font-black brass-text">${item.size !== '-' ? item.size + ' cm' : '計測なし'}</span>
                             </div>
 
-                            <div class="bg-black/30 p-2.5 rounded-lg border border-amber-950 text-xs space-y-1">
-                                <div class="text-amber-200 font-bold flex items-center gap-1">
+                            <div class="bg-black/40 p-2.5 rounded-xl border border-amber-950 text-xs space-y-1">
+                                <div class="text-amber-200 font-bold flex items-center gap-1.5">
                                     <i class="fa-solid fa-feather text-amber-400"></i>
                                     <span>ルアー: ${escapeHtml(item.lure)}</span>
                                 </div>
@@ -693,9 +1291,9 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-end pt-1 border-t border-amber-900/40">
-                        <button onclick="deleteRecord('${item.id}')" class="text-xs text-red-400 hover:text-red-300 px-2 py-1 rounded hover:bg-red-950/40 transition">
-                            <i class="fa-solid fa-trash-can mr-1"></i>削除
+                    <div class="flex justify-end pt-1.5 border-t border-amber-900/40">
+                        <button onclick="deleteRecord('${item.id}')" class="text-xs text-red-400 hover:text-red-300 px-3 py-1.5 rounded-lg hover:bg-red-950/50 transition font-bold">
+                            <i class="fa-solid fa-trash-can mr-1"></i>記録を削除
                         </button>
                     </div>
                 `;
@@ -704,91 +1302,25 @@
             });
         }
 
-        function updateStats() {
-            document.getElementById('stat-total-records').innerText = `${catchRecords.length}件の記録`;
-            
-            let totalFish = 0;
-            let maxSize = 0;
-            const lureCounts = {};
-            const spotCounts = {};
-
-            catchRecords.forEach(r => {
-                totalFish += (parseInt(r.count) || 1);
-                
-                const sz = parseFloat(r.size);
-                if (!isNaN(sz) && sz > maxSize) {
-                    maxSize = sz;
-                }
-
-                if (r.lure) {
-                    lureCounts[r.lure] = (lureCounts[r.lure] || 0) + (parseInt(r.count) || 1);
-                }
-
-                if (r.location) {
-                    spotCounts[r.location] = (spotCounts[r.location] || 0) + 1;
-                }
-            });
-
-            document.getElementById('stat-total-count').innerText = totalFish;
-            document.getElementById('stat-max-size').innerText = maxSize > 0 ? maxSize.toFixed(1) : '-';
-
-            let topLure = '-';
-            let maxLureCnt = 0;
-            for (let l in lureCounts) {
-                if (lureCounts[l] > maxLureCnt) {
-                    maxLureCnt = lureCounts[l];
-                    topLure = l;
-                }
-            }
-            document.getElementById('stat-best-lure').innerText = topLure !== '-' ? `${topLure} (${maxLureCnt}匹)` : '-';
-
-            let topSpot = '-';
-            let maxSpotCnt = 0;
-            for (let s in spotCounts) {
-                if (spotCounts[s] > maxSpotCnt) {
-                    maxSpotCnt = spotCounts[s];
-                    topSpot = s;
-                }
-            }
-            document.getElementById('stat-best-spot').innerText = topSpot !== '-' ? `メイン: ${topSpot}` : 'メインエリア: -';
-        }
-
-        function populateFilterDropdowns() {
-            const spotSelect = document.getElementById('filter-spot');
-            const lureSelect = document.getElementById('filter-lure');
-            const speciesSelect = document.getElementById('filter-species');
-
-            const currSpot = spotSelect.value;
-            const currLure = lureSelect.value;
-            const currSpecies = speciesSelect.value;
-
-            const spots = [...new Set(catchRecords.map(r => r.location).filter(Boolean))];
-            const lures = [...new Set(catchRecords.map(r => r.lure).filter(Boolean))];
-            const species = [...new Set(catchRecords.map(r => r.species).filter(Boolean))];
-
-            spotSelect.innerHTML = '<option value="">すべてのエリア</option>' + spots.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
-            lureSelect.innerHTML = '<option value="">すべてのルアー</option>' + lures.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
-            speciesSelect.innerHTML = '<option value="">すべての魚種</option>' + species.map(sp => `<option value="${escapeHtml(sp)}">${escapeHtml(sp)}</option>`).join('');
-
-            spotSelect.value = currSpot;
-            lureSelect.value = currLure;
-            speciesSelect.value = currSpecies;
-        }
-
-        function resetFilters() {
-            document.getElementById('filter-spot').value = '';
-            document.getElementById('filter-lure').value = '';
-            document.getElementById('filter-species').value = '';
-            renderHistory();
-        }
-
         function deleteRecord(id) {
             if (confirm('この釣果記録を削除してもよろしいですか？')) {
                 catchRecords = catchRecords.filter(r => r.id !== id);
-                saveToStorage();
-                renderHistory();
+                saveStorage();
+                renderHistoryCards();
                 showToast('記録を削除しました');
             }
+        }
+
+        // ==========================================
+        // ユーティリティ・モーダル・エクスポート
+        // ==========================================
+        function openPhotoModal(src) {
+            document.getElementById('modal-img').src = src;
+            document.getElementById('photo-modal').classList.remove('hidden');
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
         }
 
         function exportData() {
@@ -811,8 +1343,11 @@
                     const imported = JSON.parse(e.target.result);
                     if (Array.isArray(imported)) {
                         catchRecords = imported;
-                        saveToStorage();
-                        renderHistory();
+                        saveStorage();
+                        updateAllStats();
+                        if (!document.getElementById('view-history').classList.contains('hidden')) {
+                            renderHistoryCards();
+                        }
                         showToast(`${imported.length}件の記録を読み込みました！`);
                     } else {
                         alert('不正なデータ形式です。');
