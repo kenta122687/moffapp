@@ -173,6 +173,7 @@
             color: #e5cdad;
             transition: all 0.15s ease;
             user-select: none;
+            cursor: pointer;
         }
 
         .quick-tag:active, .quick-tag.active {
@@ -180,6 +181,7 @@
             border-color: #ffd700;
             color: #fff;
             font-weight: bold;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
 
         /* カスタムスクロールバー */
@@ -213,10 +215,10 @@
                 <div class="absolute bottom-2.5 left-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
                 <div class="absolute bottom-2.5 right-2.5 w-3 h-3 rounded-full bg-amber-400 border border-amber-900 shadow"></div>
 
-                <!-- HartDesign エンブレム -->
+                <!-- HartDesign 公式マスターエンブレム -->
                 <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 border border-amber-500/80 px-4 py-1.5 rounded-full shadow-inner mb-3">
                     <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
-                    <span class="text-xs font-black tracking-widest text-amber-200 uppercase">HartDesign Official Log</span>
+                    <span class="text-xs font-black tracking-widest text-amber-200 uppercase">HartDesign Official Master Log</span>
                     <i class="fa-solid fa-feather-pointed text-amber-300 text-sm"></i>
                 </div>
 
@@ -225,7 +227,7 @@
                     Moff隊 釣果記録帳
                 </h1>
                 <p class="text-xs sm:text-sm text-amber-300/80 font-bold tracking-widest">
-                    エリアトラウト・フェザーフィッシング専用
+                    全HartDesign製品・公式カラー完全対応
                 </p>
 
                 <!-- ミニ通算ステータス（控えめに品よく表示） -->
@@ -259,7 +261,7 @@
                                 釣果を記録する
                             </span>
                             <span class="block text-xs sm:text-sm text-amber-900 font-bold mt-0.5">
-                                魚種・サイズ・ヒットフェザーを1分で記録
+                                全フェザー＆公式カラー対応・1分で記録
                             </span>
                         </div>
                     </div>
@@ -470,44 +472,54 @@
                 </div>
 
                 <!-- ----------------------------------------- -->
-                <!-- STEP 4: HartDesignフェザー＆カラー・ウエイト -->
+                <!-- STEP 4: HartDesign公式フェザー＆公式カラー・ウエイト -->
                 <!-- ----------------------------------------- -->
                 <div id="step-card-4" class="wood-panel p-5 sm:p-6 space-y-4 step-transition hidden">
                     <div class="border-b border-amber-900/60 pb-3">
-                        <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 4</span>
-                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2">
-                            <i class="fa-solid fa-feather text-amber-400"></i>ヒットフェザー
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-amber-400 tracking-wider">STEP 4</span>
+                            <span class="text-[10px] bg-amber-900/80 border border-amber-500 text-amber-200 px-2.5 py-0.5 rounded-full font-bold">HartDesign 公式連動</span>
+                        </div>
+                        <h2 class="text-2xl font-bold font-serif-title text-amber-100 flex items-center gap-2 mt-0.5">
+                            <i class="fa-solid fa-feather text-amber-400"></i>ヒットフェザー選択
                         </h2>
-                        <p class="text-xs text-amber-300/80 mt-0.5">HartDesignフェザーの種類とカラーを選択</p>
+                        <p class="text-xs text-amber-300/80 mt-0.5">ルアーを選ぶと対応するウエイトと公式カラーが自動表示されます</p>
                     </div>
 
-                    <!-- フェザー種類セレクター -->
+                    <!-- 1. フェザーモデル選択（全HartDesign製品） -->
                     <div>
-                        <label class="block text-xs font-bold text-amber-400 mb-1.5">フェザーモデル</label>
-                        <div class="grid grid-cols-2 gap-2" id="lure-grid-container">
+                        <label class="block text-xs font-bold text-amber-300 mb-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-tag text-amber-400 mr-1"></i>1. フェザーモデル</span>
+                            <span class="text-[11px] text-amber-400" id="selected-lure-name-badge">選択中: ライトウイング</span>
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-[30vh] overflow-y-auto pr-1" id="lure-grid-container">
                             <!-- JSで動的生成 -->
                         </div>
-                        <input type="hidden" id="wiz-lure" value="Light Wing">
+                        <input type="hidden" id="wiz-lure" value="ライトウイング">
                     </div>
 
-                    <!-- カラー選択＆クイックタグ -->
-                    <div class="pt-2">
-                        <label class="block text-xs font-bold text-amber-400 mb-1.5">フェザーカラー</label>
-                        <input type="text" id="wiz-color" placeholder="例: ペレットオリーブ, ブラック, 白" class="wood-input w-full p-3 text-base mb-2">
-                        <div class="flex flex-wrap gap-1.5" id="quick-color-tags">
-                            <button type="button" onclick="setColorQuick('ペレットオリーブ')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">オリーブ</button>
-                            <button type="button" onclick="setColorQuick('ブラック')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ブラック</button>
-                            <button type="button" onclick="setColorQuick('ホワイト')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ホワイト</button>
-                            <button type="button" onclick="setColorQuick('チャート')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">チャート</button>
-                            <button type="button" onclick="setColorQuick('ピンク')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ピンク</button>
-                            <button type="button" onclick="setColorQuick('ダークブラウン')" class="quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold">ブラウン</button>
+                    <!-- 2. 公式ウエイト選択（連動ボタン＋自由入力） -->
+                    <div class="bg-black/30 p-3 rounded-xl border border-amber-900/60">
+                        <label class="block text-xs font-bold text-amber-300 mb-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-weight-hanging text-amber-400 mr-1"></i>2. ウエイト (g)</span>
+                            <span class="text-[10px] text-amber-400/80">タップで選択</span>
+                        </label>
+                        <div class="flex flex-wrap gap-1.5 mb-2" id="lure-weight-container">
+                            <!-- JSで動的生成 -->
                         </div>
+                        <input type="text" id="wiz-weight" placeholder="ウエイトまたはアクション備考" class="wood-input w-full p-2.5 text-sm">
                     </div>
 
-                    <!-- ウエイト・アクション備考 -->
-                    <div>
-                        <label class="block text-xs font-bold text-amber-400 mb-1.5">ウエイト / アクション備考</label>
-                        <input type="text" id="wiz-weight" placeholder="例: 0.17g, 表層デッドスロー, ボトムバンプ" class="wood-input w-full p-3 text-base">
+                    <!-- 3. 公式カラー選択（連動カラータグ＋自由入力） -->
+                    <div class="bg-black/30 p-3 rounded-xl border border-amber-900/60">
+                        <label class="block text-xs font-bold text-amber-300 mb-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-palette text-amber-400 mr-1"></i>3. フェザーカラー</span>
+                            <span class="text-[10px] text-amber-400/80" id="color-count-badge">タップで選択</span>
+                        </label>
+                        <div class="flex flex-wrap gap-1.5 max-h-[22vh] overflow-y-auto pr-1 mb-2" id="lure-color-container">
+                            <!-- JSで動的生成 -->
+                        </div>
+                        <input type="text" id="wiz-color" placeholder="選択したカラーまたは自由入力" class="wood-input w-full p-2.5 text-sm">
                     </div>
                 </div>
 
@@ -545,11 +557,11 @@
                         <label class="block text-xs font-bold text-amber-300 mb-1.5">
                             メモ・天候・アタリの出方など
                         </label>
-                        <textarea id="wiz-memo" rows="2" placeholder="例: 晴れ/風あり。カケアガリのフォール中に違和感バイト。" class="wood-input w-full p-3 text-sm"></textarea>
+                        <textarea id="wiz-memo" rows="2" placeholder="例: 晴れ/水温11℃。カケアガリのフォール中に違和感バイト。" class="wood-input w-full p-3 text-sm"></textarea>
                     </div>
 
                     <!-- 記録サマリープレビュー看板 -->
-                    <div class="bg-black/50 border-2 border-amber-700/80 rounded-xl p-3 space-y-1.5 text-xs">
+                    <div class="bg-black/50 border-2 border-amber-700/80 rounded-xl p-3.5 space-y-1.5 text-xs">
                         <div class="text-[11px] font-bold text-amber-400 border-b border-amber-900/60 pb-1 flex items-center justify-between">
                             <span><i class="fa-solid fa-clipboard-check mr-1"></i>入力内容の確認</span>
                             <span class="text-amber-200" id="summary-datetime">-</span>
@@ -558,7 +570,7 @@
                             <span class="text-amber-300" id="summary-location">-</span>
                             <span class="brass-text text-base" id="summary-species-size">-</span>
                         </div>
-                        <div class="text-amber-200 flex items-center gap-1">
+                        <div class="text-amber-100 flex items-center gap-1.5 font-bold pt-0.5">
                             <i class="fa-solid fa-feather text-amber-400 text-xs"></i>
                             <span id="summary-lure">-</span>
                         </div>
@@ -679,17 +691,80 @@
     <!-- JavaScript ロジック -->
     <!-- ========================================== -->
     <script>
-        // HartDesign 定番フェザー一覧
-        const HART_DESIGN_LURES = [
-            "Light Wing",
-            "Light Wing LD",
-            "Giant Wing",
-            "CRAZY",
-            "Canvas",
-            "Twinkle",
-            "Hart Design Feather",
-            "その他フェザー"
-        ];
+        // ==========================================
+        // HartDesign 公式全商品マスターデータベース
+        // (Googleスプレッドシートより完全抽出・連動)
+        // ==========================================
+        const HART_DESIGN_MASTER = {
+            "ライトウイング": {
+                weights: ["0.3g"],
+                colors: ["ホワイト", "サーモンピンク", "イエロー", "ベージュ", "ブラック", "ライトオリーブ", "ダークオリーブ", "ダークブラウン", "マリモグリーン", "レモンチャート", "ライムチャート", "ゴールドバリアント", "ピーチ", "夕張メロン", "フューシャピンク", "レッド", "パープル", "ラスティブラウン", "オレンジ", "Keiブルー"]
+            },
+            "ライトウイングLD": {
+                weights: ["0.45g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "イエロー", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "グリズリー", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "フューシャピンク", "レッド", "パープル"]
+            },
+            "ライトウイングLDPLUS": {
+                weights: ["0.65g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "イエロー", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "グリズリー", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "フューシャピンク", "レッド", "パープル"]
+            },
+            "ライトウイングJH": {
+                weights: ["0.5g", "0.9g", "1.5g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "イエロー", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "グリズリー", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "フューシャピンク", "レッド", "パープル"]
+            },
+            "ライトウイングmini": {
+                weights: ["0.3g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "イエロー", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "フューシャピンク", "レッド", "パープル"]
+            },
+            "ライトウイングminiplus": {
+                weights: ["0.45g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "イエロー", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "フューシャピンク", "レッド", "パープル"]
+            },
+            "シャイニーウイングLD": {
+                weights: ["0.45g"],
+                colors: ["サーモンピンク", "レモンチャート", "オレンジ", "フューシャピンク", "レッド", "ベージュ", "ゴールドバリアント", "ラスティブラウン", "ダークブラウン", "ブラック", "マリモグリーン", "パープル", "グリズリー"]
+            },
+            "メルティースパロー": {
+                weights: ["0.5g", "0.9g", "1.5g"],
+                colors: ["サーモンピンク", "イエロー", "ピーチ", "ライトオリーブ", "ゴールドオリーブ", "ベージュ", "ダークブラウン", "ダークオリーブ", "ゴールドベージュ", "アッシュ", "グローホワイト", "ＵＶチャート", "ＵＶオレンジ", "ＵＶピンク", "グレー", "パンプキン", "パープル", "レッド"]
+            },
+            "フェザクラ": {
+                weights: ["1.7g", "2.7g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "ピーチ", "ダークオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "ベージュ", "ライトオリーブ", "ゴールドバリアント", "ラスティブラウン", "ライムチャート", "夕張メロン", "オレンジ", "パープル"]
+            },
+            "ジャイアントウイング": {
+                weights: ["0.5g", "0.9g", "1.5g", "2.0g"],
+                colors: ["レモンチャート", "サーモンピンク", "ホワイト", "オレンジ", "ゴールドバリアント", "ベージュ", "ダークオリーブ", "ピーチ", "ライムチャート", "夕張メロン", "ライトオリーブ", "ダークブラウン", "ブラック", "マリモグリーン", "グリズリー"]
+            },
+            "ダートフェザー": {
+                weights: ["1.5g", "2.0g", "3.0g"],
+                colors: ["パールホワイト", "クリアオリーブ", "クリアベージュ", "クリアピンク", "クリアチャート"]
+            },
+            "ゴースト": {
+                weights: ["0.5g", "0.9g", "1.5g", "2.0g"],
+                colors: ["オレンジ", "レッド", "ピンク", "チャート", "スカイブルー", "ベージュ", "ブラウン", "ブラック", "ラスティブラウン", "ライトグレー", "ホワイト", "ライトピンク", "イエロー", "グレーアッシュ", "ダークオリーブ", "ライトオリーブ", "パープル", "ライトパープル"]
+            },
+            "ワインドフェザー": {
+                weights: ["1.5g", "2.5g"],
+                colors: ["ホワイト", "ブラック", "チャート", "ピンク", "オリーブ"]
+            },
+            "レイクウイング": {
+                weights: ["2.5g", "3.5g", "5.0g"],
+                colors: ["オリーブ", "ブラック", "ブラウン", "ホワイト", "チャート"]
+            },
+            "レイクウイングS": {
+                weights: ["2.0g", "3.0g"],
+                colors: ["オリーブ", "ブラック", "ブラウン", "ホワイト"]
+            },
+            "弓羽": {
+                weights: ["0.5g", "0.9g"],
+                colors: ["ホワイト", "オリーブ", "ブラック", "チャート"]
+            },
+            "その他HartDesign製品": {
+                weights: [],
+                colors: ["オリーブ", "ブラック", "ホワイト", "チャート", "ピンク", "ブラウン"]
+            }
+        };
 
         // 魚種一覧
         const FISH_SPECIES = [
@@ -715,9 +790,9 @@
                 species: "ニジマス",
                 size: "42.5",
                 count: 1,
-                lure: "Light Wing",
+                lure: "ライトウイング",
                 color: "ペレットオリーブ",
-                weight: "0.17g",
+                weight: "0.3g",
                 memo: "表層デッドスローリトリーブ。着水直後に猛烈なひったくりバイト！",
                 photo: null
             },
@@ -728,9 +803,9 @@
                 species: "ブラウントラウト",
                 size: "52.0",
                 count: 1,
-                lure: "Giant Wing",
+                lure: "ジャイアントウイング",
                 color: "ブラック",
-                weight: "0.5g",
+                weight: "0.9g",
                 memo: "大物池のボトムバンプ。強烈な首振りに耐えてランディング成功！",
                 photo: null
             }
@@ -979,30 +1054,85 @@
         }
 
         // ==========================================
-        // ステップ4: ルアー・カラーセレクター
+        // ステップ4: HartDesign公式フェザー＆連動カラー・ウエイト
         // ==========================================
         function initLureGrid() {
             const container = document.getElementById('lure-grid-container');
             container.innerHTML = '';
-            HART_DESIGN_LURES.forEach((lure, index) => {
+            
+            const lureNames = Object.keys(HART_DESIGN_MASTER);
+            lureNames.forEach((lure, index) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = `big-select-card py-3.5 px-3 rounded-xl text-center flex items-center justify-center gap-2 ${index === 0 ? 'active' : ''}`;
+                btn.className = `big-select-card py-3 px-2.5 rounded-xl text-center flex items-center justify-center gap-1.5 ${index === 0 ? 'active' : ''}`;
                 btn.innerHTML = `
-                    <i class="fa-solid fa-feather text-amber-400 text-sm"></i>
-                    <span class="text-sm font-bold truncate">${escapeHtml(lure)}</span>
+                    <i class="fa-solid fa-feather text-amber-400 text-xs"></i>
+                    <span class="text-xs sm:text-sm font-bold truncate">${escapeHtml(lure)}</span>
                 `;
                 btn.onclick = () => {
                     document.querySelectorAll('#lure-grid-container .big-select-card').forEach(c => c.classList.remove('active'));
                     btn.classList.add('active');
-                    document.getElementById('wiz-lure').value = lure;
+                    selectLureModel(lure);
                 };
                 container.appendChild(btn);
             });
+
+            // 初期選択モデル（ライトウイング）のウエイト＆カラーを展開
+            selectLureModel(lureNames[0]);
         }
 
-        function setColorQuick(colorName) {
-            document.getElementById('wiz-color').value = colorName;
+        function selectLureModel(lureName) {
+            document.getElementById('wiz-lure').value = lureName;
+            document.getElementById('selected-lure-name-badge').innerText = `選択中: ${lureName}`;
+
+            const lureInfo = HART_DESIGN_MASTER[lureName] || { weights: [], colors: [] };
+
+            // 1. ウエイトボタンを展開
+            const weightContainer = document.getElementById('lure-weight-container');
+            weightContainer.innerHTML = '';
+            if (lureInfo.weights && lureInfo.weights.length > 0) {
+                lureInfo.weights.forEach(w => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'quick-tag px-3 py-1.5 rounded-lg text-xs font-bold';
+                    btn.innerText = w;
+                    btn.onclick = () => {
+                        document.querySelectorAll('#lure-weight-container .quick-tag').forEach(t => t.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.getElementById('wiz-weight').value = w;
+                    };
+                    weightContainer.appendChild(btn);
+                });
+                // 先頭を自動選択
+                document.getElementById('wiz-weight').value = lureInfo.weights[0];
+                weightContainer.firstChild.classList.add('active');
+            } else {
+                weightContainer.innerHTML = '<span class="text-xs text-amber-400/60 py-1">自由に入力してください</span>';
+            }
+
+            // 2. 公式カラータグを展開
+            const colorContainer = document.getElementById('lure-color-container');
+            colorContainer.innerHTML = '';
+            document.getElementById('color-count-badge').innerText = `全${lureInfo.colors.length}色`;
+
+            if (lureInfo.colors && lureInfo.colors.length > 0) {
+                lureInfo.colors.forEach((col, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `quick-tag px-2.5 py-1.5 rounded-lg text-xs font-bold ${idx === 0 ? 'active' : ''}`;
+                    btn.innerText = col;
+                    btn.onclick = () => {
+                        document.querySelectorAll('#lure-color-container .quick-tag').forEach(t => t.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.getElementById('wiz-color').value = col;
+                    };
+                    colorContainer.appendChild(btn);
+                });
+                // 先頭カラーを初期セット
+                document.getElementById('wiz-color').value = lureInfo.colors[0];
+            } else {
+                colorContainer.innerHTML = '<span class="text-xs text-amber-400/60 py-1">カラー名を入力してください</span>';
+            }
         }
 
         // ==========================================
@@ -1061,13 +1191,9 @@
             document.getElementById('wiz-size').value = '';
             currentCount = 1;
             document.getElementById('wiz-count-display').innerText = '1';
-            document.getElementById('wiz-lure').value = 'Light Wing';
-            document.getElementById('wiz-color').value = '';
-            document.getElementById('wiz-weight').value = '';
             document.getElementById('wiz-memo').value = '';
             removePhoto();
             
-            // クイックボタンなどのアクティブ状態リセット
             initSpeciesGrid();
             initLureGrid();
             document.querySelectorAll('#quick-spot-tags .quick-tag').forEach(t => t.classList.remove('active'));
@@ -1243,7 +1369,7 @@
                 const detailSpecHtml = (item.color || item.weight) ? `
                     <div class="text-amber-300/90 text-xs pl-3">
                         ${item.color ? `カラー: <span class="font-bold text-amber-100">${escapeHtml(item.color)}</span> ` : ''}
-                        ${item.weight ? `| ${escapeHtml(item.weight)}` : ''}
+                        ${item.weight ? `| ウエイト: <span class="font-bold text-amber-100">${escapeHtml(item.weight)}</span>` : ''}
                     </div>
                 ` : '';
 
